@@ -429,13 +429,6 @@
             letter-spacing: .04em; color: var(--muted); opacity: .5;
         }
 
-        /* ── REVEAL ──────────────────────────────────────────── */
-        .reveal {
-            opacity: 0; transform: translateY(18px);
-            transition: opacity .55s ease, transform .55s ease;
-        }
-        .reveal.active { opacity: 1; transform: none; }
-
         /* ── RESPONSIVE ──────────────────────────────────────── */
         @media (max-width: 1024px) {
             .hero-main { grid-template-columns: 1fr; }
@@ -591,12 +584,12 @@
 <hr class="section-rule">
 <section id="profile">
     <div class="section-wrap">
-        <div class="section-header reveal">
+        <div class="section-header">
             <span class="s-num">01</span>
             <h2 class="s-title" data-key="profile_title">Mon profil</h2>
         </div>
         <div class="profile-grid">
-            <div class="p-card reveal">
+            <div class="p-card">
                 <div class="p-card-num">01 —</div>
                 <svg class="p-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -604,7 +597,7 @@
                 <h3 class="p-card-title" data-key="profile_card1_title">Le déclic</h3>
                 <p class="p-card-desc" data-key="profile_card1_desc">Curieux de nature, j'ai découvert le monde du code en explorant HTML, CSS et JavaScript. Très vite, je me suis passionné pour la création d'interfaces, ce qui m'a naturellement orienté vers le développement web.</p>
             </div>
-            <div class="p-card reveal" style="transition-delay:.1s">
+            <div class="p-card">
                 <div class="p-card-num">02 —</div>
                 <svg class="p-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -612,7 +605,7 @@
                 <h3 class="p-card-title" data-key="profile_card2_title">La formation</h3>
                 <p class="p-card-desc" data-key="profile_card2_desc">Titulaire d'un titre de Coordinateur de projets informatiques. J'ai acquis des compétences solides en développement Full Stack ainsi qu'en infrastructure cloud.</p>
             </div>
-            <div class="p-card reveal" style="transition-delay:.2s">
+            <div class="p-card">
                 <div class="p-card-num">03 —</div>
                 <svg class="p-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -629,12 +622,12 @@
 <hr class="section-rule">
 <section id="skills">
     <div class="section-wrap">
-        <div class="section-header reveal">
+        <div class="section-header">
             <span class="s-num">02</span>
             <h2 class="s-title" data-key="skills_title">Compétences</h2>
         </div>
         <div class="skills-grid">
-            <div class="reveal">
+            <div>
                 <div class="skill-cat">Front-End</div>
                 <div class="skill-tags">
                     <span class="skill-tag">JavaScript</span>
@@ -645,7 +638,7 @@
                     <span class="skill-tag">HTML / CSS</span>
                 </div>
             </div>
-            <div class="reveal" style="transition-delay:.1s">
+            <div>
                 <div class="skill-cat">Back-End</div>
                 <div class="skill-tags">
                     <span class="skill-tag">Node.js</span>
@@ -657,7 +650,7 @@
                     <span class="skill-tag">Symfony</span>
                 </div>
             </div>
-            <div class="reveal" style="transition-delay:.2s">
+            <div>
                 <div class="skill-cat">Outils &amp; Méthodes</div>
                 <div class="skill-tags">
                     <span class="skill-tag">Git / GitHub</span>
@@ -676,11 +669,11 @@
 <hr class="section-rule">
 <section id="projects">
     <div class="section-wrap">
-        <div class="section-header reveal">
+        <div class="section-header">
             <span class="s-num">03</span>
             <h2 class="s-title" data-key="projects_title">Projets</h2>
         </div>
-        <div class="filter-row reveal">
+        <div class="filter-row">
             <button type="button" class="filter-btn f-active" data-filter="all"      data-key="filter_all">Tous</button>
             <button type="button" class="filter-btn"          data-filter="pro"      data-key="filter_pro">Pros</button>
             <button type="button" class="filter-btn"          data-filter="personal" data-key="filter_personal">Personnels</button>
@@ -693,11 +686,9 @@
 <section id="contact-section">
     <div class="contact-inner">
         <div class="contact-eye">Contact</div>
-        <h2 class="contact-h reveal" data-key="contact_title">Vous avez une idée ou un projet ?</h2>
-        <p class="contact-sub reveal" data-key="contact_desc" style="transition-delay:.1s">Retrouvez tous mes liens en bas de page pour me contacter.</p>
-        <div class="reveal" style="transition-delay:.2s">
-            <a href="mailto:walid.koujdal@gmail.com" class="btn-primary" data-key="contact_btn">Aller au contact</a>
-        </div>
+        <h2 class="contact-h" data-key="contact_title">Vous avez une idée ou un projet ?</h2>
+        <p class="contact-sub" data-key="contact_desc">Retrouvez tous mes liens en bas de page pour me contacter.</p>
+        <a href="mailto:walid.koujdal@gmail.com" class="btn-primary" data-key="contact_btn">Aller au contact</a>
     </div>
 </section>
 

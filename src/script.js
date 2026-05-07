@@ -36,38 +36,6 @@ if (btn && menu) {
     });
 }
 
-// Scroll Reveal Animation
-const revealElements = document.querySelectorAll('.reveal');
-
-const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-        }
-    });
-}, {
-    root: null,
-    threshold: 0.1,
-    rootMargin: "0px 0px -30px 0px"
-});
-
-revealElements.forEach(el => {
-    revealObserver.observe(el);
-});
-
-// Activate elements already in view on load
-function activateVisible() {
-    revealElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            el.classList.add('active');
-        }
-    });
-}
-requestAnimationFrame(activateVisible);
-window.addEventListener('load', activateVisible);
-setTimeout(activateVisible, 300);
 
 // Language Toggle
 const langToggleBtn = document.getElementById(‘lang-toggle’);
