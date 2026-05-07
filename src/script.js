@@ -56,15 +56,18 @@ revealElements.forEach(el => {
     revealObserver.observe(el);
 });
 
-// Activate elements already in view on load (covers file:// and fast connections)
-requestAnimationFrame(() => {
+// Activate elements already in view on load
+function activateVisible() {
     revealElements.forEach(el => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0) {
             el.classList.add('active');
         }
     });
-});
+}
+requestAnimationFrame(activateVisible);
+window.addEventListener('load', activateVisible);
+setTimeout(activateVisible, 300);
 
 // Language Toggle
 const langToggleBtn = document.getElementById(‘lang-toggle’);
