@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walid Koujdal - Full Stack Developer</title>
+    <meta name="description"
+        content="Portfolio de Walid Koujdal, Développeur Full Stack passionné par la création d'applications web modernes et performantes.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Img/favicon.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://w-koujdal.github.io/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://w-koujdal.github.io/">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Walid Koujdal - Full Stack Developer">
+    <meta property="og:description"
+        content="Développeur Full Stack spécialisé en React, Node.js et Cloud. Découvrez mes projets et compétences.">
+    <meta property="og:image" content="https://w-koujdal.github.io/Img/Walid.png">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="400">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://w-koujdal.github.io/">
+    <meta property="twitter:title" content="Walid Koujdal - Full Stack Developer">
+    <meta property="twitter:description"
+        content="Développeur Full Stack spécialisé en React, Node.js et Cloud. Découvrez mes projets et compétences.">
+    <meta property="twitter:image" content="https://w-koujdal.github.io/Img/Walid.png">
+
+    <link href="./output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-vanilla-cream text-midnight-indigo dark:bg-midnight-indigo dark:text-vanilla-cream transition-colors duration-300">
+
+    <nav
+        class="fixed w-full z-50 bg-vanilla-cream/90 dark:bg-midnight-indigo/90 backdrop-blur-sm border-b border-midnight-indigo/5 dark:border-vanilla-cream/5 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span
+                        class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream tracking-tight">DevKo</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#hero"
+                        class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition text-midnight-indigo dark:text-vanilla-cream"
+                        data-key="nav_home">Accueil</a>
+                    <a href="#profile"
+                        class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition text-midnight-indigo dark:text-vanilla-cream"
+                        data-key="nav_profile">Profil</a>
+                    <a href="#skills"
+                        class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition text-midnight-indigo dark:text-vanilla-cream"
+                        data-key="nav_skills">Compétences</a>
+                    <a href="#projects"
+                        class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition text-midnight-indigo dark:text-vanilla-cream"
+                        data-key="nav_projects">Projets</a>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <!-- Language Toggle -->
+                    <button id="lang-toggle"
+                        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none flex items-center gap-1 text-midnight-indigo dark:text-vanilla-cream font-medium text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                        </svg>
+                        <span id="lang-text">FR</span>
+                    </button>
+
+                    <!-- Dark Mode Button -->
+                    <button
+                        class="theme-toggle p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none">
+                        <!-- Sun Icon -->
+                        <svg class="w-5 h-5 hidden dark:block text-vanilla-cream" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <!-- Moon Icon -->
+                        <svg class="w-5 h-5 block dark:hidden text-midnight-indigo" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center space-x-4">
+                    <button id="mobile-lang-toggle"
+                        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none text-midnight-indigo dark:text-vanilla-cream font-medium text-sm">
+                        FR
+                    </button>
+                    <button
+                        class="theme-toggle p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none">
+                        <!-- Icons same as desktop -->
+                        <svg class="w-6 h-6 hidden dark:block text-vanilla-cream" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <svg class="w-6 h-6 block dark:hidden text-midnight-indigo" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button id="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu" class="text-midnight-indigo dark:text-vanilla-cream focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-vanilla-cream dark:bg-midnight-indigo border-t border-midnight-indigo/10 dark:border-vanilla-cream/10">
+            <a href="#hero" class="block py-3 px-4 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
+                data-key="nav_home">Accueil</a>
+            <a href="#profile" class="block py-3 px-4 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
+                data-key="nav_profile">Profil</a>
+            <a href="#skills" class="block py-3 px-4 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
+                data-key="nav_skills">Compétences</a>
+            <a href="#projects" class="block py-3 px-4 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
+                data-key="nav_projects">Projets</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero"
+        class="min-h-screen pt-20 flex items-center justify-center px-4 relative overflow-hidden bg-vanilla-cream dark:bg-midnight-indigo">
+        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Text Content -->
+            <div class="text-center lg:text-left z-10 order-1 lg:order-1">
+                <h1 class="text-4xl lg:text-5xl font-bold mb-4 leading-tight text-midnight-indigo dark:text-vanilla-cream"
+                    data-key="hero_greeting">
+                    Salut, moi c'est <span class="text-indigo-500">Walid</span><br>
+                    et je suis développeur Full Stack
+                </h1>
+                <p class="text-lg md:text-xl text-midnight-indigo/70 dark:text-vanilla-cream/70 mb-8 max-w-lg mx-auto lg:mx-0"
+                    data-key="hero_desc">
+                    Passionné par le développement web, j'adore créer des applications complètes, modernes et
+                    performantes.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#projects"
+                        class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-medium transition shadow-lg shadow-indigo-500/20"
+                        data-key="hero_btn_portfolio">
+                        Mon Portfolio
+                    </a>
+                    <a href="Img/CV_2025-12-22_Walid_KOUJDAL.pdf"
+                        class="px-8 py-3 bg-transparent border border-midnight-indigo/20 dark:border-vanilla-cream/20 hover:bg-midnight-indigo/5 dark:hover:bg-vanilla-cream/5 text-midnight-indigo dark:text-vanilla-cream rounded-md font-medium transition"
+                        data-key="hero_btn_cv" target="_blank">
+                        Mon CV
+                    </a>
+                </div>
+            </div>
+
+            <!-- Image Content -->
+            <div class="relative flex justify-center lg:justify-end order-2 lg:order-2">
+                <div class="relative w-72 h-72 lg:w-96 lg:h-96">
+                    <!-- Background Shape/Blob could go here -->
+                    <div class="absolute inset-0 bg-indigo-500 rounded-full blur-3xl opacity-10 animate-pulse"></div>
+                    <picture>
+                        <source srcset="Img/Walid.webp" type="image/webp">
+                        <img src="Img/Walid.png" alt="Walid KOUJDAL"
+                            width="400" height="400" fetchpriority="high"
+                            class="relative z-10 w-full h-full object-cover rounded-full border-8 border-vanilla-cream dark:border-midnight-indigo shadow-2xl hover:scale-105 transition duration-500">
+                    </picture>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section (previously About) -->
+    <section id="profile" class="py-20 bg-vanilla-cream/50 dark:bg-midnight-indigo/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-12 reveal"
+                data-key="profile_title">
+                Mon profil</h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border-l-4 border-indigo-500 hover:shadow-md transition duration-300 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-midnight-indigo dark:text-vanilla-cream"
+                            data-key="profile_card1_title">Le déclic</h3>
+                    </div>
+                    <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 text-sm leading-relaxed"
+                        data-key="profile_card1_desc">
+                        Curieux de nature, j'ai découvert le monde du code en explorant HTML, CSS et JavaScript. Très
+                        vite, je me suis passionné pour la création d'interfaces, ce qui m'a naturellement orienté vers
+                        le développement web.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border-l-4 border-indigo-500 hover:shadow-md transition duration-300 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-midnight-indigo dark:text-vanilla-cream"
+                            data-key="profile_card2_title">La formation</h3>
+                    </div>
+                    <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 text-sm leading-relaxed"
+                        data-key="profile_card2_desc">
+                        Titulaire d'un titre de Coordinateur de projets informatiques. J'ai acquis des compétences
+                        solides en
+                        développement Full Stack ainsi qu'en infrastructure cloud.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border-l-4 border-indigo-500 hover:shadow-md transition duration-300 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-midnight-indigo dark:text-vanilla-cream"
+                            data-key="profile_card3_title">Ma vision</h3>
+                    </div>
+                    <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 text-sm leading-relaxed"
+                        data-key="profile_card3_desc">
+                        J'accorde une grande importance à l'accessibilité, à la performance et à l'esthétique. Je crois
+                        en des interfaces simples, utiles et bien pensées, toujours orientées utilisateur. J'aime
+                        résoudre de vrais problèmes avec créativité.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (previously Services) -->
+    <section id="skills" class="py-20 bg-white dark:bg-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-12 reveal"
+                data-key="skills_title">
+                Compétences</h2>
+
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Front-End -->
+                <div class="space-y-6 reveal">
+                    <h3 class="text-xl font-bold text-indigo-500 border-b border-indigo-500/20 pb-2">Front-End</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>JavaScript</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>React</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>Tailwind CSS</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>Bootstrap</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>Vue.js</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back-End -->
+                <div class="space-y-6 reveal">
+                    <h3 class="text-xl font-bold text-indigo-500 border-b border-indigo-500/20 pb-2">Back-End</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>Node.js</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>Express</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>API REST</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>MySQL</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>JWT</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>PHP</span>
+                                <span>50%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>Symfony</span>
+                                <span>45%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outils & Méthodes -->
+                <div class="space-y-6 reveal">
+                    <h3 class="text-xl font-bold text-indigo-500 border-b border-indigo-500/20 pb-2">Outils &
+                        Méthodes</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span>Git / GitHub</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span data-key="skill_pm">Gestion de projet (PMBOK)</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span data-key="skill_arch">Architecture projet</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span data-key="skill_tests">Tests API</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
+                                <span data-key="skill_cloud">Cloud (bases)</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-vanilla-cream/50 dark:bg-midnight-indigo/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-4" data-key="projects_title">
+                Projets</h2>
+
+            <div class="flex gap-4 mb-12">
+                <button type="button" data-filter="all"
+                    class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition bg-midnight-indigo text-vanilla-cream"
+                    data-key="filter_all">Tous</button>
+                <button type="button" data-filter="pro"
+                    class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition text-midnight-indigo/60 dark:text-vanilla-cream/60 hover:text-midnight-indigo dark:hover:text-vanilla-cream"
+                    data-key="filter_pro">Pros</button>
+                <button type="button" data-filter="personal"
+                    class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition text-midnight-indigo/60 dark:text-vanilla-cream/60 hover:text-midnight-indigo dark:hover:text-vanilla-cream"
+                    data-key="filter_personal">Personnels</button>
+            </div>
+
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- CT A & Footer -->
+    <section class="py-24 bg-vanilla-cream dark:bg-midnight-indigo">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-6" data-key="contact_title">
+                Vous avez une idée ou un projet ?</h2>
+            <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 mb-8" data-key="contact_desc">Retrouvez tous
+                mes liens en bas de page pour me contacter.</p>
+            <a href="mailto:walid.koujdal@gmail.com"
+                class="inline-block px-8 py-4 border border-midnight-indigo/20 dark:border-vanilla-cream/20 hover:bg-midnight-indigo/5 dark:hover:bg-vanilla-cream/5 text-midnight-indigo dark:text-vanilla-cream rounded-md transition duration-300"
+                data-key="contact_btn">
+                Aller au contact
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-midnight-indigo text-white py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center">
+                <h2 class="text-2xl font-bold mb-1">Walid Koujdal &dash; Full Stack Developer</h2>
+                <div class="flex flex-col md:flex-row items-center gap-4 text-sm text-white/60 mb-8">
+                    <a href="mailto:walid.koujdal@gmail.com"
+                        class="hover:text-white transition">walid.koujdal@gmail.com</a>
+                    <span class="hidden md:inline">|</span>
+                    <span class="hover:text-white transition">+33 6 26 18 95 80</span>
+                </div>
+
+                <div class="flex gap-6 mb-8">
+                    <a href="https://github.com/w-koujdal"
+                        class="text-white/60 hover:text-white transition flex items-center gap-2" target="_blank">
+                        <i class="fab fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://fr.linkedin.com/in/walid-koujdal-2a516b27b"
+                        class="text-white/60 hover:text-white transition flex items-center gap-2" target="_blank">
+                        <i class="fab fa-linkedin text-xl"></i> LinkedIn
+                    </a>
+                </div>
+
+                <div class="text-xs text-white/40">
+                    &copy; <span id="copyright-year">2025</span> Walid Koujdal. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
