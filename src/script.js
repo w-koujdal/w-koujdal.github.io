@@ -6,171 +6,157 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 const themeToggleBtns = document.querySelectorAll('.theme-toggle');
 const htmlElement = document.documentElement;
 
-// Check for saved user preference
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     htmlElement.classList.add('dark');
 } else {
     htmlElement.classList.remove('dark');
 }
 
-// Add event listener to ALL toggle buttons
-themeToggleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+themeToggleBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
         htmlElement.classList.toggle('dark');
-        if (htmlElement.classList.contains('dark')) {
-            localStorage.theme = 'dark';
-        } else {
-            localStorage.theme = 'light';
-        }
+        localStorage.theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
     });
 });
 
 // Mobile Menu
-const btn = document.getElementById("menu-btn");
-const menu = document.getElementById("mobile-menu");
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
 
-if (btn && menu) {
-    btn.addEventListener("click", () => {
-        const isOpen = !menu.classList.toggle("hidden");
-        btn.setAttribute("aria-expanded", String(!isOpen));
+if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', function() {
+        const isOpen = !mobileMenu.classList.toggle('hidden');
+        menuBtn.setAttribute('aria-expanded', String(!isOpen));
     });
 }
 
-
 // Language Toggle
-const langToggleBtn = document.getElementById(‘lang-toggle’);
-const mobileLangToggleBtn = document.getElementById(‘mobile-lang-toggle’);
-const langText = document.getElementById(‘lang-text’);
+const langToggleBtn = document.getElementById('lang-toggle');
+const mobileLangToggleBtn = document.getElementById('mobile-lang-toggle');
+const langText = document.getElementById('lang-text');
 
-// Build FR dictionary from the HTML — the markup is the single source of truth for French
+// Build FR dictionary from the HTML
 const frTranslations = {};
-document.querySelectorAll(‘[data-key]’).forEach(el => {
-    const key = el.getAttribute(‘data-key’);
+document.querySelectorAll('[data-key]').forEach(function(el) {
+    var key = el.getAttribute('data-key');
     if (!(key in frTranslations)) frTranslations[key] = el.innerHTML;
 });
-// Keys used in dynamic renders (not in static HTML)
-frTranslations.view_project = ‘Voir le projet’;
+frTranslations.view_project = 'Voir le projet';
 
-const translations = {
+var translations = {
     fr: frTranslations,
     en: {
-        nav_home: ‘Home’,
-        nav_profile: ‘Profile’,
-        nav_skills: ‘Skills’,
-        nav_projects: ‘Projects’,
-        hero_greeting: ‘Hi, I\’m <span class="accent">Walid</span><br>and I am a Full Stack developer’,
-        hero_desc: "Passionate about web development, I love creating complete, modern, and high-performance applications.",
-        hero_btn_portfolio: ‘My Portfolio’,
-        hero_btn_cv: ‘My Resume’,
-        profile_title: ‘My Profile’,
-        profile_card1_title: ‘The Spark’,
-        profile_card1_desc: "Curious by nature, I discovered the world of coding by exploring HTML, CSS, and JavaScript. I quickly became passionate about interface creation, which naturally led me to web development.",
-        profile_card2_title: ‘Education’,
-        profile_card2_desc: "Holder of a title of IT Project Coordinator. I have acquired solid skills in Full Stack development as well as cloud infrastructure.",
-        profile_card3_title: ‘My Vision’,
-        profile_card3_desc: "I place great importance on accessibility, performance, and aesthetics. I believe in simple, useful, and well-thought-out interfaces, always user-oriented. I love solving real problems with creativity.",
-        skills_title: ‘Skills’,
-        skill_pm: ‘Project Management (PMBOK)’,
-        skill_arch: ‘Project Architecture’,
-        skill_tests: ‘API Testing’,
-        skill_cloud: ‘Cloud (Basics)’,
-        projects_title: ‘Projects’,
-        filter_all: ‘All’,
-        filter_pro: ‘Professional’,
-        filter_personal: ‘Personal’,
-        view_project: ‘View Project’,
-        contact_title: ‘Have an idea or a project?’,
-        contact_desc: ‘Find all my links at the bottom of the page to contact me.’,
-        contact_btn: ‘Get in Touch’
+        nav_home: 'Home',
+        nav_profile: 'Profile',
+        nav_skills: 'Skills',
+        nav_projects: 'Projects',
+        hero_greeting: 'Hi, I\'m <span class="accent">Walid</span><br>and I am a Full Stack developer',
+        hero_desc: 'Passionate about web development, I love creating complete, modern, and high-performance applications.',
+        hero_btn_portfolio: 'My Portfolio',
+        hero_btn_cv: 'My Resume',
+        profile_title: 'My Profile',
+        profile_card1_title: 'The Spark',
+        profile_card1_desc: 'Curious by nature, I discovered the world of coding by exploring HTML, CSS and JavaScript. I quickly became passionate about interface creation, which naturally led me to web development.',
+        profile_card2_title: 'Education',
+        profile_card2_desc: 'Holder of a title of IT Project Coordinator. I have acquired solid skills in Full Stack development as well as cloud infrastructure.',
+        profile_card3_title: 'My Vision',
+        profile_card3_desc: 'I place great importance on accessibility, performance and aesthetics. I believe in simple, useful and well-thought-out interfaces, always user-oriented.',
+        skills_title: 'Skills',
+        skill_pm: 'Project Management (PMBOK)',
+        skill_arch: 'Project Architecture',
+        skill_tests: 'API Testing',
+        skill_cloud: 'Cloud (Basics)',
+        projects_title: 'Projects',
+        filter_all: 'All',
+        filter_pro: 'Professional',
+        filter_personal: 'Personal',
+        view_project: 'View Project',
+        contact_title: 'Have an idea or a project?',
+        contact_desc: 'Find all my links at the bottom of the page to contact me.',
+        contact_btn: 'Get in Touch'
     }
 };
 
-// Projects data — single source of truth for all project content
-const projects = [
+// Projects data
+var projects = [
     {
-        id: ‘cyna’,
-        label: ‘CYNA’,
-        category: ‘pro’,
-        url: ‘#’,
-        tags: [‘Node.js’, ‘MySQL’, ‘React’, ‘API REST’],
-        title: { fr: ‘CYNA – Plateforme SaaS E-commerce’, en: ‘CYNA – E-commerce SaaS Platform’ },
+        id: 'cyna',
+        label: 'CYNA',
+        category: 'pro',
+        url: '#',
+        tags: ['Node.js', 'MySQL', 'React', 'API REST'],
+        title: { fr: 'CYNA - Plateforme SaaS E-commerce', en: 'CYNA - E-commerce SaaS Platform' },
         desc: {
-            fr: "Plateforme SaaS permettant aux entreprises de gérer leurs produits, commandes et utilisateurs via une API REST et une interface web/mobile.",
-            en: "SaaS platform allowing companies to manage their products, orders, and users via a REST API and a web/mobile interface."
+            fr: 'Plateforme SaaS permettant aux entreprises de gerer leurs produits, commandes et utilisateurs via une API REST et une interface web/mobile.',
+            en: 'SaaS platform allowing companies to manage their products, orders, and users via a REST API and a web/mobile interface.'
         }
     },
     {
-        id: ‘api-saas’,
-        label: ‘API SaaS’,
-        category: ‘pro’,
-        url: ‘#’,
-        tags: [‘Node.js’, ‘Express’, ‘JWT’],
-        title: { fr: ‘API SaaS – Produits & Modules’, en: ‘SaaS API – Products & Modules’ },
+        id: 'api-saas',
+        label: 'API SaaS',
+        category: 'pro',
+        url: '#',
+        tags: ['Node.js', 'Express', 'JWT'],
+        title: { fr: 'API SaaS - Produits & Modules', en: 'SaaS API - Products & Modules' },
         desc: {
-            fr: "API REST sécurisée permettant l’ajout, modification et suppression de modules SaaS (CRUD complet).",
-            en: "Secure REST API allowing the addition, modification, and deletion of SaaS modules (full CRUD)."
+            fr: 'API REST securisee permettant l\'ajout, modification et suppression de modules SaaS (CRUD complet).',
+            en: 'Secure REST API allowing the addition, modification, and deletion of SaaS modules (full CRUD).'
         }
     },
     {
-        id: ‘mobile-app’,
-        label: ‘Mobile App’,
-        category: ‘personal’,
-        url: ‘#’,
-        tags: [‘React Native’, ‘Axios’],
-        title: { fr: ‘Application Mobile – Gestion Produits’, en: ‘Mobile App – Product Management’ },
+        id: 'mobile-app',
+        label: 'Mobile App',
+        category: 'personal',
+        url: '#',
+        tags: ['React Native', 'Axios'],
+        title: { fr: 'Application Mobile - Gestion Produits', en: 'Mobile App - Product Management' },
         desc: {
-            fr: "Application mobile connectée à une API Node.js permettant de gérer un catalogue produits.",
-            en: "Mobile application connected to a Node.js API for managing a product catalog."
+            fr: 'Application mobile connectee a une API Node.js permettant de gerer un catalogue produits.',
+            en: 'Mobile application connected to a Node.js API for managing a product catalog.'
         }
     }
 ];
 
-let currentLang = localStorage.lang || ‘fr’;
-let activeFilter = ‘all’;
-
-const arrow = ‘<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>’;
+var currentLang = localStorage.lang || 'fr';
+var activeFilter = 'all';
 
 function renderProjects(filter) {
     activeFilter = filter;
-    const grid = document.getElementById(‘projects-grid’);
+    var grid = document.getElementById('projects-grid');
     if (!grid) return;
 
-    const viewLabel = translations[currentLang].view_project;
-    const list = filter === ‘all’ ? projects : projects.filter(p => p.category === filter);
+    var viewLabel = translations[currentLang].view_project;
+    var list = filter === 'all' ? projects : projects.filter(function(p) { return p.category === filter; });
 
-    grid.innerHTML = list.map((p, i) => `
-        <article class="proj-card">
-            <div class="proj-idx">${String(i + 1).padStart(2, ‘0’)} —</div>
-            <span class="proj-badge">${p.label}</span>
-            <h3 class="proj-title">${p.title[currentLang]}</h3>
-            <p class="proj-desc">${p.desc[currentLang]}</p>
-            <div class="proj-tags">
-                ${p.tags.map(tag => `<span class="proj-tag">${tag}</span>`).join(‘’)}
-            </div>
-            <a href="${p.url}"${p.url !== ‘#’ ? ‘ target="_blank" rel="noopener noreferrer"’ : ‘’} class="proj-link">
-                ${viewLabel} <span>→</span>
-            </a>
-        </article>
-    `).join(‘’);
+    grid.innerHTML = list.map(function(p, i) {
+        var num = String(i + 1).padStart(2, '0');
+        var target = p.url !== '#' ? ' target="_blank" rel="noopener noreferrer"' : '';
+        var tags = p.tags.map(function(tag) { return '<span class="proj-tag">' + tag + '</span>'; }).join('');
+        return '<article class="proj-card">'
+            + '<div class="proj-idx">' + num + ' -</div>'
+            + '<span class="proj-badge">' + p.label + '</span>'
+            + '<h3 class="proj-title">' + p.title[currentLang] + '</h3>'
+            + '<p class="proj-desc">' + p.desc[currentLang] + '</p>'
+            + '<div class="proj-tags">' + tags + '</div>'
+            + '<a href="' + p.url + '"' + target + ' class="proj-link">' + viewLabel + ' <span>&#8594;</span></a>'
+            + '</article>';
+    }).join('');
 
-    // Sync active state on filter buttons
-    document.querySelectorAll(‘.filter-btn’).forEach(btn => {
-        btn.classList.toggle(‘f-active’, btn.dataset.filter === filter);
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.classList.toggle('f-active', btn.dataset.filter === filter);
     });
 }
 
-// Wire up filter buttons
-document.querySelectorAll(‘.filter-btn’).forEach(btn => {
-    btn.addEventListener(‘click’, () => renderProjects(btn.dataset.filter));
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { renderProjects(btn.dataset.filter); });
 });
 
-// Initial render
-renderProjects(‘all’);
+renderProjects('all');
 
 function updateLanguage(lang) {
-    const dict = translations[lang];
-    document.querySelectorAll(‘[data-key]’).forEach(el => {
-        const key = el.getAttribute(‘data-key’);
+    var dict = translations[lang];
+    document.querySelectorAll('[data-key]').forEach(function(el) {
+        var key = el.getAttribute('data-key');
         if (dict[key] !== undefined) el.innerHTML = dict[key];
     });
     document.documentElement.lang = lang;
@@ -180,23 +166,22 @@ function updateLanguage(lang) {
     renderProjects(activeFilter);
 }
 
-// HTML already renders in French — only re-render if the user previously chose English
-if (currentLang === ‘fr’) {
-    document.documentElement.lang = ‘fr’;
+if (currentLang === 'fr') {
+    document.documentElement.lang = 'fr';
 } else {
     updateLanguage(currentLang);
 }
 
 if (langToggleBtn) {
-    langToggleBtn.addEventListener(‘click’, () => {
-        currentLang = currentLang === ‘fr’ ? ‘en’ : ‘fr’;
+    langToggleBtn.addEventListener('click', function() {
+        currentLang = currentLang === 'fr' ? 'en' : 'fr';
         updateLanguage(currentLang);
     });
 }
 
 if (mobileLangToggleBtn) {
-    mobileLangToggleBtn.addEventListener(‘click’, () => {
-        currentLang = currentLang === ‘fr’ ? ‘en’ : ‘fr’;
+    mobileLangToggleBtn.addEventListener('click', function() {
+        currentLang = currentLang === 'fr' ? 'en' : 'fr';
         updateLanguage(currentLang);
     });
 }
