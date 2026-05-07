@@ -1,552 +1,719 @@
 <!doctype html>
 <html lang="fr" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Walid Koujdal - Full Stack Developer</title>
-    <meta name="description"
-        content="Portfolio de Walid Koujdal, Développeur Full Stack passionné par la création d'applications web modernes et performantes.">
-
-    <!-- Favicon -->
+    <title>Walid Koujdal — Développeur Full Stack</title>
+    <meta name="description" content="Portfolio de Walid Koujdal, Développeur Full Stack passionné par la création d'applications web modernes et performantes.">
     <link rel="icon" type="image/png" href="Img/favicon.png">
-
-    <!-- Canonical -->
     <link rel="canonical" href="https://w-koujdal.github.io/">
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://w-koujdal.github.io/">
     <meta property="og:locale" content="fr_FR">
-    <meta property="og:title" content="Walid Koujdal - Full Stack Developer">
-    <meta property="og:description"
-        content="Développeur Full Stack spécialisé en React, Node.js et Cloud. Découvrez mes projets et compétences.">
+    <meta property="og:title" content="Walid Koujdal — Développeur Full Stack">
+    <meta property="og:description" content="Développeur Full Stack spécialisé en React, Node.js et Cloud.">
     <meta property="og:image" content="https://w-koujdal.github.io/Img/Walid.png">
     <meta property="og:image:width" content="400">
     <meta property="og:image:height" content="400">
-
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://w-koujdal.github.io/">
-    <meta property="twitter:title" content="Walid Koujdal - Full Stack Developer">
-    <meta property="twitter:description"
-        content="Développeur Full Stack spécialisé en React, Node.js et Cloud. Découvrez mes projets et compétences.">
+    <meta property="twitter:title" content="Walid Koujdal — Développeur Full Stack">
+    <meta property="twitter:description" content="Développeur Full Stack spécialisé en React, Node.js et Cloud.">
     <meta property="twitter:image" content="https://w-koujdal.github.io/Img/Walid.png">
 
     <link href="./output.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
     <style>
+        /* ── TOKENS ─────────────────────────────────────────── */
+        :root {
+            --bg:       #F3EFE6;
+            --fg:       #0D0D0D;
+            --muted:    rgba(13,13,13,0.42);
+            --accent:   #B87520;
+            --accent-fg:#FFF8EC;
+            --border:   rgba(13,13,13,0.09);
+            --card:     rgba(13,13,13,0.03);
+            --nav-h:    68px;
+        }
+        html.dark {
+            --bg:       #0D0D0D;
+            --fg:       #F3EFE6;
+            --muted:    rgba(243,239,230,0.42);
+            --accent:   #E8A838;
+            --accent-fg:#0D0D0D;
+            --border:   rgba(243,239,230,0.09);
+            --card:     rgba(243,239,230,0.04);
+        }
+
+        /* ── BASE ─────────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            transition: background .3s, color .3s;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ──────────────────────────────────────────────── */
+        #navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            height: var(--nav-h);
+            display: flex; align-items: center;
+            padding: 0 2rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            transition: background .3s;
+        }
+        .nav-inner {
+            width: 100%; max-width: 1280px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo {
+            font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem;
+            letter-spacing: -.02em; color: var(--fg); text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-links {
+            display: flex; align-items: center; gap: 2.5rem;
+        }
+        .nav-links a {
+            font-family: 'JetBrains Mono', monospace; font-size: .7rem;
+            letter-spacing: .08em; text-transform: uppercase;
+            color: var(--muted); text-decoration: none; transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--fg); }
+        .nav-actions { display: flex; align-items: center; gap: .75rem; }
+        .nav-btn {
+            background: none; border: none; cursor: pointer;
+            color: var(--muted); padding: .4rem .5rem;
+            display: flex; align-items: center; gap: .3rem;
+            font-family: 'JetBrains Mono', monospace; font-size: .7rem;
+            letter-spacing: .04em; transition: color .2s;
+        }
+        .nav-btn:hover { color: var(--fg); }
+        .nav-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        /* dark/light icon toggle */
+        .icon-sun { display: none; }
+        .icon-moon { display: block; }
+        html.dark .icon-sun { display: block; }
+        html.dark .icon-moon { display: none; }
+
+        /* mobile */
+        @media (max-width: 767px) {
+            .nav-links { display: none; }
+            #menu-btn, #mobile-lang-toggle { display: flex; }
+        }
+        @media (min-width: 768px) {
+            #menu-btn, #mobile-lang-toggle { display: none; }
+        }
+
+        #mobile-menu {
+            position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;
+            background: var(--bg); border-bottom: 1px solid var(--border);
+            padding: .5rem 0;
+        }
+        #mobile-menu.hidden { display: none; }
+        #mobile-menu a {
+            display: block; padding: .875rem 2rem;
+            border-bottom: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace; font-size: .75rem;
+            letter-spacing: .07em; text-transform: uppercase;
+            color: var(--muted); text-decoration: none; transition: color .2s;
+        }
+        #mobile-menu a:hover { color: var(--fg); }
+
+        /* ── HERO ─────────────────────────────────────────────── */
+        #hero {
+            min-height: 100svh;
+            padding-top: var(--nav-h);
+            display: grid;
+            grid-template-rows: 1fr auto;
+            position: relative; overflow: hidden;
+        }
+        /* grain */
+        #hero::after {
+            content: '';
+            position: absolute; inset: 0; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: .025;
+        }
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 3rem; align-items: center;
+            padding: 4rem 2rem 3rem;
+            max-width: 1280px; margin: 0 auto; width: 100%;
+        }
+        .hero-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: .75rem;
+        }
+        .hero-tag::before {
+            content: ''; width: 28px; height: 1px; background: var(--accent);
+        }
+        h1.hero-name {
+            font-family: 'Syne', sans-serif; font-weight: 800;
+            font-size: clamp(3rem, 7.5vw, 6.5rem);
+            line-height: .93; letter-spacing: -.03em;
+            color: var(--fg); margin-bottom: 2rem;
+        }
+        h1.hero-name .accent { color: var(--accent); }
+        .hero-desc {
+            font-size: 1rem; color: var(--muted);
+            max-width: 460px; line-height: 1.75; margin-bottom: 2.5rem;
+        }
+        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        /* buttons */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: .5rem;
+            padding: .7rem 1.6rem;
+            background: var(--accent); color: var(--accent-fg);
+            font-family: 'JetBrains Mono', monospace; font-size: .7rem;
+            font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+            text-decoration: none; border: none; cursor: pointer;
+            transition: opacity .2s, transform .15s;
+        }
+        .btn-primary:hover { opacity: .85; transform: translateY(-1px); }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: .5rem;
+            padding: .7rem 1.6rem;
+            background: transparent; color: var(--fg);
+            font-family: 'JetBrains Mono', monospace; font-size: .7rem;
+            letter-spacing: .06em; text-transform: uppercase;
+            text-decoration: none; border: 1px solid var(--border);
+            transition: border-color .2s, transform .15s;
+        }
+        .btn-ghost:hover { border-color: var(--muted); transform: translateY(-1px); }
+
+        /* photo */
+        .hero-photo-wrap { display: flex; justify-content: flex-end; }
+        .hero-photo-frame {
+            position: relative; width: 320px; height: 400px;
+        }
+        .hero-photo-frame::before {
+            content: ''; position: absolute; inset: -10px;
+            border: 1px solid var(--border); z-index: 0;
+        }
+        .hero-photo-frame::after {
+            content: ''; position: absolute; bottom: -16px; right: -16px;
+            width: 64px; height: 64px;
+            background: var(--accent); opacity: .18; z-index: 0;
+        }
+        .hero-photo-frame picture,
+        .hero-photo-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: top center;
+            display: block; position: relative; z-index: 1;
+            filter: grayscale(15%);
+        }
+
+        /* marquee */
+        .marquee-wrap {
+            border-top: 1px solid var(--border);
+            padding: .875rem 0; overflow: hidden;
+        }
+        .marquee-track {
+            display: flex; width: max-content;
+            animation: marquee 28s linear infinite;
+        }
+        .marquee-track:hover { animation-play-state: paused; }
+        .marquee-item {
+            display: flex; align-items: center; gap: 1.25rem;
+            padding: 0 2.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem; letter-spacing: .09em; text-transform: uppercase;
+            color: var(--muted); white-space: nowrap;
+        }
+        .m-dot {
+            width: 4px; height: 4px; border-radius: 50%;
+            background: var(--accent); flex-shrink: 0;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ── SECTIONS ────────────────────────────────────────── */
+        .section-wrap {
+            max-width: 1280px; margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+        .section-rule { border: none; border-top: 1px solid var(--border); }
+        .section-header {
+            display: flex; align-items: flex-end; gap: 1.25rem;
+            margin-bottom: 3.5rem;
+        }
+        .s-num {
+            font-family: 'Syne', sans-serif; font-weight: 800;
+            font-size: 4.5rem; line-height: 1;
+            color: var(--fg); opacity: .07;
+            letter-spacing: -.04em; user-select: none; flex-shrink: 0;
+        }
+        .s-title {
+            font-family: 'Syne', sans-serif; font-weight: 700;
+            font-size: 2rem; letter-spacing: -.02em;
+            line-height: 1.1; color: var(--fg);
+        }
+
+        /* ── PROFILE CARDS ───────────────────────────────────── */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .p-card {
+            padding: 2.25rem;
+            border: 1px solid var(--border);
+            border-right: none;
+            transition: background .2s;
+        }
+        .p-card:last-child { border-right: 1px solid var(--border); }
+        .p-card:hover { background: var(--card); }
+        .p-card-num {
+            font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 1.25rem;
+        }
+        .p-card-icon {
+            width: 32px; height: 32px; color: var(--muted); margin-bottom: 1.25rem;
+        }
+        .p-card-title {
+            font-family: 'Syne', sans-serif; font-weight: 700;
+            font-size: 1.05rem; color: var(--fg); margin-bottom: .6rem;
+        }
+        .p-card-desc { font-size: .875rem; color: var(--muted); line-height: 1.7; }
+
+        /* ── SKILLS ──────────────────────────────────────────── */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(3,1fr); gap: 3rem;
+        }
+        .skill-cat {
+            font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 1.25rem;
+            padding-bottom: .75rem; border-bottom: 1px solid var(--border);
+        }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: .45rem; }
+        .skill-tag {
+            padding: .3rem .8rem;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace; font-size: .68rem;
+            letter-spacing: .02em; color: var(--muted);
+            transition: border-color .2s, color .2s;
+        }
+        .skill-tag:hover { border-color: var(--accent); color: var(--fg); }
+
+        /* ── PROJECT FILTERS ─────────────────────────────────── */
+        .filter-row {
+            display: flex; gap: 0; margin-bottom: 2.5rem;
+            border: 1px solid var(--border); width: fit-content;
+        }
+        .filter-btn {
+            padding: .45rem 1.2rem;
+            font-family: 'JetBrains Mono', monospace; font-size: .68rem;
+            letter-spacing: .07em; text-transform: uppercase;
+            background: transparent; color: var(--muted);
+            border: none; border-right: 1px solid var(--border);
+            cursor: pointer; transition: background .15s, color .15s;
+        }
+        .filter-btn:last-child { border-right: none; }
+        .filter-btn:hover { color: var(--fg); }
+        .filter-btn.f-active { background: var(--fg); color: var(--bg); }
+
+        /* ── PROJECT CARDS (injected by JS) ──────────────────── */
+        #projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: var(--border);
+        }
+        .proj-card {
+            background: var(--bg); padding: 1.75rem;
+            display: flex; flex-direction: column;
+            transition: background .2s;
+        }
+        .proj-card:hover { background: var(--card); }
+        .proj-idx {
+            font-family: 'JetBrains Mono', monospace; font-size: .6rem;
+            letter-spacing: .1em; color: var(--muted); opacity: .5;
+            margin-bottom: .875rem;
+        }
+        .proj-badge {
+            display: inline-block; padding: .2rem .55rem;
+            border: 1px solid var(--accent); color: var(--accent);
+            font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+            letter-spacing: .07em; text-transform: uppercase;
+            margin-bottom: 1rem; width: fit-content;
+        }
+        .proj-title {
+            font-family: 'Syne', sans-serif; font-weight: 700;
+            font-size: .975rem; line-height: 1.3;
+            color: var(--fg); margin-bottom: .65rem;
+        }
+        .proj-desc {
+            font-size: .85rem; color: var(--muted);
+            line-height: 1.65; flex: 1; margin-bottom: 1.25rem;
+        }
+        .proj-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.5rem; }
+        .proj-tag {
+            padding: .18rem .55rem;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+            letter-spacing: .03em; color: var(--muted);
+        }
+        .proj-link {
+            display: inline-flex; align-items: center; gap: .45rem;
+            font-family: 'JetBrains Mono', monospace; font-size: .68rem;
+            letter-spacing: .05em; text-transform: uppercase;
+            color: var(--accent); text-decoration: none; margin-top: auto;
+            transition: gap .2s;
+        }
+        .proj-link:hover { gap: .7rem; }
+
+        /* ── CONTACT ─────────────────────────────────────────── */
+        #contact-section {
+            border-top: 1px solid var(--border);
+            padding: 6rem 2rem;
+        }
+        .contact-inner { max-width: 1280px; margin: 0 auto; }
+        .contact-eye {
+            font-family: 'JetBrains Mono', monospace; font-size: .68rem;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: .75rem;
+        }
+        .contact-eye::before {
+            content: ''; width: 28px; height: 1px; background: var(--accent);
+        }
+        .contact-h {
+            font-family: 'Syne', sans-serif; font-weight: 800;
+            font-size: clamp(1.75rem, 4.5vw, 3.75rem);
+            letter-spacing: -.03em; line-height: 1.05;
+            color: var(--fg); margin-bottom: 1.25rem; max-width: 680px;
+        }
+        .contact-sub {
+            font-size: .975rem; color: var(--muted);
+            margin-bottom: 2.25rem; max-width: 460px;
+        }
+
+        /* ── FOOTER ──────────────────────────────────────────── */
+        footer {
+            border-top: 1px solid var(--border); padding: 1.75rem 2rem;
+        }
+        .footer-inner {
+            max-width: 1280px; margin: 0 auto;
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-name {
+            font-family: 'Syne', sans-serif; font-weight: 700;
+            font-size: .875rem; color: var(--fg);
+        }
+        .footer-links { display: flex; gap: 1.5rem; align-items: center; }
+        .footer-links a {
+            font-family: 'JetBrains Mono', monospace; font-size: .68rem;
+            letter-spacing: .04em; color: var(--muted);
+            text-decoration: none; transition: color .2s;
+        }
+        .footer-links a:hover { color: var(--fg); }
+        .footer-copy {
+            font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+            letter-spacing: .04em; color: var(--muted); opacity: .5;
+        }
+
+        /* ── REVEAL ──────────────────────────────────────────── */
+        .reveal {
+            opacity: 0; transform: translateY(18px);
+            transition: opacity .55s ease, transform .55s ease;
+        }
+        .reveal.active { opacity: 1; transform: none; }
+
+        /* ── RESPONSIVE ──────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .hero-main { grid-template-columns: 1fr; }
+            .hero-photo-wrap { display: none; }
+            .hero-desc { max-width: 100%; }
+            .profile-grid { grid-template-columns: 1fr; }
+            .p-card { border-right: 1px solid var(--border); border-bottom: none; }
+            .p-card:last-child { border-bottom: 1px solid var(--border); }
+            .skills-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            #projects-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .section-wrap { padding: 4rem 1.25rem; }
+            #navbar { padding: 0 1.25rem; }
+            .hero-main { padding: 3rem 1.25rem 2rem; }
+            #contact-section { padding: 4rem 1.25rem; }
+            footer { padding: 1.5rem 1.25rem; }
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+            .skills-grid { grid-template-columns: 1fr; }
+            #projects-grid { grid-template-columns: 1fr; }
+            .filter-row { width: 100%; }
+            .filter-btn { flex: 1; text-align: center; }
+            .s-num { font-size: 3rem; }
+            .s-title { font-size: 1.6rem; }
         }
     </style>
+    <!-- Structured data — Person schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Walid Koujdal",
+        "url": "https://w-koujdal.github.io/",
+        "image": "https://w-koujdal.github.io/Img/Walid.png",
+        "jobTitle": "Développeur Full Stack",
+        "description": "Développeur Full Stack spécialisé en React, Node.js et Cloud.",
+        "email": "walid.koujdal@gmail.com",
+        "sameAs": [
+            "https://github.com/w-koujdal",
+            "https://fr.linkedin.com/in/walid-koujdal-2a516b27b"
+        ],
+        "knowsAbout": ["JavaScript", "React", "Node.js", "Express", "MySQL", "React Native", "Tailwind CSS", "API REST", "Vue.js", "PHP", "Symfony"]
+    }
+    </script>
 </head>
 
-<body
-    class="bg-vanilla-cream text-midnight-indigo dark:bg-midnight-indigo dark:text-vanilla-cream transition-colors duration-300">
+<body>
 
-    <nav
-        class="fixed w-full z-50 bg-vanilla-cream/90 dark:bg-midnight-indigo/90 backdrop-blur-sm border-b border-midnight-indigo/5 dark:border-vanilla-cream/5 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <span
-                        class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream tracking-tight">DevKo</span>
+<!-- ── NAV ──────────────────────────────────────────────────── -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-logo">WK<span>.</span></a>
+
+        <div class="nav-links">
+            <a href="#hero"     data-key="nav_home">Accueil</a>
+            <a href="#profile"  data-key="nav_profile">Profil</a>
+            <a href="#skills"   data-key="nav_skills">Compétences</a>
+            <a href="#projects" data-key="nav_projects">Projets</a>
+        </div>
+
+        <div class="nav-actions">
+            <button id="lang-toggle" class="nav-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/>
+                </svg>
+                <span id="lang-text">FR</span>
+            </button>
+            <button class="theme-toggle nav-btn" aria-label="Changer le thème">
+                <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+                <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+            </button>
+            <button id="mobile-lang-toggle" class="nav-btn">FR</button>
+            <button id="menu-btn" class="nav-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:20px;height:20px">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div id="mobile-menu" class="hidden">
+    <a href="#hero"     data-key="nav_home">Accueil</a>
+    <a href="#profile"  data-key="nav_profile">Profil</a>
+    <a href="#skills"   data-key="nav_skills">Compétences</a>
+    <a href="#projects" data-key="nav_projects">Projets</a>
+</div>
+
+<!-- ── HERO ─────────────────────────────────────────────────── -->
+<section id="hero">
+    <div class="hero-main">
+        <div>
+            <div class="hero-tag">Développeur Full Stack</div>
+            <h1 class="hero-name reveal" data-key="hero_greeting">
+                Salut, moi c'est <span class="accent">Walid</span><br>
+                et je suis développeur Full Stack
+            </h1>
+            <p class="hero-desc reveal" data-key="hero_desc" style="transition-delay:.1s">
+                Passionné par le développement web, j'adore créer des applications complètes, modernes et performantes.
+            </p>
+            <div class="hero-cta reveal" style="transition-delay:.2s">
+                <a href="#projects" class="btn-primary" data-key="hero_btn_portfolio">Mon Portfolio</a>
+                <a href="Img/CV_2025-12-22_Walid_KOUJDAL.pdf" class="btn-ghost" data-key="hero_btn_cv" target="_blank">Mon CV</a>
+            </div>
+        </div>
+        <div class="hero-photo-wrap">
+            <div class="hero-photo-frame">
+                <picture>
+                    <source srcset="Img/Walid.webp" type="image/webp">
+                    <img src="Img/Walid.png" alt="Walid Koujdal" width="400" height="400" fetchpriority="high">
+                </picture>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech marquee -->
+    <div class="marquee-wrap">
+        <div class="marquee-track">
+            <span class="marquee-item"><span class="m-dot"></span>JavaScript</span>
+            <span class="marquee-item"><span class="m-dot"></span>React</span>
+            <span class="marquee-item"><span class="m-dot"></span>Node.js</span>
+            <span class="marquee-item"><span class="m-dot"></span>Express</span>
+            <span class="marquee-item"><span class="m-dot"></span>MySQL</span>
+            <span class="marquee-item"><span class="m-dot"></span>React Native</span>
+            <span class="marquee-item"><span class="m-dot"></span>Tailwind CSS</span>
+            <span class="marquee-item"><span class="m-dot"></span>API REST</span>
+            <span class="marquee-item"><span class="m-dot"></span>JWT</span>
+            <span class="marquee-item"><span class="m-dot"></span>Git / GitHub</span>
+            <span class="marquee-item"><span class="m-dot"></span>Vue.js</span>
+            <span class="marquee-item"><span class="m-dot"></span>Cloud</span>
+            <!-- duplicate for seamless loop -->
+            <span class="marquee-item"><span class="m-dot"></span>JavaScript</span>
+            <span class="marquee-item"><span class="m-dot"></span>React</span>
+            <span class="marquee-item"><span class="m-dot"></span>Node.js</span>
+            <span class="marquee-item"><span class="m-dot"></span>Express</span>
+            <span class="marquee-item"><span class="m-dot"></span>MySQL</span>
+            <span class="marquee-item"><span class="m-dot"></span>React Native</span>
+            <span class="marquee-item"><span class="m-dot"></span>Tailwind CSS</span>
+            <span class="marquee-item"><span class="m-dot"></span>API REST</span>
+            <span class="marquee-item"><span class="m-dot"></span>JWT</span>
+            <span class="marquee-item"><span class="m-dot"></span>Git / GitHub</span>
+            <span class="marquee-item"><span class="m-dot"></span>Vue.js</span>
+            <span class="marquee-item"><span class="m-dot"></span>Cloud</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── PROFIL ────────────────────────────────────────────────── -->
+<hr class="section-rule">
+<section id="profile">
+    <div class="section-wrap">
+        <div class="section-header reveal">
+            <span class="s-num">01</span>
+            <h2 class="s-title" data-key="profile_title">Mon profil</h2>
+        </div>
+        <div class="profile-grid">
+            <div class="p-card reveal">
+                <div class="p-card-num">01 —</div>
+                <svg class="p-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <h3 class="p-card-title" data-key="profile_card1_title">Le déclic</h3>
+                <p class="p-card-desc" data-key="profile_card1_desc">Curieux de nature, j'ai découvert le monde du code en explorant HTML, CSS et JavaScript. Très vite, je me suis passionné pour la création d'interfaces, ce qui m'a naturellement orienté vers le développement web.</p>
+            </div>
+            <div class="p-card reveal" style="transition-delay:.1s">
+                <div class="p-card-num">02 —</div>
+                <svg class="p-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+                <h3 class="p-card-title" data-key="profile_card2_title">La formation</h3>
+                <p class="p-card-desc" data-key="profile_card2_desc">Titulaire d'un titre de Coordinateur de projets informatiques. J'ai acquis des compétences solides en développement Full Stack ainsi qu'en infrastructure cloud.</p>
+            </div>
+            <div class="p-card reveal" style="transition-delay:.2s">
+                <div class="p-card-num">03 —</div>
+                <svg class="p-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                <h3 class="p-card-title" data-key="profile_card3_title">Ma vision</h3>
+                <p class="p-card-desc" data-key="profile_card3_desc">J'accorde une grande importance à l'accessibilité, à la performance et à l'esthétique. Je crois en des interfaces simples, utiles et bien pensées, toujours orientées utilisateur. J'aime résoudre de vrais problèmes avec créativité.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── COMPÉTENCES ───────────────────────────────────────────── -->
+<hr class="section-rule">
+<section id="skills">
+    <div class="section-wrap">
+        <div class="section-header reveal">
+            <span class="s-num">02</span>
+            <h2 class="s-title" data-key="skills_title">Compétences</h2>
+        </div>
+        <div class="skills-grid">
+            <div class="reveal">
+                <div class="skill-cat">Front-End</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Tailwind CSS</span>
+                    <span class="skill-tag">Vue.js</span>
+                    <span class="skill-tag">Bootstrap</span>
+                    <span class="skill-tag">HTML / CSS</span>
                 </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#hero"
-                        class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition text-midnight-indigo dark:text-vanilla-cream"
-                        data-key="nav_home">Accueil</a>
-                    <a href="#profile"
-                        class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition text-midnight-indigo dark:text-vanilla-cream"
-                        data-key="nav_profile">Profil</a>
-                    <a href="#skills"
-                        class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition text-midnight-indigo dark:text-vanilla-cream"
-                        data-key="nav_skills">Compétences</a>
-                    <a href="#projects"
-                        class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition text-midnight-indigo dark:text-vanilla-cream"
-                        data-key="nav_projects">Projets</a>
+            </div>
+            <div class="reveal" style="transition-delay:.1s">
+                <div class="skill-cat">Back-End</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express</span>
+                    <span class="skill-tag">API REST</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">JWT</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Symfony</span>
                 </div>
-
-                <!-- Right Actions -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <!-- Language Toggle -->
-                    <button id="lang-toggle"
-                        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none flex items-center gap-1 text-midnight-indigo dark:text-vanilla-cream font-medium text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                        </svg>
-                        <span id="lang-text">FR</span>
-                    </button>
-
-                    <!-- Dark Mode Button -->
-                    <button
-                        class="theme-toggle p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none">
-                        <!-- Sun Icon -->
-                        <svg class="w-5 h-5 hidden dark:block text-vanilla-cream" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                            </path>
-                        </svg>
-                        <!-- Moon Icon -->
-                        <svg class="w-5 h-5 block dark:hidden text-midnight-indigo" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
-                            </path>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center space-x-4">
-                    <button id="mobile-lang-toggle"
-                        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none text-midnight-indigo dark:text-vanilla-cream font-medium text-sm">
-                        FR
-                    </button>
-                    <button
-                        class="theme-toggle p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none">
-                        <!-- Icons same as desktop -->
-                        <svg class="w-6 h-6 hidden dark:block text-vanilla-cream" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                            </path>
-                        </svg>
-                        <svg class="w-6 h-6 block dark:hidden text-midnight-indigo" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
-                            </path>
-                        </svg>
-                    </button>
-                    <button id="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu" class="text-midnight-indigo dark:text-vanilla-cream focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+            </div>
+            <div class="reveal" style="transition-delay:.2s">
+                <div class="skill-cat">Outils &amp; Méthodes</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git / GitHub</span>
+                    <span class="skill-tag" data-key="skill_pm">Gestion de projet (PMBOK)</span>
+                    <span class="skill-tag" data-key="skill_arch">Architecture projet</span>
+                    <span class="skill-tag" data-key="skill_tests">Tests API</span>
+                    <span class="skill-tag" data-key="skill_cloud">Cloud (bases)</span>
+                    <span class="skill-tag">React Native</span>
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu"
-            class="hidden md:hidden bg-vanilla-cream dark:bg-midnight-indigo border-t border-midnight-indigo/10 dark:border-vanilla-cream/10">
-            <a href="#hero" class="block py-3 px-4 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
-                data-key="nav_home">Accueil</a>
-            <a href="#profile" class="block py-3 px-4 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
-                data-key="nav_profile">Profil</a>
-            <a href="#skills" class="block py-3 px-4 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
-                data-key="nav_skills">Compétences</a>
-            <a href="#projects" class="block py-3 px-4 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
-                data-key="nav_projects">Projets</a>
+    </div>
+</section>
+
+<!-- ── PROJETS ───────────────────────────────────────────────── -->
+<hr class="section-rule">
+<section id="projects">
+    <div class="section-wrap">
+        <div class="section-header reveal">
+            <span class="s-num">03</span>
+            <h2 class="s-title" data-key="projects_title">Projets</h2>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="hero"
-        class="min-h-screen pt-20 flex items-center justify-center px-4 relative overflow-hidden bg-vanilla-cream dark:bg-midnight-indigo">
-        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
-            <!-- Text Content -->
-            <div class="text-center lg:text-left z-10 order-1 lg:order-1">
-                <h1 class="text-4xl lg:text-5xl font-bold mb-4 leading-tight text-midnight-indigo dark:text-vanilla-cream"
-                    data-key="hero_greeting">
-                    Salut, moi c'est <span class="text-indigo-500">Walid</span><br>
-                    et je suis développeur Full Stack
-                </h1>
-                <p class="text-lg md:text-xl text-midnight-indigo/70 dark:text-vanilla-cream/70 mb-8 max-w-lg mx-auto lg:mx-0"
-                    data-key="hero_desc">
-                    Passionné par le développement web, j'adore créer des applications complètes, modernes et
-                    performantes.
-                </p>
-
-                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                    <a href="#projects"
-                        class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-medium transition shadow-lg shadow-indigo-500/20"
-                        data-key="hero_btn_portfolio">
-                        Mon Portfolio
-                    </a>
-                    <a href="Img/CV_2025-12-22_Walid_KOUJDAL.pdf"
-                        class="px-8 py-3 bg-transparent border border-midnight-indigo/20 dark:border-vanilla-cream/20 hover:bg-midnight-indigo/5 dark:hover:bg-vanilla-cream/5 text-midnight-indigo dark:text-vanilla-cream rounded-md font-medium transition"
-                        data-key="hero_btn_cv" target="_blank">
-                        Mon CV
-                    </a>
-                </div>
-            </div>
-
-            <!-- Image Content -->
-            <div class="relative flex justify-center lg:justify-end order-2 lg:order-2">
-                <div class="relative w-72 h-72 lg:w-96 lg:h-96">
-                    <!-- Background Shape/Blob could go here -->
-                    <div class="absolute inset-0 bg-indigo-500 rounded-full blur-3xl opacity-10 animate-pulse"></div>
-                    <picture>
-                        <source srcset="Img/Walid.webp" type="image/webp">
-                        <img src="Img/Walid.png" alt="Walid KOUJDAL"
-                            width="400" height="400" fetchpriority="high"
-                            class="relative z-10 w-full h-full object-cover rounded-full border-8 border-vanilla-cream dark:border-midnight-indigo shadow-2xl hover:scale-105 transition duration-500">
-                    </picture>
-                </div>
-            </div>
+        <div class="filter-row reveal">
+            <button type="button" class="filter-btn f-active" data-filter="all"      data-key="filter_all">Tous</button>
+            <button type="button" class="filter-btn"          data-filter="pro"      data-key="filter_pro">Pros</button>
+            <button type="button" class="filter-btn"          data-filter="personal" data-key="filter_personal">Personnels</button>
         </div>
-    </section>
+        <div id="projects-grid"></div>
+    </div>
+</section>
 
-    <!-- Profile Section (previously About) -->
-    <section id="profile" class="py-20 bg-vanilla-cream/50 dark:bg-midnight-indigo/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-12 reveal"
-                data-key="profile_title">
-                Mon profil</h2>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div
-                    class="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border-l-4 border-indigo-500 hover:shadow-md transition duration-300 reveal">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-500">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-bold text-lg text-midnight-indigo dark:text-vanilla-cream"
-                            data-key="profile_card1_title">Le déclic</h3>
-                    </div>
-                    <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 text-sm leading-relaxed"
-                        data-key="profile_card1_desc">
-                        Curieux de nature, j'ai découvert le monde du code en explorant HTML, CSS et JavaScript. Très
-                        vite, je me suis passionné pour la création d'interfaces, ce qui m'a naturellement orienté vers
-                        le développement web.
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border-l-4 border-indigo-500 hover:shadow-md transition duration-300 reveal">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-500">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-                                </path>
-                            </svg>
-                        </div>
-                        <h3 class="font-bold text-lg text-midnight-indigo dark:text-vanilla-cream"
-                            data-key="profile_card2_title">La formation</h3>
-                    </div>
-                    <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 text-sm leading-relaxed"
-                        data-key="profile_card2_desc">
-                        Titulaire d'un titre de Coordinateur de projets informatiques. J'ai acquis des compétences
-                        solides en
-                        développement Full Stack ainsi qu'en infrastructure cloud.
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                    class="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border-l-4 border-indigo-500 hover:shadow-md transition duration-300 reveal">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-500">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h3 class="font-bold text-lg text-midnight-indigo dark:text-vanilla-cream"
-                            data-key="profile_card3_title">Ma vision</h3>
-                    </div>
-                    <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 text-sm leading-relaxed"
-                        data-key="profile_card3_desc">
-                        J'accorde une grande importance à l'accessibilité, à la performance et à l'esthétique. Je crois
-                        en des interfaces simples, utiles et bien pensées, toujours orientées utilisateur. J'aime
-                        résoudre de vrais problèmes avec créativité.
-                    </p>
-                </div>
-            </div>
+<!-- ── CONTACT ───────────────────────────────────────────────── -->
+<section id="contact-section">
+    <div class="contact-inner">
+        <div class="contact-eye">Contact</div>
+        <h2 class="contact-h reveal" data-key="contact_title">Vous avez une idée ou un projet ?</h2>
+        <p class="contact-sub reveal" data-key="contact_desc" style="transition-delay:.1s">Retrouvez tous mes liens en bas de page pour me contacter.</p>
+        <div class="reveal" style="transition-delay:.2s">
+            <a href="mailto:walid.koujdal@gmail.com" class="btn-primary" data-key="contact_btn">Aller au contact</a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Skills Section (previously Services) -->
-    <section id="skills" class="py-20 bg-white dark:bg-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <h2 class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-12 reveal"
-                data-key="skills_title">
-                Compétences</h2>
-
-            <div class="grid md:grid-cols-3 gap-12">
-                <!-- Front-End -->
-                <div class="space-y-6 reveal">
-                    <h3 class="text-xl font-bold text-indigo-500 border-b border-indigo-500/20 pb-2">Front-End</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>JavaScript</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>React</span>
-                                <span>70%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 70%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>Tailwind CSS</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>Bootstrap</span>
-                                <span>65%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 65%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>Vue.js</span>
-                                <span>60%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 60%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Back-End -->
-                <div class="space-y-6 reveal">
-                    <h3 class="text-xl font-bold text-indigo-500 border-b border-indigo-500/20 pb-2">Back-End</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>Node.js</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>Express</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>API REST</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>MySQL</span>
-                                <span>70%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 70%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>JWT</span>
-                                <span>65%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 65%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>PHP</span>
-                                <span>50%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 50%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>Symfony</span>
-                                <span>45%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 45%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Outils & Méthodes -->
-                <div class="space-y-6 reveal">
-                    <h3 class="text-xl font-bold text-indigo-500 border-b border-indigo-500/20 pb-2">Outils &
-                        Méthodes</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span>Git / GitHub</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span data-key="skill_pm">Gestion de projet (PMBOK)</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span data-key="skill_arch">Architecture projet</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span data-key="skill_tests">Tests API</span>
-                                <span>70%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 70%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div
-                                class="flex justify-between mb-1 text-sm font-medium text-midnight-indigo dark:text-vanilla-cream">
-                                <span data-key="skill_cloud">Cloud (bases)</span>
-                                <span>60%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-white/10 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 60%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- ── FOOTER ────────────────────────────────────────────────── -->
+<footer>
+    <div class="footer-inner">
+        <span class="footer-name">Walid Koujdal</span>
+        <div class="footer-links">
+            <a href="mailto:walid.koujdal@gmail.com">walid.koujdal@gmail.com</a>
+            <a href="https://github.com/w-koujdal" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://fr.linkedin.com/in/walid-koujdal-2a516b27b" target="_blank" rel="noopener">LinkedIn</a>
         </div>
-    </section>
+        <span class="footer-copy">&copy; <span id="copyright-year">2025</span> Walid Koujdal</span>
+    </div>
+</footer>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-vanilla-cream/50 dark:bg-midnight-indigo/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-4" data-key="projects_title">
-                Projets</h2>
-
-            <div class="flex gap-4 mb-12">
-                <button type="button" data-filter="all"
-                    class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition bg-midnight-indigo text-vanilla-cream"
-                    data-key="filter_all">Tous</button>
-                <button type="button" data-filter="pro"
-                    class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition text-midnight-indigo/60 dark:text-vanilla-cream/60 hover:text-midnight-indigo dark:hover:text-vanilla-cream"
-                    data-key="filter_pro">Pros</button>
-                <button type="button" data-filter="personal"
-                    class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition text-midnight-indigo/60 dark:text-vanilla-cream/60 hover:text-midnight-indigo dark:hover:text-vanilla-cream"
-                    data-key="filter_personal">Personnels</button>
-            </div>
-
-            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-        </div>
-    </section>
-
-    <!-- CT A & Footer -->
-    <section class="py-24 bg-vanilla-cream dark:bg-midnight-indigo">
-        <div class="max-w-3xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-6" data-key="contact_title">
-                Vous avez une idée ou un projet ?</h2>
-            <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 mb-8" data-key="contact_desc">Retrouvez tous
-                mes liens en bas de page pour me contacter.</p>
-            <a href="mailto:walid.koujdal@gmail.com"
-                class="inline-block px-8 py-4 border border-midnight-indigo/20 dark:border-vanilla-cream/20 hover:bg-midnight-indigo/5 dark:hover:bg-vanilla-cream/5 text-midnight-indigo dark:text-vanilla-cream rounded-md transition duration-300"
-                data-key="contact_btn">
-                Aller au contact
-            </a>
-        </div>
-    </section>
-
-    <footer class="bg-midnight-indigo text-white py-12 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col items-center">
-                <h2 class="text-2xl font-bold mb-1">Walid Koujdal &dash; Full Stack Developer</h2>
-                <div class="flex flex-col md:flex-row items-center gap-4 text-sm text-white/60 mb-8">
-                    <a href="mailto:walid.koujdal@gmail.com"
-                        class="hover:text-white transition">walid.koujdal@gmail.com</a>
-                    <span class="hidden md:inline">|</span>
-                    <span class="hover:text-white transition">+33 6 26 18 95 80</span>
-                </div>
-
-                <div class="flex gap-6 mb-8">
-                    <a href="https://github.com/w-koujdal"
-                        class="text-white/60 hover:text-white transition flex items-center gap-2" target="_blank">
-                        <i class="fab fa-github text-xl"></i> GitHub
-                    </a>
-                    <a href="https://fr.linkedin.com/in/walid-koujdal-2a516b27b"
-                        class="text-white/60 hover:text-white transition flex items-center gap-2" target="_blank">
-                        <i class="fab fa-linkedin text-xl"></i> LinkedIn
-                    </a>
-                </div>
-
-                <div class="text-xs text-white/40">
-                    &copy; <span id="copyright-year">2025</span> Walid Koujdal. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="./script.js"></script>
+<script src="./script.js"></script>
 </body>
-
 </html>

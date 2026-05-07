@@ -48,12 +48,22 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
     });
 }, {
     root: null,
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
+    threshold: 0.1,
+    rootMargin: "0px 0px -30px 0px"
 });
 
 revealElements.forEach(el => {
     revealObserver.observe(el);
+});
+
+// Activate elements already in view on load (covers file:// and fast connections)
+requestAnimationFrame(() => {
+    revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            el.classList.add('active');
+        }
+    });
 });
 
 // Language Toggle
@@ -77,7 +87,7 @@ const translations = {
         nav_profile: ‘Profile’,
         nav_skills: ‘Skills’,
         nav_projects: ‘Projects’,
-        hero_greeting: ‘Hi, I\’m <span class="text-indigo-500">Walid</span><br>and I am a Full Stack developer’,
+        hero_greeting: ‘Hi, I\’m <span class="accent">Walid</span><br>and I am a Full Stack developer’,
         hero_desc: "Passionate about web development, I love creating complete, modern, and high-performance applications.",
         hero_btn_portfolio: ‘My Portfolio’,
         hero_btn_cv: ‘My Resume’,
@@ -157,32 +167,24 @@ function renderProjects(filter) {
     const viewLabel = translations[currentLang].view_project;
     const list = filter === ‘all’ ? projects : projects.filter(p => p.category === filter);
 
-    grid.innerHTML = list.map(p => `
-        <div class="bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300 border border-midnight-indigo/5 dark:border-vanilla-cream/5 group reveal active">
-            <div class="h-48 bg-gray-200 dark:bg-white/10 relative overflow-hidden">
-                <div class="absolute inset-0 flex items-center justify-center text-midnight-indigo/20 dark:text-vanilla-cream/20 text-4xl font-bold group-hover:scale-105 transition duration-500">
-                    ${p.label}
-                </div>
+    grid.innerHTML = list.map((p, i) => `
+        <article class="proj-card">
+            <div class="proj-idx">${String(i + 1).padStart(2, ‘0’)} —</div>
+            <span class="proj-badge">${p.label}</span>
+            <h3 class="proj-title">${p.title[currentLang]}</h3>
+            <p class="proj-desc">${p.desc[currentLang]}</p>
+            <div class="proj-tags">
+                ${p.tags.map(tag => `<span class="proj-tag">${tag}</span>`).join(‘’)}
             </div>
-            <div class="p-6">
-                <h3 class="text-xl font-bold text-midnight-indigo dark:text-vanilla-cream mb-2">${p.title[currentLang]}</h3>
-                <p class="text-midnight-indigo/70 dark:text-vanilla-cream/70 text-sm mb-4 leading-relaxed">${p.desc[currentLang]}</p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    ${p.tags.map(tag => `<span class="px-3 py-1 bg-indigo-500/10 text-indigo-500 rounded-full text-xs font-medium border border-indigo-500/20">${tag}</span>`).join(‘’)}
-                </div>
-                <a href="${p.url}"${p.url !== ‘#’ ? ‘ target="_blank" rel="noopener noreferrer"’ : ‘’} class="inline-flex items-center text-indigo-500 font-medium text-sm hover:text-indigo-600 transition">
-                    ${viewLabel} ${arrow}
-                </a>
-            </div>
-        </div>
+            <a href="${p.url}"${p.url !== ‘#’ ? ‘ target="_blank" rel="noopener noreferrer"’ : ‘’} class="proj-link">
+                ${viewLabel} <span>→</span>
+            </a>
+        </article>
     `).join(‘’);
 
     // Sync active state on filter buttons
     document.querySelectorAll(‘.filter-btn’).forEach(btn => {
-        const isActive = btn.dataset.filter === filter;
-        btn.className = isActive
-            ? ‘filter-btn px-4 py-2 text-sm font-medium rounded-full transition bg-midnight-indigo text-vanilla-cream’
-            : ‘filter-btn px-4 py-2 text-sm font-medium rounded-full transition text-midnight-indigo/60 dark:text-vanilla-cream/60 hover:text-midnight-indigo dark:hover:text-vanilla-cream’;
+        btn.classList.toggle(‘f-active’, btn.dataset.filter === filter);
     });
 }
 
