@@ -108,7 +108,14 @@ var projects = [
         label: 'Mobile App',
         category: 'personal',
         url: '#',
-        img: 'Img/login.png',
+        imgs: [
+            'Img/login.png',
+            'Img/Screenshot_20260508_232406_CynaMobile.png',
+            'Img/Screenshot_20260508_232352_CynaMobile.png',
+            'Img/Screenshot_20260508_232358_CynaMobile.png',
+            'Img/Screenshot_20260508_232345_CynaMobile.png',
+            'Img/Screenshot_20260508_230030_CynaMobile.png'
+        ],
         tags: ['React Native', 'Expo', 'Node.js', 'Axios', 'AsyncStorage'],
         title: { fr: 'CYNA — Application Mobile SaaS', en: 'CYNA — SaaS Mobile Application' },
         desc: {
@@ -147,7 +154,23 @@ function renderProjects(filter) {
         var num = String(i + 1).padStart(2, '0');
         var target = p.url !== '#' ? ' target="_blank" rel="noopener noreferrer"' : '';
         var tags = p.tags.map(function(tag) { return '<span class="proj-tag">' + tag + '</span>'; }).join('');
-        var imgHtml = p.img ? '<img src="' + p.img + '" alt="' + p.label + '" class="proj-img">' : '';
+        var imgHtml = '';
+        if (p.imgs && p.imgs.length > 0) {
+            var carImgs = p.imgs.map(function(src, i) {
+                return '<img src="' + src + '" class="proj-car-img' + (i === 0 ? ' active' : '') + '" alt="' + p.label + '">';
+            }).join('');
+            var carDots = p.imgs.map(function(_, i) {
+                return '<span class="car-dot' + (i === 0 ? ' active' : '') + '"></span>';
+            }).join('');
+            imgHtml = '<div class="proj-carousel" data-idx="0">'
+                + carImgs
+                + '<button class="car-prev" aria-label="Précédent">&#8592;</button>'
+                + '<button class="car-next" aria-label="Suivant">&#8594;</button>'
+                + '<div class="car-dots">' + carDots + '</div>'
+                + '</div>';
+        } else if (p.img) {
+            imgHtml = '<img src="' + p.img + '" alt="' + p.label + '" class="proj-img">';
+        }
         var videoBtn = p.video ? '<button type="button" class="proj-video-btn" data-video="' + p.video + '">&#9654; Voir la démo</button>' : '';
         return '<article class="proj-card">'
             + imgHtml
@@ -157,7 +180,9 @@ function renderProjects(filter) {
             + '<p class="proj-desc">' + p.desc[currentLang] + '</p>'
             + '<div class="proj-tags">' + tags + '</div>'
             + videoBtn
-            + '<a href="' + p.url + '"' + target + ' class="proj-link">' + viewLabel + ' <span>&#8594;</span></a>'
+            + (p.imgs && p.imgs.length > 0
+                ? '<button type="button" class="proj-link proj-gallery-btn" data-pid="' + p.id + '">' + viewLabel + ' <span>&#8594;</span></button>'
+                : '<a href="' + p.url + '"' + target + ' class="proj-link">' + viewLabel + ' <span>&#8594;</span></a>')
             + '</article>';
     }).join('');
 
@@ -230,6 +255,77 @@ document.addEventListener('click', function(e) {
     if (e.target.classList.contains('proj-video-btn')) {
         openVideoModal(e.target.dataset.video);
     }
+});
+
+// Gallery modal
+var galleryModal = document.getElementById('gallery-modal');
+var galleryImg = document.getElementById('gallery-img');
+var galleryDots = document.getElementById('gallery-dots');
+var galleryCounter = document.getElementById('gallery-counter');
+var galleryCurrentImgs = [];
+var galleryCurrentIdx = 0;
+
+function openGallery(imgs, startIdx) {
+    galleryCurrentImgs = imgs;
+    galleryCurrentIdx = startIdx || 0;
+    renderGallery();
+    galleryModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeGallery() {
+    galleryModal.classList.remove('open');
+    document.body.style.overflow = '';
+}
+function renderGallery() {
+    galleryImg.src = galleryCurrentImgs[galleryCurrentIdx];
+    galleryCounter.textContent = (galleryCurrentIdx + 1) + ' / ' + galleryCurrentImgs.length;
+    galleryDots.innerHTML = galleryCurrentImgs.map(function(_, i) {
+        return '<span class="g-dot' + (i === galleryCurrentIdx ? ' active' : '') + '" data-i="' + i + '"></span>';
+    }).join('');
+}
+function galleryGo(dir) {
+    galleryCurrentIdx = (galleryCurrentIdx + dir + galleryCurrentImgs.length) % galleryCurrentImgs.length;
+    renderGallery();
+}
+
+document.getElementById('gallery-close').addEventListener('click', closeGallery);
+document.getElementById('gallery-backdrop').addEventListener('click', closeGallery);
+document.getElementById('gallery-prev').addEventListener('click', function() { galleryGo(-1); });
+document.getElementById('gallery-next').addEventListener('click', function() { galleryGo(1); });
+document.getElementById('gallery-dots').addEventListener('click', function(e) {
+    var dot = e.target.closest('.g-dot');
+    if (dot) { galleryCurrentIdx = parseInt(dot.dataset.i); renderGallery(); }
+});
+document.addEventListener('keydown', function(e) {
+    if (!galleryModal.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') galleryGo(-1);
+    if (e.key === 'ArrowRight') galleryGo(1);
+    if (e.key === 'Escape') closeGallery();
+});
+document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.proj-gallery-btn');
+    if (!btn) return;
+    var pid = btn.dataset.pid;
+    var project = projects.filter(function(p) { return p.id === pid; })[0];
+    if (project && project.imgs) openGallery(project.imgs, 0);
+});
+
+// Carousel navigation
+document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.car-prev, .car-next');
+    if (!btn) return;
+    e.stopPropagation();
+    var carousel = btn.closest('.proj-carousel');
+    if (!carousel) return;
+    var imgs = carousel.querySelectorAll('.proj-car-img');
+    var dots = carousel.querySelectorAll('.car-dot');
+    var current = parseInt(carousel.dataset.idx) || 0;
+    current = btn.classList.contains('car-prev')
+        ? (current - 1 + imgs.length) % imgs.length
+        : (current + 1) % imgs.length;
+    imgs.forEach(function(img, i) { img.classList.toggle('active', i === current); });
+    dots.forEach(function(dot, i) { dot.classList.toggle('active', i === current); });
+    carousel.dataset.idx = current;
 });
 
 // Skill tooltips — clic pour mobile

@@ -374,6 +374,39 @@
         }
         .proj-card:hover .proj-img { filter: grayscale(0%); }
 
+        .proj-carousel {
+            width: calc(100% + 3.5rem); margin: -1.75rem -1.75rem 1.25rem;
+            position: relative; height: 280px;
+            background: #0D0D0D; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .proj-car-img {
+            position: absolute; height: 100%; width: auto;
+            object-fit: contain; opacity: 0;
+            transition: opacity .3s;
+        }
+        .proj-car-img.active { opacity: 1; }
+        .car-prev, .car-next {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,.15); border: none; color: #fff;
+            width: 28px; height: 28px; cursor: pointer; z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .85rem; transition: background .2s;
+        }
+        .car-prev:hover, .car-next:hover { background: rgba(255,255,255,.35); }
+        .car-prev { left: .5rem; }
+        .car-next { right: .5rem; }
+        .car-dots {
+            position: absolute; bottom: .5rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: .35rem; z-index: 2;
+        }
+        .car-dot {
+            width: 5px; height: 5px; border-radius: 50%;
+            background: rgba(255,255,255,.35); transition: background .2s;
+        }
+        .car-dot.active { background: var(--accent); }
+
         #projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -459,6 +492,63 @@
         .contact-sub {
             font-size: .975rem; color: var(--muted);
             margin-bottom: 2.25rem; max-width: 460px;
+        }
+
+        /* ── GALLERY MODAL ───────────────────────────────────── */
+        #gallery-modal {
+            display: none; position: fixed; inset: 0; z-index: 200;
+            align-items: center; justify-content: center;
+        }
+        #gallery-modal.open { display: flex; }
+        #gallery-backdrop {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,.92); cursor: pointer;
+        }
+        #gallery-img-wrap {
+            position: relative; z-index: 1;
+            max-height: 80vh; display: flex;
+            align-items: center; justify-content: center;
+        }
+        #gallery-img {
+            max-height: 80vh; max-width: 80vw;
+            object-fit: contain; display: block;
+            transition: opacity .2s;
+        }
+        #gallery-close {
+            position: fixed; top: 1.25rem; right: 1.25rem; z-index: 3;
+            background: rgba(255,255,255,.1); border: none; cursor: pointer;
+            color: #fff; width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .2s;
+        }
+        #gallery-close:hover { background: rgba(255,255,255,.25); }
+        #gallery-prev, #gallery-next {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,.1); border: none; color: #fff;
+            width: 44px; height: 44px; font-size: 1.2rem; cursor: pointer;
+            z-index: 3; display: flex; align-items: center; justify-content: center;
+            transition: background .2s;
+        }
+        #gallery-prev:hover, #gallery-next:hover { background: rgba(255,255,255,.25); }
+        #gallery-prev { left: 1rem; }
+        #gallery-next { right: 1rem; }
+        #gallery-dots {
+            position: fixed; bottom: 1.5rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: .4rem; z-index: 3;
+        }
+        #gallery-dots .g-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(255,255,255,.3); cursor: pointer;
+            transition: background .2s;
+        }
+        #gallery-dots .g-dot.active { background: var(--accent); }
+        #gallery-counter {
+            position: fixed; top: 1.25rem; left: 50%;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace; font-size: .7rem;
+            letter-spacing: .08em; color: rgba(255,255,255,.5);
+            z-index: 3;
         }
 
         /* ── VIDEO MODAL ─────────────────────────────────────── */
@@ -789,6 +879,23 @@
         <span class="footer-copy">&copy; <span id="copyright-year">2025</span> Walid Koujdal</span>
     </div>
 </footer>
+
+<!-- ── GALLERY MODAL ─────────────────────────────────────────── -->
+<div id="gallery-modal" aria-modal="true" role="dialog" aria-label="Galerie projet">
+    <div id="gallery-backdrop"></div>
+    <button id="gallery-close" aria-label="Fermer">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+    </button>
+    <button id="gallery-prev" aria-label="Précédent">&#8592;</button>
+    <div id="gallery-img-wrap">
+        <img id="gallery-img" src="" alt="">
+    </div>
+    <button id="gallery-next" aria-label="Suivant">&#8594;</button>
+    <div id="gallery-dots"></div>
+    <div id="gallery-counter"></div>
+</div>
 
 <!-- ── VIDEO MODAL ───────────────────────────────────────────── -->
 <div id="video-modal" aria-modal="true" role="dialog" aria-label="Démo projet">
