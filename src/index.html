@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Walid Koujdal — Développeur Full Stack</title>
     <meta name="description" content="Portfolio de Walid Koujdal, Développeur Full Stack passionné par la création d'applications web modernes et performantes.">
+    <link rel="icon" type="image/svg+xml" href="Img/logo.svg">
     <link rel="icon" type="image/png" href="Img/favicon.png">
     <link rel="canonical" href="https://w-koujdal.github.io/">
     <meta property="og:type" content="website">
@@ -29,23 +30,25 @@
     <style>
         /* ── TOKENS ─────────────────────────────────────────── */
         :root {
-            --bg:       #F3EFE6;
+            --bg:       #D9D1C0;
+            --bg-alt:   #CEC5B0;
             --fg:       #0D0D0D;
-            --muted:    rgba(13,13,13,0.42);
+            --muted:    rgba(13,13,13,0.45);
             --accent:   #B87520;
             --accent-fg:#FFF8EC;
-            --border:   rgba(13,13,13,0.09);
-            --card:     rgba(13,13,13,0.03);
+            --border:   rgba(13,13,13,0.13);
+            --card:     rgba(13,13,13,0.06);
             --nav-h:    68px;
         }
         html.dark {
             --bg:       #0D0D0D;
+            --bg-alt:   #111111;
             --fg:       #F3EFE6;
             --muted:    rgba(243,239,230,0.42);
             --accent:   #E8A838;
             --accent-fg:#0D0D0D;
-            --border:   rgba(243,239,230,0.09);
-            --card:     rgba(243,239,230,0.04);
+            --border:   rgba(243,239,230,0.11);
+            --card:     rgba(243,239,230,0.05);
         }
 
         /* ── BASE ─────────────────────────────────────────────── */
@@ -309,8 +312,41 @@
             font-family: 'DM Sans', sans-serif; font-size: .875rem;
             font-weight: 500; color: var(--fg);
             transition: border-color .2s, color .2s;
+            position: relative; cursor: help;
         }
         .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+        .skill-tag[data-tip]::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 9px); left: 50%;
+            transform: translateX(-50%);
+            background: var(--fg); color: var(--bg);
+            padding: .35rem .7rem;
+            font-family: 'DM Sans', sans-serif; font-size: .75rem; font-weight: 400;
+            white-space: nowrap; letter-spacing: 0;
+            pointer-events: none; opacity: 0;
+            transition: opacity .15s, transform .15s;
+            transform: translateX(-50%) translateY(4px);
+            z-index: 20;
+        }
+        .skill-tag[data-tip]::before {
+            content: '';
+            position: absolute;
+            bottom: calc(100% + 4px); left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--fg);
+            pointer-events: none; opacity: 0;
+            transition: opacity .15s;
+            z-index: 20;
+        }
+        .skill-tag[data-tip]:hover::after,
+        .skill-tag[data-tip].tip-on::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .skill-tag[data-tip]:hover::before,
+        .skill-tag[data-tip].tip-on::before { opacity: 1; }
 
         /* ── PROJECT FILTERS ─────────────────────────────────── */
         .filter-row {
@@ -330,13 +366,23 @@
         .filter-btn.f-active { background: var(--fg); color: var(--bg); }
 
         /* ── PROJECT CARDS (injected by JS) ──────────────────── */
+        .proj-img {
+            width: calc(100% + 3.5rem); margin: -1.75rem -1.75rem 1.25rem;
+            aspect-ratio: 16/9; object-fit: cover; display: block;
+            filter: grayscale(10%);
+            transition: filter .3s;
+        }
+        .proj-card:hover .proj-img { filter: grayscale(0%); }
+
         #projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1px; background: var(--border);
         }
+        #profile, #projects { background: var(--bg-alt); }
+
         .proj-card {
-            background: var(--bg); padding: 1.75rem;
+            background: var(--bg-alt); padding: 1.75rem;
             display: flex; flex-direction: column;
             transition: background .2s;
         }
@@ -369,6 +415,17 @@
             font-family: 'JetBrains Mono', monospace; font-size: .58rem;
             letter-spacing: .03em; color: var(--muted);
         }
+        .proj-video-btn {
+            display: inline-flex; align-items: center; gap: .45rem;
+            font-family: 'JetBrains Mono', monospace; font-size: .68rem;
+            letter-spacing: .05em; text-transform: uppercase;
+            background: none; border: 1px solid var(--accent);
+            color: var(--accent); padding: .4rem .9rem;
+            cursor: pointer; margin-bottom: .75rem;
+            transition: background .2s, color .2s;
+        }
+        .proj-video-btn:hover { background: var(--accent); color: var(--accent-fg); }
+
         .proj-link {
             display: inline-flex; align-items: center; gap: .45rem;
             font-family: 'JetBrains Mono', monospace; font-size: .68rem;
@@ -402,6 +459,31 @@
         .contact-sub {
             font-size: .975rem; color: var(--muted);
             margin-bottom: 2.25rem; max-width: 460px;
+        }
+
+        /* ── VIDEO MODAL ─────────────────────────────────────── */
+        #video-modal {
+            display: none; position: fixed; inset: 0; z-index: 200;
+            align-items: center; justify-content: center;
+        }
+        #video-modal.open { display: flex; }
+        #video-modal-backdrop {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,.85); cursor: pointer;
+        }
+        #video-modal-box {
+            position: relative; z-index: 1;
+            width: min(90vw, 960px);
+            background: #0D0D0D;
+        }
+        #video-modal-close {
+            position: absolute; top: -2.5rem; right: 0;
+            background: none; border: none; cursor: pointer;
+            color: rgba(255,255,255,.7); transition: color .2s;
+        }
+        #video-modal-close:hover { color: #fff; }
+        #video-modal-player {
+            width: 100%; display: block; max-height: 80vh;
         }
 
         /* ── FOOTER ──────────────────────────────────────────── */
@@ -480,7 +562,9 @@
 <!-- ── NAV ──────────────────────────────────────────────────── -->
 <nav id="navbar">
     <div class="nav-inner">
-        <a href="#hero" class="nav-logo">WK<span>.</span></a>
+        <a href="#hero" class="nav-logo">
+            <img src="Img/logo.svg" alt="WK" width="36" height="36" style="display:block;">
+        </a>
 
         <div class="nav-links">
             <a href="#hero"     data-key="nav_home">Accueil</a>
@@ -630,35 +714,36 @@
             <div>
                 <div class="skill-cat">Front-End</div>
                 <div class="skill-tags">
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Tailwind CSS</span>
-                    <span class="skill-tag">Vue.js</span>
-                    <span class="skill-tag">Bootstrap</span>
-                    <span class="skill-tag">HTML / CSS</span>
+                    <span class="skill-tag" data-tip="Langage universel du web, client &amp; serveur">JavaScript</span>
+                    <span class="skill-tag" data-tip="Bibliothèque UI par Meta, basée sur des composants">React</span>
+                    <span class="skill-tag" data-tip="Framework CSS utilitaire-first, ultra-flexible">Tailwind CSS</span>
+                    <span class="skill-tag" data-tip="Framework JavaScript progressif et accessible">Vue.js</span>
+                    <span class="skill-tag" data-tip="Framework CSS responsive prêt à l'emploi">Bootstrap</span>
+                    <span class="skill-tag" data-tip="Framework React full-stack, SSR et SSG">Next.js</span>
+                    <span class="skill-tag" data-tip="Structure et style de toutes les pages web">HTML / CSS</span>
                 </div>
             </div>
             <div>
                 <div class="skill-cat">Back-End</div>
                 <div class="skill-tags">
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Express</span>
-                    <span class="skill-tag">API REST</span>
-                    <span class="skill-tag">MySQL</span>
-                    <span class="skill-tag">JWT</span>
-                    <span class="skill-tag">PHP</span>
-                    <span class="skill-tag">Symfony</span>
+                    <span class="skill-tag" data-tip="JavaScript côté serveur, haute performance">Node.js</span>
+                    <span class="skill-tag" data-tip="Framework web minimaliste pour Node.js">Express</span>
+                    <span class="skill-tag" data-tip="Architecture HTTP pour échanges client/serveur">API REST</span>
+                    <span class="skill-tag" data-tip="Base de données relationnelle open-source">MySQL</span>
+                    <span class="skill-tag" data-tip="Tokens signés pour l'authentification sécurisée">JWT</span>
+                    <span class="skill-tag" data-tip="Langage back-end historique du web">PHP</span>
+                    <span class="skill-tag" data-tip="Framework PHP robuste et modulaire">Symfony</span>
                 </div>
             </div>
             <div>
                 <div class="skill-cat">Outils &amp; Méthodes</div>
                 <div class="skill-tags">
-                    <span class="skill-tag">Git / GitHub</span>
-                    <span class="skill-tag" data-key="skill_pm">Gestion de projet (PMBOK)</span>
-                    <span class="skill-tag" data-key="skill_arch">Architecture projet</span>
-                    <span class="skill-tag" data-key="skill_tests">Tests API</span>
-                    <span class="skill-tag" data-key="skill_cloud">Cloud (bases)</span>
-                    <span class="skill-tag">React Native</span>
+                    <span class="skill-tag" data-tip="Versioning et collaboration de code">Git / GitHub</span>
+                    <span class="skill-tag" data-key="skill_pm" data-tip="Référentiel PMI des bonnes pratiques projet">Gestion de projet (PMBOK)</span>
+                    <span class="skill-tag" data-key="skill_arch" data-tip="Conception structurelle des systèmes logiciels">Architecture projet</span>
+                    <span class="skill-tag" data-key="skill_tests" data-tip="Validation des endpoints et contrats d'API">Tests API</span>
+                    <span class="skill-tag" data-key="skill_cloud" data-tip="Hébergement et services distants scalables">Cloud (bases)</span>
+                    <span class="skill-tag" data-tip="Apps mobile iOS &amp; Android en React">React Native</span>
                 </div>
             </div>
         </div>
@@ -704,6 +789,19 @@
         <span class="footer-copy">&copy; <span id="copyright-year">2025</span> Walid Koujdal</span>
     </div>
 </footer>
+
+<!-- ── VIDEO MODAL ───────────────────────────────────────────── -->
+<div id="video-modal" aria-modal="true" role="dialog" aria-label="Démo projet">
+    <div id="video-modal-backdrop"></div>
+    <div id="video-modal-box">
+        <button id="video-modal-close" aria-label="Fermer">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+        <video id="video-modal-player" controls playsinline></video>
+    </div>
+</div>
 
 <script src="./script.js"></script>
 </body>

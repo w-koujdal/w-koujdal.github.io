@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <rect width="48" height="48" fill="#0D0D0D"/>
+  <rect x="36" y="36" width="7" height="7" fill="#B87520"/>
+  <text x="24" y="30"
+    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-weight="900"
+    font-size="22"
+    text-anchor="middle"
+    letter-spacing="-1"
+    fill="#F3EFE6">W<tspan fill="#B87520">K</tspan></text>
+</svg>

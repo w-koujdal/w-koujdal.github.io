@@ -120,6 +120,8 @@ var projects = [
         label: 'Tilila Coffee',
         category: 'personal',
         url: '#',
+        img: 'Img/tilila.png',
+        video: 'Img/0508.mp4',
         tags: ['Next.js', 'TypeScript', 'Supabase', 'React'],
         title: { fr: 'Tilila Coffee - Site Vitrine', en: 'Tilila Coffee - Showcase Website' },
         desc: {
@@ -144,12 +146,16 @@ function renderProjects(filter) {
         var num = String(i + 1).padStart(2, '0');
         var target = p.url !== '#' ? ' target="_blank" rel="noopener noreferrer"' : '';
         var tags = p.tags.map(function(tag) { return '<span class="proj-tag">' + tag + '</span>'; }).join('');
+        var imgHtml = p.img ? '<img src="' + p.img + '" alt="' + p.label + '" class="proj-img">' : '';
+        var videoBtn = p.video ? '<button type="button" class="proj-video-btn" data-video="' + p.video + '">&#9654; Voir la démo</button>' : '';
         return '<article class="proj-card">'
+            + imgHtml
             + '<div class="proj-idx">' + num + ' -</div>'
             + '<span class="proj-badge">' + p.label + '</span>'
             + '<h3 class="proj-title">' + p.title[currentLang] + '</h3>'
             + '<p class="proj-desc">' + p.desc[currentLang] + '</p>'
             + '<div class="proj-tags">' + tags + '</div>'
+            + videoBtn
             + '<a href="' + p.url + '"' + target + ' class="proj-link">' + viewLabel + ' <span>&#8594;</span></a>'
             + '</article>';
     }).join('');
@@ -197,3 +203,43 @@ if (mobileLangToggleBtn) {
         updateLanguage(currentLang);
     });
 }
+
+// Video modal
+var videoModal = document.getElementById('video-modal');
+var videoPlayer = document.getElementById('video-modal-player');
+
+function openVideoModal(src) {
+    videoPlayer.src = src;
+    videoModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    videoPlayer.play();
+}
+function closeVideoModal() {
+    videoModal.classList.remove('open');
+    videoPlayer.pause();
+    videoPlayer.src = '';
+    document.body.style.overflow = '';
+}
+
+document.getElementById('video-modal-close').addEventListener('click', closeVideoModal);
+document.getElementById('video-modal-backdrop').addEventListener('click', closeVideoModal);
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeVideoModal(); });
+
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('proj-video-btn')) {
+        openVideoModal(e.target.dataset.video);
+    }
+});
+
+// Skill tooltips — clic pour mobile
+document.querySelectorAll('.skill-tag[data-tip]').forEach(function(tag) {
+    tag.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOn = this.classList.contains('tip-on');
+        document.querySelectorAll('.skill-tag.tip-on').forEach(function(t) { t.classList.remove('tip-on'); });
+        if (!isOn) this.classList.add('tip-on');
+    });
+});
+document.addEventListener('click', function() {
+    document.querySelectorAll('.skill-tag.tip-on').forEach(function(t) { t.classList.remove('tip-on'); });
+});
