@@ -114,6 +114,18 @@ var projects = [
             fr: 'Application mobile connectee a une API Node.js permettant de gerer un catalogue produits.',
             en: 'Mobile application connected to a Node.js API for managing a product catalog.'
         }
+    },
+    {
+        id: 'tilila',
+        label: 'Tilila Coffee',
+        category: 'personal',
+        url: '#',
+        tags: ['Next.js', 'TypeScript', 'Supabase', 'React'],
+        title: { fr: 'Tilila Coffee - Site Vitrine', en: 'Tilila Coffee - Showcase Website' },
+        desc: {
+            fr: 'Site vitrine complet pour un coffee shop : menu dynamique, evenements, carte interactive et panneau d\'administration, avec Supabase comme backend.',
+            en: 'Full showcase website for a coffee shop: dynamic menu, events, interactive map and admin panel, powered by Supabase as backend.'
+        }
     }
 ];
 
