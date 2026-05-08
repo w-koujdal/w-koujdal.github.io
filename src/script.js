@@ -108,11 +108,12 @@ var projects = [
         label: 'Mobile App',
         category: 'personal',
         url: '#',
-        tags: ['React Native', 'Axios'],
-        title: { fr: 'Application Mobile - Gestion Produits', en: 'Mobile App - Product Management' },
+        img: 'Img/login.png',
+        tags: ['React Native', 'Expo', 'Node.js', 'Axios', 'AsyncStorage'],
+        title: { fr: 'CYNA — Application Mobile SaaS', en: 'CYNA — SaaS Mobile Application' },
         desc: {
-            fr: 'Application mobile connectee a une API Node.js permettant de gerer un catalogue produits.',
-            en: 'Mobile application connected to a Node.js API for managing a product catalog.'
+            fr: 'Application mobile full-stack connectee a une API REST Node.js. Catalogue produits, panier persistant, paiement, historique des commandes et mode sombre.',
+            en: 'Full-stack mobile application connected to a Node.js REST API. Product catalog, persistent cart, payment, order history and dark mode.'
         }
     },
     {
