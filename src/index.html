@@ -626,6 +626,66 @@
             .s-num { font-size: 3.5rem; }
             .s-title { font-size: 1.4rem; }
         }
+
+        /* ── TOUCH & MOBILE UX ──────────────────────────────────── */
+        button, a { -webkit-tap-highlight-color: transparent; }
+        .btn-primary:active { opacity: .75; transform: scale(.97); }
+        .btn-ghost:active   { opacity: .7; }
+        .filter-btn:active  { opacity: .7; }
+        .nav-btn:active     { opacity: .7; }
+
+        /* Carousel swipe */
+        .proj-carousel { touch-action: pan-y; cursor: pointer; }
+
+        @media (max-width: 767px) {
+            /* Nav — touch targets 44px */
+            .nav-btn { min-height: 44px; padding: 0 .625rem; }
+
+            /* Mobile menu items — easier to tap */
+            #mobile-menu a { padding: 1.125rem 1.5rem; font-size: .8rem; }
+
+            /* Filters — taller tap zone */
+            .filter-row { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+            .filter-btn { padding: .7rem 1rem; min-height: 44px; white-space: nowrap; }
+
+            /* Carousel arrows — 44px touch target */
+            .car-prev, .car-next { width: 44px; height: 44px; font-size: 1rem; }
+
+            /* Carousel — taller for portrait screenshots */
+            .proj-carousel { height: 340px; }
+
+            /* Gallery modal */
+            #gallery-img { max-width: 95vw; }
+            #gallery-prev, #gallery-next { width: 52px; height: 52px; font-size: 1.4rem; }
+            #gallery-close { width: 44px; height: 44px; top: .75rem; right: .75rem; }
+
+            /* Video modal close — overlay inside the box, not above it */
+            #video-modal-close {
+                position: absolute; top: .5rem; right: .5rem;
+                background: rgba(0,0,0,.6); color: #fff;
+                width: 40px; height: 40px;
+                display: flex; align-items: center; justify-content: center;
+            }
+
+            /* Skill tooltips — show below on mobile to avoid top-overflow */
+            .skill-tag[data-tip]::after {
+                top: calc(100% + 9px); bottom: auto;
+                transform: translateX(-50%) translateY(-4px);
+            }
+            .skill-tag[data-tip].tip-on::after,
+            .skill-tag[data-tip]:hover::after {
+                transform: translateX(-50%) translateY(0);
+            }
+            .skill-tag[data-tip]::before {
+                top: calc(100% + 4px); bottom: auto;
+                border-top-color: transparent;
+                border-bottom-color: var(--fg);
+            }
+
+            /* Footer links — wrap gracefully */
+            .footer-links { flex-wrap: wrap; gap: .75rem; }
+            .footer-links a:first-child { word-break: break-all; }
+        }
     </style>
     <!-- Structured data — Person schema -->
     <script type="application/ld+json">

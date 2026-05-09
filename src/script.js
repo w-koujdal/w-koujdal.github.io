@@ -25,8 +25,14 @@ const mobileMenu = document.getElementById('mobile-menu');
 
 if (menuBtn && mobileMenu) {
     menuBtn.addEventListener('click', function() {
-        const isOpen = !mobileMenu.classList.toggle('hidden');
-        menuBtn.setAttribute('aria-expanded', String(!isOpen));
+        mobileMenu.classList.toggle('hidden');
+        menuBtn.setAttribute('aria-expanded', String(!mobileMenu.classList.contains('hidden')));
+    });
+    document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            menuBtn.setAttribute('aria-expanded', 'false');
+        });
     });
 }
 
@@ -340,3 +346,51 @@ document.querySelectorAll('.skill-tag[data-tip]').forEach(function(tag) {
 document.addEventListener('click', function() {
     document.querySelectorAll('.skill-tag.tip-on').forEach(function(t) { t.classList.remove('tip-on'); });
 });
+
+// ── SWIPE : carousel ────────────────────────────────────────
+var carSwipeX = 0, carSwipeEl = null;
+document.addEventListener('touchstart', function(e) {
+    var c = e.target.closest('.proj-carousel');
+    if (!c) return;
+    carSwipeX = e.changedTouches[0].clientX;
+    carSwipeEl = c;
+}, { passive: true });
+document.addEventListener('touchend', function(e) {
+    if (!carSwipeEl) return;
+    var dx = e.changedTouches[0].clientX - carSwipeX;
+    if (Math.abs(dx) > 40) {
+        var c = carSwipeEl;
+        var imgs = c.querySelectorAll('.proj-car-img');
+        var dots = c.querySelectorAll('.car-dot');
+        var cur = parseInt(c.dataset.idx) || 0;
+        cur = dx < 0 ? (cur + 1) % imgs.length : (cur - 1 + imgs.length) % imgs.length;
+        imgs.forEach(function(img, i) { img.classList.toggle('active', i === cur); });
+        dots.forEach(function(dot, i) { dot.classList.toggle('active', i === cur); });
+        c.dataset.idx = cur;
+    }
+    carSwipeEl = null;
+}, { passive: true });
+
+// ── TAP carousel → ouvre la galerie à l'index courant ───────
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.car-prev, .car-next')) return;
+    var c = e.target.closest('.proj-carousel');
+    if (!c) return;
+    var card = c.closest('.proj-card');
+    if (!card) return;
+    var galleryBtn = card.querySelector('.proj-gallery-btn');
+    if (!galleryBtn) return;
+    var pid = galleryBtn.dataset.pid;
+    var project = projects.filter(function(p) { return p.id === pid; })[0];
+    if (project && project.imgs) openGallery(project.imgs, parseInt(c.dataset.idx) || 0);
+});
+
+// ── SWIPE : galerie modale ───────────────────────────────────
+var galSwipeX = 0;
+galleryModal.addEventListener('touchstart', function(e) {
+    galSwipeX = e.changedTouches[0].clientX;
+}, { passive: true });
+galleryModal.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - galSwipeX;
+    if (Math.abs(dx) > 40) galleryGo(dx < 0 ? 1 : -1);
+}, { passive: true });
