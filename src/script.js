@@ -86,6 +86,19 @@ var translations = {
 // Projects data
 var projects = [
     {
+        id: 'prestly',
+        label: 'Prestly',
+        category: 'personal',
+        url: 'https://prestly.fr',
+        img: 'Img/prestly.png',
+        tags: ['Next.js 16', 'Supabase', 'Stripe', 'IA', 'React Native'],
+        title: { fr: 'Prestly - SaaS de Gestion pour Artisans du Bâtiment', en: 'Prestly - Management SaaS for Building Trade Craftsmen' },
+        desc: {
+            fr: 'SaaS de gestion pour artisans du bâtiment indépendants : devis générés par IA en quelques secondes (règles de chiffrage propres à 8 métiers), signature électronique, suivi des paiements et avis clients automatisés, avec une app mobile compagnon. Architecture multi-tenant sécurisée (RLS Postgres, CSP stricte, backups chiffrés AES-256-GCM).',
+            en: 'Management SaaS for independent building trade craftsmen: AI-generated quotes in seconds (pricing rules tailored to 8 trades), e-signature, payment tracking and automated client reviews, plus a companion mobile app. Secure multi-tenant architecture (Postgres RLS, strict CSP, AES-256-GCM encrypted backups).'
+        }
+    },
+    {
         id: 'cyna',
         label: 'CYNA',
         category: 'pro',
@@ -130,17 +143,22 @@ var projects = [
         }
     },
     {
-        id: 'tilila',
-        label: 'Tilila Coffee',
+        id: 'paradise',
+        label: 'Paradise',
         category: 'personal',
-        url: '#',
-        img: 'Img/tilila.png',
-        video: 'Img/0508.mp4',
+        url: 'https://paradise-saintgratien.vercel.app/',
+        imgs: [
+            'Img/paradise.png',
+            'Img/paradise-mobile-1.png',
+            'Img/paradise-mobile-2.png',
+            'Img/paradise-mobile-3.png',
+            'Img/paradise-mobile-4.png'
+        ],
         tags: ['Next.js', 'TypeScript', 'Supabase', 'React'],
-        title: { fr: 'Tilila Coffee - Site Vitrine', en: 'Tilila Coffee - Showcase Website' },
+        title: { fr: 'Paradise - Bar à Dessert (Site Vitrine)', en: 'Paradise - Dessert Bar (Showcase Website)' },
         desc: {
-            fr: 'Site vitrine complet pour un coffee shop : menu dynamique, evenements, carte interactive et panneau d\'administration, avec Supabase comme backend.',
-            en: 'Full showcase website for a coffee shop: dynamic menu, events, interactive map and admin panel, powered by Supabase as backend.'
+            fr: 'Site vitrine pour un bar à dessert à Saint-Gratien : carte des produits, présentation du concept, événements et informations pratiques, avec Supabase comme backend.',
+            en: 'Showcase website for a dessert bar in Saint-Gratien: product menu, concept presentation, events and practical info, powered by Supabase as backend.'
         }
     }
 ];
