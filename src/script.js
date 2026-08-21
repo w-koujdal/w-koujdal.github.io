@@ -48,6 +48,7 @@ document.querySelectorAll('[data-key]').forEach(function(el) {
     if (!(key in frTranslations)) frTranslations[key] = el.innerHTML;
 });
 frTranslations.view_project = 'Voir le projet';
+frTranslations.visit_site = 'Voir le site';
 
 var translations = {
     fr: frTranslations,
@@ -77,6 +78,7 @@ var translations = {
         filter_pro: 'Professional',
         filter_personal: 'Personal',
         view_project: 'View Project',
+        visit_site: 'Visit Site',
         contact_title: 'Have an idea or a project?',
         contact_desc: 'Find all my links at the bottom of the page to contact me.',
         contact_btn: 'Get in Touch'
@@ -128,6 +130,7 @@ function renderProjects(filter) {
     if (!grid) return;
 
     var viewLabel = translations[currentLang].view_project;
+    var siteLabel = translations[currentLang].visit_site;
     var list = filter === 'all' ? projects : projects.filter(function(p) { return p.category === filter; });
 
     grid.innerHTML = list.map(function(p, i) {
@@ -161,7 +164,10 @@ function renderProjects(filter) {
             + '<div class="proj-tags">' + tags + '</div>'
             + videoBtn
             + (p.imgs && p.imgs.length > 0
-                ? '<button type="button" class="proj-link proj-gallery-btn" data-pid="' + p.id + '">' + viewLabel + ' <span>&#8594;</span></button>'
+                ? '<div class="proj-links-row">'
+                    + '<button type="button" class="proj-link proj-gallery-btn" data-pid="' + p.id + '">' + viewLabel + ' <span>&#8594;</span></button>'
+                    + (p.url !== '#' ? '<a href="' + p.url + '"' + target + ' class="proj-link">' + siteLabel + ' <span>&#8594;</span></a>' : '')
+                    + '</div>'
                 : '<a href="' + p.url + '"' + target + ' class="proj-link">' + viewLabel + ' <span>&#8594;</span></a>')
             + '</article>';
     }).join('');
