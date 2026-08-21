@@ -99,50 +99,6 @@ var projects = [
         }
     },
     {
-        id: 'cyna',
-        label: 'CYNA',
-        category: 'pro',
-        url: '#',
-        tags: ['Node.js', 'MySQL', 'React', 'API REST'],
-        title: { fr: 'CYNA - Plateforme SaaS E-commerce', en: 'CYNA - E-commerce SaaS Platform' },
-        desc: {
-            fr: 'Plateforme SaaS permettant aux entreprises de gerer leurs produits, commandes et utilisateurs via une API REST et une interface web/mobile.',
-            en: 'SaaS platform allowing companies to manage their products, orders, and users via a REST API and a web/mobile interface.'
-        }
-    },
-    {
-        id: 'api-saas',
-        label: 'API SaaS',
-        category: 'pro',
-        url: '#',
-        tags: ['Node.js', 'Express', 'JWT'],
-        title: { fr: 'API SaaS - Produits & Modules', en: 'SaaS API - Products & Modules' },
-        desc: {
-            fr: 'API REST securisee permettant l\'ajout, modification et suppression de modules SaaS (CRUD complet).',
-            en: 'Secure REST API allowing the addition, modification, and deletion of SaaS modules (full CRUD).'
-        }
-    },
-    {
-        id: 'mobile-app',
-        label: 'Mobile App',
-        category: 'personal',
-        url: '#',
-        imgs: [
-            'Img/login.png',
-            'Img/Screenshot_20260508_232406_CynaMobile.png',
-            'Img/Screenshot_20260508_232352_CynaMobile.png',
-            'Img/Screenshot_20260508_232358_CynaMobile.png',
-            'Img/Screenshot_20260508_232345_CynaMobile.png',
-            'Img/Screenshot_20260508_230030_CynaMobile.png'
-        ],
-        tags: ['React Native', 'Expo', 'Node.js', 'Axios', 'AsyncStorage'],
-        title: { fr: 'CYNA — Application Mobile SaaS', en: 'CYNA — SaaS Mobile Application' },
-        desc: {
-            fr: 'Application mobile full-stack connectee a une API REST Node.js. Catalogue produits, panier persistant, paiement, historique des commandes et mode sombre.',
-            en: 'Full-stack mobile application connected to a Node.js REST API. Product catalog, persistent cart, payment, order history and dark mode.'
-        }
-    },
-    {
         id: 'paradise',
         label: 'Paradise',
         category: 'personal',
