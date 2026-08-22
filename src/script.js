@@ -92,7 +92,18 @@ var projects = [
         label: 'Prestly',
         category: 'personal',
         url: 'https://prestly.fr',
-        img: 'Img/prestly.png',
+        imgs: [
+            'Img/prestly.png',
+            'Img/prestly-dashboard.png',
+            'Img/prestly-devis-liste.png',
+            'Img/prestly-rendez-vous.png',
+            'Img/prestly-clients.png',
+            'Img/prestly-devis-detail.png',
+            'Img/prestly-factures.png',
+            'Img/prestly-devis-ia.png',
+            'Img/prestly-booking.png',
+            'Img/prestly-artisans-listing.png'
+        ],
         tags: ['Next.js 16', 'Supabase', 'Stripe', 'IA', 'React Native'],
         title: { fr: 'Prestly - SaaS de Gestion pour Artisans du Bâtiment', en: 'Prestly - Management SaaS for Building Trade Craftsmen' },
         desc: {
