@@ -49,6 +49,7 @@ document.querySelectorAll('[data-key]').forEach(function(el) {
 });
 frTranslations.view_project = 'Voir le projet';
 frTranslations.visit_site = 'Voir le site';
+frTranslations.empty_projects = 'Aucun projet dans cette catégorie pour le moment.';
 
 var translations = {
     fr: frTranslations,
@@ -59,7 +60,7 @@ var translations = {
         nav_projects: 'Projects',
         hero_greeting: 'Hi, I\'m <span class="accent">Walid</span><br>and I am a Full Stack developer',
         hero_desc: 'Passionate about web development, I love creating complete, modern, and high-performance applications.',
-        hero_btn_portfolio: 'My Portfolio',
+        hero_btn_portfolio: 'My Projects',
         hero_btn_cv: 'My Resume',
         profile_title: 'My Profile',
         profile_card1_title: 'The Spark',
@@ -79,6 +80,7 @@ var translations = {
         filter_personal: 'Personal',
         view_project: 'View Project',
         visit_site: 'Visit Site',
+        empty_projects: 'No projects in this category yet.',
         contact_title: 'Have an idea or a project?',
         contact_desc: 'Find all my links at the bottom of the page to contact me.',
         contact_btn: 'Get in Touch'
@@ -90,19 +92,19 @@ var projects = [
     {
         id: 'prestly',
         label: 'Prestly',
-        category: 'personal',
+        category: 'pro',
         url: 'https://prestly.fr',
         imgs: [
-            'Img/prestly.png',
-            'Img/prestly-dashboard.png',
-            'Img/prestly-devis-liste.png',
-            'Img/prestly-rendez-vous.png',
-            'Img/prestly-clients.png',
-            'Img/prestly-devis-detail.png',
-            'Img/prestly-factures.png',
-            'Img/prestly-devis-ia.png',
-            'Img/prestly-booking.png',
-            'Img/prestly-artisans-listing.png'
+            'Img/prestly.webp',
+            'Img/prestly-dashboard.webp',
+            'Img/prestly-devis-liste.webp',
+            'Img/prestly-rendez-vous.webp',
+            'Img/prestly-clients.webp',
+            'Img/prestly-devis-detail.webp',
+            'Img/prestly-factures.webp',
+            'Img/prestly-devis-ia.webp',
+            'Img/prestly-booking.webp',
+            'Img/prestly-artisans-listing.webp'
         ],
         tags: ['Next.js 16', 'Supabase', 'Stripe', 'IA', 'React Native'],
         title: { fr: 'Prestly - SaaS de Gestion pour Artisans du Bâtiment', en: 'Prestly - Management SaaS for Building Trade Craftsmen' },
@@ -114,14 +116,14 @@ var projects = [
     {
         id: 'paradise',
         label: 'Paradise',
-        category: 'personal',
+        category: 'pro',
         url: 'https://paradise-saintgratien.vercel.app/',
         imgs: [
-            'Img/paradise.png',
-            'Img/paradise-mobile-1.png',
-            'Img/paradise-mobile-2.png',
-            'Img/paradise-mobile-3.png',
-            'Img/paradise-mobile-4.png'
+            'Img/paradise.webp',
+            'Img/paradise-mobile-1.webp',
+            'Img/paradise-mobile-2.webp',
+            'Img/paradise-mobile-3.webp',
+            'Img/paradise-mobile-4.webp'
         ],
         tags: ['Next.js', 'TypeScript', 'Supabase', 'React'],
         title: { fr: 'Paradise - Bar à Dessert (Site Vitrine)', en: 'Paradise - Dessert Bar (Showcase Website)' },
@@ -144,6 +146,14 @@ function renderProjects(filter) {
     var siteLabel = translations[currentLang].visit_site;
     var list = filter === 'all' ? projects : projects.filter(function(p) { return p.category === filter; });
 
+    if (list.length === 0) {
+        grid.innerHTML = '<p class="proj-empty">' + translations[currentLang].empty_projects + '</p>';
+        document.querySelectorAll('.filter-btn').forEach(function(btn) {
+            btn.classList.toggle('f-active', btn.dataset.filter === filter);
+        });
+        return;
+    }
+
     grid.innerHTML = list.map(function(p, i) {
         var num = String(i + 1).padStart(2, '0');
         var target = p.url !== '#' ? ' target="_blank" rel="noopener noreferrer"' : '';
@@ -151,7 +161,7 @@ function renderProjects(filter) {
         var imgHtml = '';
         if (p.imgs && p.imgs.length > 0) {
             var carImgs = p.imgs.map(function(src, i) {
-                return '<img src="' + src + '" class="proj-car-img' + (i === 0 ? ' active' : '') + '" alt="' + p.label + '">';
+                return '<img src="' + src + '" class="proj-car-img' + (i === 0 ? ' active' : '') + '" alt="' + p.label + ' — ' + (i + 1) + '/' + p.imgs.length + '" loading="lazy" decoding="async">';
             }).join('');
             var carDots = p.imgs.map(function(_, i) {
                 return '<span class="car-dot' + (i === 0 ? ' active' : '') + '"></span>';
@@ -163,10 +173,10 @@ function renderProjects(filter) {
                 + '<div class="car-dots">' + carDots + '</div>'
                 + '</div>';
         } else if (p.img) {
-            imgHtml = '<img src="' + p.img + '" alt="' + p.label + '" class="proj-img">';
+            imgHtml = '<img src="' + p.img + '" alt="' + p.label + '" class="proj-img" loading="lazy" decoding="async">';
         }
         var videoBtn = p.video ? '<button type="button" class="proj-video-btn" data-video="' + p.video + '">&#9654; Voir la démo</button>' : '';
-        return '<article class="proj-card">'
+        return '<article class="proj-card" style="animation-delay:' + (i * 60) + 'ms">'
             + imgHtml
             + '<div class="proj-idx">' + num + ' -</div>'
             + '<span class="proj-badge">' + p.label + '</span>'
@@ -261,10 +271,12 @@ var galleryDots = document.getElementById('gallery-dots');
 var galleryCounter = document.getElementById('gallery-counter');
 var galleryCurrentImgs = [];
 var galleryCurrentIdx = 0;
+var galleryCurrentLabel = '';
 
-function openGallery(imgs, startIdx) {
+function openGallery(imgs, startIdx, label) {
     galleryCurrentImgs = imgs;
     galleryCurrentIdx = startIdx || 0;
+    galleryCurrentLabel = label || '';
     renderGallery();
     galleryModal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -275,6 +287,7 @@ function closeGallery() {
 }
 function renderGallery() {
     galleryImg.src = galleryCurrentImgs[galleryCurrentIdx];
+    galleryImg.alt = galleryCurrentLabel + ' — capture ' + (galleryCurrentIdx + 1) + '/' + galleryCurrentImgs.length;
     galleryCounter.textContent = (galleryCurrentIdx + 1) + ' / ' + galleryCurrentImgs.length;
     galleryDots.innerHTML = galleryCurrentImgs.map(function(_, i) {
         return '<span class="g-dot' + (i === galleryCurrentIdx ? ' active' : '') + '" data-i="' + i + '"></span>';
@@ -293,6 +306,18 @@ document.getElementById('gallery-dots').addEventListener('click', function(e) {
     var dot = e.target.closest('.g-dot');
     if (dot) { galleryCurrentIdx = parseInt(dot.dataset.i); renderGallery(); }
 });
+
+// Clic sur un côté de l'image → navigation (gauche = précédent, droite = suivant)
+galleryImg.addEventListener('click', function(e) {
+    var rect = galleryImg.getBoundingClientRect();
+    var clickX = e.clientX - rect.left;
+    galleryGo(clickX < rect.width / 2 ? -1 : 1);
+});
+galleryImg.addEventListener('mousemove', function(e) {
+    var rect = galleryImg.getBoundingClientRect();
+    var clickX = e.clientX - rect.left;
+    galleryImg.style.cursor = clickX < rect.width / 2 ? 'w-resize' : 'e-resize';
+});
 document.addEventListener('keydown', function(e) {
     if (!galleryModal.classList.contains('open')) return;
     if (e.key === 'ArrowLeft') galleryGo(-1);
@@ -304,7 +329,7 @@ document.addEventListener('click', function(e) {
     if (!btn) return;
     var pid = btn.dataset.pid;
     var project = projects.filter(function(p) { return p.id === pid; })[0];
-    if (project && project.imgs) openGallery(project.imgs, 0);
+    if (project && project.imgs) openGallery(project.imgs, 0, project.label);
 });
 
 // Carousel navigation
@@ -373,7 +398,7 @@ document.addEventListener('click', function(e) {
     if (!galleryBtn) return;
     var pid = galleryBtn.dataset.pid;
     var project = projects.filter(function(p) { return p.id === pid; })[0];
-    if (project && project.imgs) openGallery(project.imgs, parseInt(c.dataset.idx) || 0);
+    if (project && project.imgs) openGallery(project.imgs, parseInt(c.dataset.idx) || 0, project.label);
 });
 
 // ── SWIPE : galerie modale ───────────────────────────────────
