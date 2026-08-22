@@ -1,0 +1,24 @@
+# Walid Koujdal
+
+> Développeur Full Stack basé en France, spécialisé en React, Next.js, Node.js et architectures cloud.
+
+Walid Koujdal conçoit et développe des applications web et mobiles complètes, du back-end à l'interface, avec une attention particulière portée à l'accessibilité, la performance et la sécurité.
+
+## Compétences
+
+- Front-End : JavaScript, TypeScript, React, Next.js, Vue.js, Tailwind CSS, Bootstrap
+- Back-End : Node.js, Express, API REST, MySQL, Supabase (PostgreSQL), Stripe
+- Mobile : React Native
+- Outils & méthodes : Git/GitHub, gestion de projet (PMBOK), tests API, cloud
+
+## Projets
+
+- [Prestly](https://prestly.fr) — SaaS de gestion pour artisans du bâtiment indépendants : devis générés par IA en quelques secondes, signature électronique, suivi des paiements et avis clients automatisés, avec app mobile compagnon. Stack : Next.js 16, Supabase, Stripe, React Native.
+- [Paradise](https://paradise-saintgratien.vercel.app/) — Site vitrine pour un bar à dessert à Saint-Gratien (Val-d'Oise) : carte des produits, présentation du concept, événements. Stack : Next.js, TypeScript, Supabase.
+
+## Contact
+
+- Email : walid.koujdal@gmail.com
+- GitHub : https://github.com/w-koujdal
+- LinkedIn : https://fr.linkedin.com/in/walid-koujdal-2a516b27b
+- Portfolio : https://w-koujdal.github.io/

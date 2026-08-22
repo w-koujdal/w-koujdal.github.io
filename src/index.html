@@ -288,7 +288,9 @@
         }
         .p-card-icon {
             width: 32px; height: 32px; color: var(--muted); margin-bottom: 1.25rem;
+            transition: color .2s;
         }
+        .p-card:hover .p-card-icon { color: var(--accent); }
         .p-card-title {
             font-family: 'Syne', sans-serif; font-weight: 700;
             font-size: 1.05rem; color: var(--fg); margin-bottom: .6rem;
@@ -515,6 +517,25 @@
             font-size: .975rem; color: var(--muted);
             margin-bottom: 2.25rem; max-width: 460px;
         }
+        .contact-actions {
+            display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem;
+        }
+        .copy-email-btn {
+            display: inline-flex; align-items: center; gap: .55rem;
+            background: none; border: 1px solid var(--border); color: var(--muted);
+            font-family: 'JetBrains Mono', monospace; font-size: .72rem;
+            letter-spacing: .02em;
+            padding: .85rem 1.15rem; cursor: pointer;
+            transition: border-color .2s, color .2s;
+        }
+        .copy-email-btn:hover { border-color: var(--accent); color: var(--fg); }
+        .copy-email-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+        .copy-email-btn.copied { border-color: var(--accent); color: var(--accent); }
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+        }
 
         /* ── GALLERY MODAL ───────────────────────────────────── */
         #gallery-modal {
@@ -729,7 +750,22 @@
             "https://github.com/w-koujdal",
             "https://fr.linkedin.com/in/walid-koujdal-2a516b27b"
         ],
-        "knowsAbout": ["JavaScript", "React", "Node.js", "Express", "MySQL", "React Native", "Tailwind CSS", "API REST", "Vue.js", "PHP", "Symfony"]
+        "knowsAbout": ["JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Express", "MySQL", "Supabase", "Stripe", "React Native", "Tailwind CSS", "Bootstrap", "API REST", "Vue.js", "PHP", "Symfony"],
+        "owns": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "Prestly",
+                "url": "https://prestly.fr",
+                "applicationCategory": "BusinessApplication",
+                "description": "SaaS de gestion pour artisans du bâtiment indépendants : devis générés par IA, signature électronique, suivi des paiements et avis clients automatisés."
+            },
+            {
+                "@type": "WebSite",
+                "name": "Paradise",
+                "url": "https://paradise-saintgratien.vercel.app/",
+                "description": "Site vitrine pour un bar à dessert à Saint-Gratien."
+            }
+        ]
     }
     </script>
 </head>
@@ -949,8 +985,17 @@
     <div class="contact-inner">
         <div class="contact-eye">Contact</div>
         <h2 class="contact-h" data-key="contact_title">Vous avez une idée ou un projet ?</h2>
-        <p class="contact-sub" data-key="contact_desc">Retrouvez tous mes liens en bas de page pour me contacter.</p>
-        <a href="mailto:walid.koujdal@gmail.com" class="btn-primary" data-key="contact_btn">Aller au contact</a>
+        <p class="contact-sub" data-key="contact_desc">Je réponds généralement sous 24 à 48h.</p>
+        <div class="contact-actions">
+            <a href="mailto:walid.koujdal@gmail.com" class="btn-primary" data-key="contact_btn">M'envoyer un email</a>
+            <button type="button" id="copy-email-btn" class="copy-email-btn" data-email="walid.koujdal@gmail.com" aria-label="Copier l'adresse email">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                <span class="copy-email-text">walid.koujdal@gmail.com</span>
+            </button>
+            <span id="copy-email-feedback" aria-live="polite" class="sr-only"></span>
+        </div>
     </div>
 </section>
 

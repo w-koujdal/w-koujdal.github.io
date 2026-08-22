@@ -82,8 +82,8 @@ var translations = {
         visit_site: 'Visit Site',
         empty_projects: 'No projects in this category yet.',
         contact_title: 'Have an idea or a project?',
-        contact_desc: 'Find all my links at the bottom of the page to contact me.',
-        contact_btn: 'Get in Touch'
+        contact_desc: 'I usually reply within 24 to 48 hours.',
+        contact_btn: 'Send Me an Email'
     }
 };
 
@@ -410,3 +410,37 @@ galleryModal.addEventListener('touchend', function(e) {
     var dx = e.changedTouches[0].clientX - galSwipeX;
     if (Math.abs(dx) > 40) galleryGo(dx < 0 ? 1 : -1);
 }, { passive: true });
+
+// ── COPIER L'ADRESSE EMAIL ────────────────────────────────────
+var copyEmailBtn = document.getElementById('copy-email-btn');
+var copyEmailFeedback = document.getElementById('copy-email-feedback');
+if (copyEmailBtn) {
+    var copyEmailTextEl = copyEmailBtn.querySelector('.copy-email-text');
+    var copyEmailOriginalText = copyEmailTextEl ? copyEmailTextEl.textContent : '';
+    copyEmailBtn.addEventListener('click', function() {
+        var email = copyEmailBtn.dataset.email;
+        var announce = function() {
+            copyEmailBtn.classList.add('copied');
+            if (copyEmailTextEl) copyEmailTextEl.textContent = currentLang === 'en' ? 'Copied!' : 'Copié !';
+            if (copyEmailFeedback) copyEmailFeedback.textContent = currentLang === 'en' ? 'Email address copied' : 'Adresse email copiée';
+            setTimeout(function() {
+                copyEmailBtn.classList.remove('copied');
+                if (copyEmailTextEl) copyEmailTextEl.textContent = copyEmailOriginalText;
+                if (copyEmailFeedback) copyEmailFeedback.textContent = '';
+            }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(announce);
+        } else {
+            var tmp = document.createElement('textarea');
+            tmp.value = email;
+            tmp.style.position = 'fixed';
+            tmp.style.opacity = '0';
+            document.body.appendChild(tmp);
+            tmp.select();
+            document.execCommand('copy');
+            document.body.removeChild(tmp);
+            announce();
+        }
+    });
+}
