@@ -131,6 +131,24 @@ var projects = [
             fr: 'Site vitrine pour un bar à dessert à Saint-Gratien : carte des produits, présentation du concept, événements et informations pratiques, avec Supabase comme backend.',
             en: 'Showcase website for a dessert bar in Saint-Gratien: product menu, concept presentation, events and practical info, powered by Supabase as backend.'
         }
+    },
+    {
+        id: 'mesnotes',
+        label: 'Mes Notes',
+        category: 'personal',
+        url: '#',
+        imgs: [
+            'Img/mesnotes-liste.webp',
+            'Img/mesnotes-recherche.webp',
+            'Img/mesnotes-note.webp',
+            'Img/mesnotes-corbeille.webp'
+        ],
+        tags: ['Flutter', 'Rust', 'ONNX Runtime', 'SQLite'],
+        title: { fr: 'Mes Notes - Bibliothécaire Personnel', en: 'My Notes - Personal Librarian' },
+        desc: {
+            fr: 'App de prise de notes Android qui retrouve tes notes par le sens plutôt que par les mots exacts, grâce à un moteur de recherche sémantique 100% embarqué : chaque note est convertie en vecteur via un modèle MiniLM exécuté localement (pont FFI Flutter ↔ Rust ↔ ONNX Runtime), sans jamais dépendre d\'une API cloud. Dictée vocale, tags intelligents suggérés par IA, import en masse et corbeille avec restauration.',
+            en: 'Android note-taking app that finds your notes by meaning rather than exact keywords, powered by a fully on-device semantic search engine: each note is turned into a vector via a locally-run MiniLM model (Flutter ↔ Rust ↔ ONNX Runtime FFI bridge), with zero cloud dependency. Voice dictation, AI-suggested smart tags, bulk text import and a trash with restore.'
+        }
     }
 ];
 
@@ -189,7 +207,7 @@ function renderProjects(filter) {
                     + '<button type="button" class="proj-link proj-gallery-btn" data-pid="' + p.id + '">' + viewLabel + ' <span>&#8594;</span></button>'
                     + (p.url !== '#' ? '<a href="' + p.url + '"' + target + ' class="proj-link">' + siteLabel + ' <span>&#8594;</span></a>' : '')
                     + '</div>'
-                : '<a href="' + p.url + '"' + target + ' class="proj-link">' + viewLabel + ' <span>&#8594;</span></a>')
+                : (p.url !== '#' ? '<a href="' + p.url + '"' + target + ' class="proj-link">' + viewLabel + ' <span>&#8594;</span></a>' : ''))
             + '</article>';
     }).join('');
 
