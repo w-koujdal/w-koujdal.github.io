@@ -120,16 +120,16 @@
             <li><a href="#chapter-contact"  class="menu-link group/l flex items-baseline gap-4 py-1 transition-colors hover:text-(--accent)"><span class="w-7 font-(family-name:--font-mono) text-[.7rem] font-normal tracking-[.1em] text-(--accent)">05</span>Contact</a></li>
         </ol>
         <div class="mt-10 flex flex-wrap gap-4 border-t border-(--border) pt-8">
-            <a href="mailto:walid.koujdal@gmail.com" class="inline-flex items-center gap-2 bg-(--accent) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] font-medium uppercase tracking-[.06em] text-(--accent-fg) transition-opacity hover:opacity-85">M'envoyer un email</a>
-            <a href="https://fr.linkedin.com/in/walid-koujdal-2a516b27b" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-(--border) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] transition-colors hover:border-(--muted)">LinkedIn</a>
+            <a href="https://ig.me/m/azog03" target="_blank" rel="noopener" data-ig-cta class="inline-flex items-center gap-2 px-6 py-3 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] bg-(--accent) font-medium text-(--accent-fg) transition-opacity hover:opacity-85">Je veux ma place</a>
+            <a href="mailto:walid.koujdal@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] border border-(--border) transition-colors hover:border-(--muted)">Agence / freelance</a>
         </div>
     </nav>
 </div>
 
 <!-- ── FLOATING PILL (value injected from PLACES_PRISES in v2.js) ──── -->
-<button type="button" id="places-pill" class="fixed left-1/2 z-[80] inline-flex -translate-x-1/2 cursor-pointer items-center gap-2.5 border border-(--border) bg-(--fg) px-4 py-2.5 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.08em] text-(--bg) shadow-lg transition-[opacity,translate] duration-300 hover:bg-(--accent) hover:text-(--accent-fg) bottom-[calc(1rem_+_env(safe-area-inset-bottom))]" aria-label="Voir l'offre : places prises">
+<button type="button" id="places-pill" class="fixed left-1/2 z-[80] inline-flex -translate-x-1/2 cursor-pointer items-center gap-2.5 border border-(--border) bg-(--fg) px-4 py-2.5 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.08em] text-(--bg) shadow-lg transition-[opacity,translate] duration-300 hover:bg-(--accent) hover:text-(--accent-fg) bottom-[calc(1rem_+_env(safe-area-inset-bottom))]" aria-label="Voir l'offre">
     <span class="size-1.5 rounded-full bg-(--accent)" aria-hidden="true"></span>
-    <span><span data-places>–</span>/<span data-places-total>10</span> places prises</span>
+    <span id="places-pill-text">–</span>
 </button>
 
 <main id="story">
@@ -354,7 +354,7 @@
 
     <!-- ══════════════════════════════════════════════════════════════
          CHAPTER 5 — L'OFFRE
-         Counter animates 0 → PLACES_PRISES on scroll (v2.js); values
+         Counter shows the remaining places and counts up on scroll (v2.js); values
          are injected from the constants at the top of v2.js.
          ══════════════════════════════════════════════════════════════ -->
     <section id="chapter-offer" data-chapter="offer" class="border-t border-(--border) py-24">
@@ -367,7 +367,7 @@
             <div class="grid gap-12 md:grid-cols-[1fr_auto] md:items-end">
                 <div>
                     <p data-reveal class="font-(family-name:--font-display) text-[clamp(2rem,5vw,4rem)] font-extrabold leading-[1.05] tracking-[-.025em]">
-                        Les 10 premiers :<br><span class="text-(--accent)">site offert.</span>
+                        Pour le lancement :<br><span class="text-(--accent)"><span data-places-total>5</span> sites offerts.</span>
                     </p>
                     <p data-reveal class="mt-8 max-w-[560px] leading-[1.75] text-(--muted)">
                         Un site vitrine pensé pour le mobile, avec 2 mois de modifications inclus (textes, photos, horaires, carte). Nom de domaine en option, au nom du client.
@@ -375,9 +375,9 @@
                 </div>
                 <div data-reveal class="border border-(--border) bg-(--card) px-8 py-6 text-center md:min-w-[260px]">
                     <div class="font-(family-name:--font-display) text-[clamp(3rem,8vw,6rem)] font-extrabold leading-none tracking-[-.03em]">
-                        <span id="offer-counter" data-places>–</span><span class="text-(--muted)">/<span data-places-total>10</span></span>
+                        <span id="offer-counter">–</span><span id="offer-total" class="text-(--muted)">/<span data-places-total>5</span></span>
                     </div>
-                    <div class="mt-3 font-(family-name:--font-mono) text-[.68rem] uppercase tracking-[.12em] text-(--muted)">places prises</div>
+                    <div id="offer-label" class="mt-3 font-(family-name:--font-mono) text-[.68rem] uppercase tracking-[.12em] text-(--muted)">places offertes</div>
                 </div>
             </div>
 
@@ -385,20 +385,23 @@
                 <li data-reveal class="border border-(--border) bg-(--card) p-8">
                     <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--accent)">01 —</div>
                     <h3 class="font-(family-name:--font-display) text-xl font-bold">Échange</h3>
+                    <p class="mt-3 text-[.95rem] leading-[1.7] text-(--muted)">Je t'envoie un court formulaire via <a href="https://briefly-app.com/fr" target="_blank" rel="noopener" class="text-[.85em] text-(--accent) underline underline-offset-2 hover:no-underline">Briefly</a> (ton activité, ta carte ou tes prestations, tes photos). Pas de compte à créer. Une question ? Écris-moi directement sur Insta.</p>
                 </li>
                 <li data-reveal class="border border-(--border) bg-(--card) p-8">
                     <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--accent)">02 —</div>
                     <h3 class="font-(family-name:--font-display) text-xl font-bold">Maquette</h3>
+                    <p class="mt-3 text-[.95rem] leading-[1.7] text-(--muted)">Je te montre le site avant sa mise en ligne, tu me dis ce que tu veux changer.</p>
                 </li>
                 <li data-reveal class="border border-(--border) bg-(--card) p-8">
                     <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--accent)">03 —</div>
                     <h3 class="font-(family-name:--font-display) text-xl font-bold">Mise en ligne</h3>
+                    <p class="mt-3 text-[.95rem] leading-[1.7] text-(--muted)">Ton site est en ligne, prêt pour ta bio Insta. 2 mois de modifications inclus.</p>
                 </li>
             </ol>
 
             <div data-reveal class="mt-10 flex flex-wrap items-center gap-6">
                 <a href="#chapter-contact" class="inline-flex items-center gap-2 bg-(--accent) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] font-medium uppercase tracking-[.06em] text-(--accent-fg) transition-opacity hover:opacity-85">Me contacter</a>
-                <span class="font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.08em] text-(--muted)">Livraison en <span data-delai>–</span> jours</span>
+                <span class="font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.08em] text-(--muted)">Livraison en <span data-delai>–</span></span>
             </div>
         </div>
     </section>
@@ -413,7 +416,8 @@
             <h2 class="mb-4 font-(family-name:--font-display) text-[clamp(1.75rem,4vw,3rem)] font-extrabold tracking-[-.02em]">Vous avez une idée ou un projet ?</h2>
             <p class="mb-10 text-(--muted)">Je réponds généralement sous 24 à 48h.</p>
             <div class="flex flex-wrap items-center justify-center gap-4">
-                <a href="mailto:walid.koujdal@gmail.com" class="inline-flex items-center gap-2 bg-(--accent) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] font-medium uppercase tracking-[.06em] text-(--accent-fg) transition-opacity hover:opacity-85">M'envoyer un email</a>
+                <a href="https://ig.me/m/azog03" target="_blank" rel="noopener" data-ig-cta class="inline-flex items-center gap-2 px-6 py-3 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] bg-(--accent) font-medium text-(--accent-fg) transition-opacity hover:opacity-85">Je veux ma place</a>
+                <a href="mailto:walid.koujdal@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] border border-(--border) transition-colors hover:border-(--muted)">Agence / freelance</a>
                 <span class="font-(family-name:--font-mono) text-[.75rem] text-(--muted)">walid.koujdal@gmail.com</span>
             </div>
         </div>

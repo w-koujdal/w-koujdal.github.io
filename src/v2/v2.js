@@ -7,9 +7,9 @@
 /* ══════════════════════════════════════════════════════════════════
    ✏️  VALEURS À ÉDITER À LA MAIN
    ══════════════════════════════════════════════════════════════════ */
-var PLACES_PRISES = 3;            // nombre de places déjà prises (pill + compteur de l'offre)
-var PLACES_TOTAL = 10;            // nombre total de places offertes
-var DELAI_LIVRAISON_JOURS = 7;    // "Livraison en Y jours" dans l'offre
+var PLACES_PRISES = 0;            // nombre de places déjà prises (0 = "N places offertes")
+var PLACES_TOTAL = 5;             // nombre total de places offertes
+var DELAI_LIVRAISON_JOURS = 14;   // affiché en semaines : 14 → "environ 2 semaines"
 
 (function () {
     'use strict';
@@ -35,10 +35,53 @@ var DELAI_LIVRAISON_JOURS = 7;    // "Livraison en Y jours" dans l'offre
     var yearEl = document.getElementById('copyright-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    /* ── 3. Inject the editable values (static, visible in every mode) */
-    document.querySelectorAll('[data-places]').forEach(function (el) { el.textContent = PLACES_PRISES; });
+    /* ── 3. Inject the editable values (static, visible in every mode) ── */
+    var placesPrises = Math.min(Math.max(PLACES_PRISES, 0), PLACES_TOTAL);
+    var placesRestantes = PLACES_TOTAL - placesPrises;
+    var isFull = placesRestantes === 0;
+    var isUntouched = placesPrises === 0;            // nothing taken yet → "offertes", no count-up
+    var canCountUp = !isFull && !isUntouched;
+
+    // Wording of the remaining places (pill + offer counter).
+    var pillLabel = isFull ? 'Complet'
+        : isUntouched ? PLACES_TOTAL + ' places offertes'
+        : placesRestantes + (placesRestantes === 1 ? ' place restante' : ' places restantes');
+
+    var delaiLabel = DELAI_LIVRAISON_JOURS < 7
+        ? DELAI_LIVRAISON_JOURS + ' jour' + (DELAI_LIVRAISON_JOURS > 1 ? 's' : '')
+        : 'environ ' + Math.round(DELAI_LIVRAISON_JOURS / 7) + ' semaine' + (Math.round(DELAI_LIVRAISON_JOURS / 7) > 1 ? 's' : '');
+
+    var pillText = document.getElementById('places-pill-text');
+    if (pillText) pillText.textContent = pillLabel;
+    var pillBtn = document.getElementById('places-pill');
+    if (pillBtn) pillBtn.setAttribute('aria-label', 'Voir l\'offre : ' + pillLabel);
+
+    var counterEl = document.getElementById('offer-counter');
+    var counterTotalEl = document.getElementById('offer-total');
+    var counterLabelEl = document.getElementById('offer-label');
+    function renderCounter(n) {
+        if (isFull) {
+            counterEl.textContent = 'Complet';
+            if (counterTotalEl) counterTotalEl.hidden = true;
+            if (counterLabelEl) counterLabelEl.hidden = true;
+        } else if (isUntouched) {
+            counterEl.textContent = PLACES_TOTAL;                 // "5 places offertes"
+            if (counterTotalEl) counterTotalEl.hidden = true;
+            if (counterLabelEl) counterLabelEl.textContent = 'places offertes';
+        } else {
+            counterEl.textContent = n;                            // "N/5 places restantes"
+            if (counterLabelEl) counterLabelEl.textContent = placesRestantes === 1 ? 'place restante' : 'places restantes';
+        }
+    }
+    if (counterEl) renderCounter(placesRestantes);
+
     document.querySelectorAll('[data-places-total]').forEach(function (el) { el.textContent = PLACES_TOTAL; });
-    document.querySelectorAll('[data-delai]').forEach(function (el) { el.textContent = DELAI_LIVRAISON_JOURS; });
+    document.querySelectorAll('[data-delai]').forEach(function (el) { el.textContent = delaiLabel; });
+
+    // Instagram CTA becomes a waiting list once everything is taken.
+    if (isFull) {
+        document.querySelectorAll('[data-ig-cta]').forEach(function (el) { el.textContent = 'Liste d\'attente'; });
+    }
 
     /* ── 4. Shared scroll helper (Lenis when available, instant jump otherwise) */
     function scrollToEl(target) {
@@ -254,13 +297,14 @@ var DELAI_LIVRAISON_JOURS = 7;    // "Livraison en Y jours" dans l'offre
                 });
             });
 
-            /* 11b. Offer counter — 0 → PLACES_PRISES once the chapter scrolls in. */
-            var counterEl = document.getElementById('offer-counter');
-            if (counterEl) {
+            /* 11b. Offer counter — counts 0 → remaining places once the chapter
+                    scrolls in. Skipped when nothing is taken yet ("5 places offertes")
+                    or when full ("Complet"): the static value is already shown. */
+            if (counterEl && canCountUp) {
                 var counter = { val: 0 };
                 counterEl.textContent = '0';
                 gsap.to(counter, {
-                    val: PLACES_PRISES,
+                    val: placesRestantes,
                     duration: 1.4,
                     ease: 'power2.out',
                     snap: { val: 1 },
@@ -321,7 +365,7 @@ var DELAI_LIVRAISON_JOURS = 7;    // "Livraison en Y jours" dans l'offre
             // Cleanup when this context reverts (e.g. reduced motion turned on):
             // show the final value directly.
             return function () {
-                if (counterEl) counterEl.textContent = PLACES_PRISES;
+                if (counterEl) renderCounter(placesRestantes);
             };
         }
     );
