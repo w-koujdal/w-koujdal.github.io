@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <!-- v2 is a work-in-progress scaffold: keep it out of search indexes for now -->
     <meta name="robots" content="noindex">
     <title>Walid Koujdal — Développeur Full Stack (v2)</title>
@@ -47,6 +47,12 @@
         .lenis [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-smooth iframe { pointer-events: none; }
 
+        /* native anchor jumps (reduced motion / no JS) must clear the fixed nav */
+        [data-chapter] { scroll-margin-top: 68px; }
+
+        /* scroll lock while the full-screen menu is open (Lenis is also stopped in v2.js) */
+        html.menu-open, html.menu-open body { overflow: hidden; }
+
         /* dark/light icon toggle */
         .icon-sun  { display: none; }
         .icon-moon { display: block; }
@@ -79,13 +85,6 @@
             <img src="../Img/logo.svg" alt="WK" width="36" height="36" class="block">
         </a>
 
-        <div class="hidden items-center gap-10 md:flex font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.08em]">
-            <a href="#chapter-intro"    class="text-(--muted) transition-colors hover:text-(--fg)">Accueil</a>
-            <a href="#chapter-profile"  class="text-(--muted) transition-colors hover:text-(--fg)">Profil</a>
-            <a href="#chapter-skills"   class="text-(--muted) transition-colors hover:text-(--fg)">Compétences</a>
-            <a href="#chapter-projects" class="text-(--muted) transition-colors hover:text-(--fg)">Projets</a>
-            <a href="#chapter-contact"  class="text-(--muted) transition-colors hover:text-(--fg)">Contact</a>
-        </div>
 
         <div class="flex items-center gap-3">
             <a href="../" class="font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.04em] text-(--muted) transition-colors hover:text-(--fg)">v1</a>
@@ -97,9 +96,41 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
                 </svg>
             </button>
+            <button type="button" id="menu-btn" class="group flex cursor-pointer items-center border-0 bg-transparent px-2 py-1.5 text-(--muted) transition-colors hover:text-(--fg)" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-overlay" aria-haspopup="dialog">
+                <svg class="h-5 w-5 group-aria-expanded:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="hidden h-5 w-5 group-aria-expanded:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
     </div>
 </nav>
+
+<!-- ── FULL-SCREEN MENU (opened by #menu-btn, see v2.js) ─────────── -->
+<div id="menu-overlay" class="fixed inset-0 z-[90] flex flex-col bg-(--bg) pt-[68px]" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <nav class="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between overflow-y-auto px-8 py-10" aria-label="Chapitres">
+        <ol class="flex flex-col gap-1 font-(family-name:--font-display) text-[clamp(1.4rem,6vw,3.5rem)] font-extrabold leading-tight tracking-[-.02em]">
+            <li><a href="#chapter-intro"    class="menu-link group/l flex items-baseline gap-4 py-1 transition-colors hover:text-(--accent)"><span class="w-7 font-(family-name:--font-mono) text-[.7rem] font-normal tracking-[.1em] text-(--accent)">00</span>Accueil</a></li>
+            <li><a href="#chapter-profile"  class="menu-link group/l flex items-baseline gap-4 py-1 transition-colors hover:text-(--accent)"><span class="w-7 font-(family-name:--font-mono) text-[.7rem] font-normal tracking-[.1em] text-(--accent)">01</span>Profil</a></li>
+            <li><a href="#chapter-skills"   class="menu-link group/l flex items-baseline gap-4 py-1 transition-colors hover:text-(--accent)"><span class="w-7 font-(family-name:--font-mono) text-[.7rem] font-normal tracking-[.1em] text-(--accent)">02</span>Compétences</a></li>
+            <li><a href="#chapter-projects" class="menu-link group/l flex items-baseline gap-4 py-1 transition-colors hover:text-(--accent)"><span class="w-7 font-(family-name:--font-mono) text-[.7rem] font-normal tracking-[.1em] text-(--accent)">03</span>Projets</a></li>
+            <li><a href="#chapter-offer"    class="menu-link group/l flex items-baseline gap-4 py-1 transition-colors hover:text-(--accent)"><span class="w-7 font-(family-name:--font-mono) text-[.7rem] font-normal tracking-[.1em] text-(--accent)">04</span>Offre</a></li>
+            <li><a href="#chapter-contact"  class="menu-link group/l flex items-baseline gap-4 py-1 transition-colors hover:text-(--accent)"><span class="w-7 font-(family-name:--font-mono) text-[.7rem] font-normal tracking-[.1em] text-(--accent)">05</span>Contact</a></li>
+        </ol>
+        <div class="mt-10 flex flex-wrap gap-4 border-t border-(--border) pt-8">
+            <a href="mailto:walid.koujdal@gmail.com" class="inline-flex items-center gap-2 bg-(--accent) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] font-medium uppercase tracking-[.06em] text-(--accent-fg) transition-opacity hover:opacity-85">M'envoyer un email</a>
+            <a href="https://fr.linkedin.com/in/walid-koujdal-2a516b27b" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-(--border) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] transition-colors hover:border-(--muted)">LinkedIn</a>
+        </div>
+    </nav>
+</div>
+
+<!-- ── FLOATING PILL (value injected from PLACES_PRISES in v2.js) ──── -->
+<button type="button" id="places-pill" class="fixed left-1/2 z-[80] inline-flex -translate-x-1/2 cursor-pointer items-center gap-2.5 border border-(--border) bg-(--fg) px-4 py-2.5 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.08em] text-(--bg) shadow-lg transition-[opacity,translate] duration-300 hover:bg-(--accent) hover:text-(--accent-fg) bottom-[calc(1rem_+_env(safe-area-inset-bottom))]" aria-label="Voir l'offre : places prises">
+    <span class="size-1.5 rounded-full bg-(--accent)" aria-hidden="true"></span>
+    <span><span data-places>–</span>/<span data-places-total>10</span> places prises</span>
+</button>
 
 <main id="story">
 
@@ -322,10 +353,61 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════════════════
-         CHAPTER 5 — CONTACT (placeholder)
-         Content: contact block from ../index.html. Animation TODO.
+         CHAPTER 5 — L'OFFRE
+         Counter animates 0 → PLACES_PRISES on scroll (v2.js); values
+         are injected from the constants at the top of v2.js.
          ══════════════════════════════════════════════════════════════ -->
-    <section id="chapter-contact" data-chapter="contact" class="border-t border-(--border) py-32">
+    <section id="chapter-offer" data-chapter="offer" class="border-t border-(--border) py-24">
+        <div class="mx-auto w-full max-w-7xl px-8">
+            <header data-reveal class="mb-14 flex items-baseline gap-4">
+                <span class="font-(family-name:--font-mono) text-[.7rem] text-(--accent)">04</span>
+                <h2 class="font-(family-name:--font-display) text-[clamp(1.75rem,3.5vw,2.75rem)] font-extrabold tracking-[-.02em]">L'offre</h2>
+            </header>
+
+            <div class="grid gap-12 md:grid-cols-[1fr_auto] md:items-end">
+                <div>
+                    <p data-reveal class="font-(family-name:--font-display) text-[clamp(2rem,5vw,4rem)] font-extrabold leading-[1.05] tracking-[-.025em]">
+                        Les 10 premiers :<br><span class="text-(--accent)">site offert.</span>
+                    </p>
+                    <p data-reveal class="mt-8 max-w-[560px] leading-[1.75] text-(--muted)">
+                        Un site vitrine pensé pour le mobile, avec 2 mois de modifications inclus (textes, photos, horaires, carte). Nom de domaine en option, au nom du client.
+                    </p>
+                </div>
+                <div data-reveal class="border border-(--border) bg-(--card) px-8 py-6 text-center md:min-w-[260px]">
+                    <div class="font-(family-name:--font-display) text-[clamp(3rem,8vw,6rem)] font-extrabold leading-none tracking-[-.03em]">
+                        <span id="offer-counter" data-places>–</span><span class="text-(--muted)">/<span data-places-total>10</span></span>
+                    </div>
+                    <div class="mt-3 font-(family-name:--font-mono) text-[.68rem] uppercase tracking-[.12em] text-(--muted)">places prises</div>
+                </div>
+            </div>
+
+            <ol class="mt-16 grid gap-6 md:grid-cols-3">
+                <li data-reveal class="border border-(--border) bg-(--card) p-8">
+                    <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--accent)">01 —</div>
+                    <h3 class="font-(family-name:--font-display) text-xl font-bold">Échange</h3>
+                </li>
+                <li data-reveal class="border border-(--border) bg-(--card) p-8">
+                    <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--accent)">02 —</div>
+                    <h3 class="font-(family-name:--font-display) text-xl font-bold">Maquette</h3>
+                </li>
+                <li data-reveal class="border border-(--border) bg-(--card) p-8">
+                    <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--accent)">03 —</div>
+                    <h3 class="font-(family-name:--font-display) text-xl font-bold">Mise en ligne</h3>
+                </li>
+            </ol>
+
+            <div data-reveal class="mt-10 flex flex-wrap items-center gap-6">
+                <a href="#chapter-contact" class="inline-flex items-center gap-2 bg-(--accent) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] font-medium uppercase tracking-[.06em] text-(--accent-fg) transition-opacity hover:opacity-85">Me contacter</a>
+                <span class="font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.08em] text-(--muted)">Livraison en <span data-delai>–</span> jours</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CHAPTER 6 — CONTACT + FOOTER
+         Content: contact block and footer from ../index.html.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="chapter-contact" data-chapter="contact" class="border-t border-(--border) pt-32 pb-10">
         <div data-reveal class="mx-auto w-full max-w-3xl px-8 text-center">
             <div class="mb-5 font-(family-name:--font-mono) text-[.68rem] uppercase tracking-[.12em] text-(--accent)">Contact</div>
             <h2 class="mb-4 font-(family-name:--font-display) text-[clamp(1.75rem,4vw,3rem)] font-extrabold tracking-[-.02em]">Vous avez une idée ou un projet ?</h2>
@@ -335,14 +417,8 @@
                 <span class="font-(family-name:--font-mono) text-[.75rem] text-(--muted)">walid.koujdal@gmail.com</span>
             </div>
         </div>
-    </section>
 
-    <!-- ══════════════════════════════════════════════════════════════
-         CHAPTER 6 — OUTRO / FOOTER (placeholder)
-         Content: footer from ../index.html. Animation TODO.
-         ══════════════════════════════════════════════════════════════ -->
-    <section id="chapter-outro" data-chapter="outro" class="border-t border-(--border) py-10">
-        <footer class="mx-auto flex w-full max-w-7xl flex-col items-center gap-4 px-8 text-center font-(family-name:--font-mono) text-[.7rem] md:flex-row md:justify-between md:text-left">
+        <footer class="mx-auto mt-32 flex w-full max-w-7xl flex-col items-center gap-4 border-t border-(--border) px-8 pt-10 text-center font-(family-name:--font-mono) text-[.7rem] md:flex-row md:justify-between md:text-left">
             <span class="font-(family-name:--font-display) text-base font-bold">Walid Koujdal</span>
             <div class="flex flex-wrap justify-center gap-6 uppercase tracking-[.06em]">
                 <a href="mailto:walid.koujdal@gmail.com" class="text-(--muted) transition-colors hover:text-(--fg)">walid.koujdal@gmail.com</a>
