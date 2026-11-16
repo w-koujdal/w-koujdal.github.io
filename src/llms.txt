@@ -15,6 +15,7 @@ Walid Koujdal conçoit et développe des applications web et mobiles complètes,
 
 - [Prestly](https://prestly.fr) — SaaS de gestion pour artisans du bâtiment indépendants : devis générés par IA en quelques secondes, signature électronique, suivi des paiements et avis clients automatisés, avec app mobile compagnon. Stack : Next.js 16, Supabase, Stripe, React Native.
 - [Paradise](https://paradise-saintgratien.vercel.app/) — Site vitrine pour un bar à dessert à Saint-Gratien (Val-d'Oise) : carte des produits, présentation du concept, événements. Stack : Next.js, TypeScript, Supabase.
+- Mes Notes — Application Android de prise de notes avec recherche sémantique 100 % embarquée (modèle MiniLM exécuté localement), dictée vocale et tags suggérés par IA. Stack : Flutter, Rust, ONNX Runtime, SQLite.
 
 ## Contact
 
