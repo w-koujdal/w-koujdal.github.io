@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- v2 is a work-in-progress scaffold: keep it out of search indexes for now -->
+    <meta name="robots" content="noindex">
+    <title>Walid Koujdal — Développeur Full Stack (v2)</title>
+    <meta name="description" content="Portfolio de Walid Koujdal, Développeur Full Stack passionné par la création d'applications web modernes et performantes.">
+    <link rel="icon" type="image/svg+xml" href="../Img/logo.svg">
+    <link rel="icon" type="image/png" href="../Img/favicon.png">
+
+    <link href="../output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── TOKENS (same palette as ../index.html, consumed via Tailwind var utilities) ── */
+        :root {
+            --bg:        #D9D1C0;
+            --bg-alt:    #CEC5B0;
+            --fg:        #0D0D0D;
+            --muted:     rgba(13,13,13,0.45);
+            --accent:    #B87520;
+            --accent-fg: #FFF8EC;
+            --border:    rgba(13,13,13,0.13);
+            --card:      rgba(13,13,13,0.06);
+            --font-display: 'Syne', sans-serif;
+            --font-mono:    'JetBrains Mono', monospace;
+            --font-body:    'DM Sans', sans-serif;
+        }
+        html.dark {
+            --bg:        #0D0D0D;
+            --bg-alt:    #111111;
+            --fg:        #F3EFE6;
+            --muted:     rgba(243,239,230,0.42);
+            --accent:    #E8A838;
+            --accent-fg: #0D0D0D;
+            --border:    rgba(243,239,230,0.11);
+            --card:      rgba(243,239,230,0.05);
+        }
+
+        /* ── Lenis recommended CSS (from lenis@1.3.26/dist/lenis.css) ── */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+        .lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-smooth iframe { pointer-events: none; }
+
+        /* dark/light icon toggle */
+        .icon-sun  { display: none; }
+        .icon-moon { display: block; }
+        html.dark .icon-sun  { display: block; }
+        html.dark .icon-moon { display: none; }
+
+        /* ── Reduced motion fallback ─────────────────────────────────
+           v2.js never boots GSAP/Lenis when the user prefers reduced
+           motion, so nothing is hidden or transformed. This CSS is a
+           belt-and-braces safety net for anything else. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-(--bg) text-(--fg) font-(family-name:--font-body) antialiased overflow-x-hidden">
+
+<!-- ── Scroll progress (scrubbed by ScrollTrigger) ─────────────── -->
+<div id="progress" class="fixed top-0 left-0 z-[110] h-0.5 w-full origin-left scale-x-0 bg-(--accent)" aria-hidden="true"></div>
+
+<!-- ── NAV ──────────────────────────────────────────────────────── -->
+<nav id="navbar" class="fixed inset-x-0 top-0 z-[100] flex h-[68px] items-center border-b border-(--border) bg-(--bg) px-8">
+    <div class="mx-auto flex w-full max-w-7xl items-center justify-between">
+        <a href="#chapter-intro" class="block">
+            <img src="../Img/logo.svg" alt="WK" width="36" height="36" class="block">
+        </a>
+
+        <div class="hidden items-center gap-10 md:flex font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.08em]">
+            <a href="#chapter-intro"    class="text-(--muted) transition-colors hover:text-(--fg)">Accueil</a>
+            <a href="#chapter-profile"  class="text-(--muted) transition-colors hover:text-(--fg)">Profil</a>
+            <a href="#chapter-skills"   class="text-(--muted) transition-colors hover:text-(--fg)">Compétences</a>
+            <a href="#chapter-projects" class="text-(--muted) transition-colors hover:text-(--fg)">Projets</a>
+            <a href="#chapter-contact"  class="text-(--muted) transition-colors hover:text-(--fg)">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <a href="../" class="font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.04em] text-(--muted) transition-colors hover:text-(--fg)">v1</a>
+            <button type="button" class="theme-toggle flex cursor-pointer items-center gap-1 border-0 bg-transparent px-2 py-1.5 text-(--muted) transition-colors hover:text-(--fg)" aria-label="Changer le thème">
+                <svg class="icon-moon h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+                <svg class="icon-sun h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main id="story">
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CHAPTER 1 — INTRO (placeholder)
+         Content: hero from ../index.html. Animation TODO: text reveal,
+         photo parallax is wired as a first example in v2.js.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="chapter-intro" data-chapter="intro" class="relative grid min-h-svh grid-rows-[1fr_auto] overflow-hidden pt-[68px]">
+        <div class="mx-auto grid w-full max-w-7xl items-center gap-12 px-8 pb-12 pt-16 md:grid-cols-[1fr_380px]">
+            <div>
+                <div data-reveal class="mb-6 flex items-center gap-3 font-(family-name:--font-mono) text-[.68rem] uppercase tracking-[.12em] text-(--accent) before:h-px before:w-7 before:bg-(--accent) before:content-['']">Développeur Full Stack</div>
+                <h1 data-reveal class="mb-8 font-(family-name:--font-display) text-[clamp(2rem,4.5vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-.025em]">
+                    Salut, moi c'est <span class="text-(--accent)">Walid</span><br>
+                    et je suis développeur Full Stack
+                </h1>
+                <p data-reveal class="mb-10 max-w-[460px] leading-[1.75] text-(--muted)">
+                    Passionné par le développement web, j'adore créer des applications complètes, modernes et performantes.
+                </p>
+                <div data-reveal class="flex flex-wrap gap-4">
+                    <a href="#chapter-projects" class="inline-flex items-center gap-2 bg-(--accent) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] font-medium uppercase tracking-[.06em] text-(--accent-fg) transition-opacity hover:opacity-85">Mes Projets</a>
+                    <a href="../Img/CV_2025-12-22_Walid_KOUJDAL.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-(--border) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] transition-colors hover:border-(--muted)">Mon CV</a>
+                </div>
+            </div>
+            <div class="flex justify-center md:justify-end">
+                <div data-parallax class="aspect-square w-full max-w-[380px] overflow-hidden border border-(--border) bg-(--card)">
+                    <picture>
+                        <source srcset="../Img/Walid.webp" type="image/webp">
+                        <img src="../Img/Walid.png" alt="Walid Koujdal" width="400" height="400" fetchpriority="high" class="h-full w-full object-cover">
+                    </picture>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech list (marquee in v1, static chips here for now) -->
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 border-t border-(--border) px-8 py-4 font-(family-name:--font-mono) text-[.68rem] uppercase tracking-[.1em] text-(--muted)" aria-label="Technologies">
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">JavaScript</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">React</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">Node.js</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">Express</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">MySQL</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">React Native</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">Tailwind CSS</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">API REST</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">JWT</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">Git / GitHub</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">Vue.js</li>
+            <li class="flex items-center gap-2 before:size-1 before:rounded-full before:bg-(--accent) before:content-['']">Cloud</li>
+        </ul>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CHAPTER 2 — PROFIL (placeholder)
+         Content: 3 profile cards from ../index.html. Animation TODO.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="chapter-profile" data-chapter="profile" class="border-t border-(--border) py-24">
+        <div class="mx-auto w-full max-w-7xl px-8">
+            <header data-reveal class="mb-14 flex items-baseline gap-4">
+                <span class="font-(family-name:--font-mono) text-[.7rem] text-(--accent)">01</span>
+                <h2 class="font-(family-name:--font-display) text-[clamp(1.75rem,3.5vw,2.75rem)] font-extrabold tracking-[-.02em]">Mon profil</h2>
+            </header>
+            <div class="grid gap-6 md:grid-cols-3">
+                <article data-reveal class="border border-(--border) bg-(--card) p-8">
+                    <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">01 —</div>
+                    <svg class="mb-6 h-7 w-7 text-(--accent)" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <h3 class="mb-3 font-(family-name:--font-display) text-xl font-bold">Le déclic</h3>
+                    <p class="text-[.95rem] leading-[1.7] text-(--muted)">Curieux de nature, j'ai découvert le monde du code en explorant HTML, CSS et JavaScript. Très vite, je me suis passionné pour la création d'interfaces, ce qui m'a naturellement orienté vers le développement web.</p>
+                </article>
+                <article data-reveal class="border border-(--border) bg-(--card) p-8">
+                    <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">02 —</div>
+                    <svg class="mb-6 h-7 w-7 text-(--accent)" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <h3 class="mb-3 font-(family-name:--font-display) text-xl font-bold">La formation</h3>
+                    <p class="text-[.95rem] leading-[1.7] text-(--muted)">Titulaire d'un titre de Coordinateur de projets informatiques. J'ai acquis des compétences solides en développement Full Stack ainsi qu'en infrastructure cloud.</p>
+                </article>
+                <article data-reveal class="border border-(--border) bg-(--card) p-8">
+                    <div class="mb-4 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">03 —</div>
+                    <svg class="mb-6 h-7 w-7 text-(--accent)" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                    <h3 class="mb-3 font-(family-name:--font-display) text-xl font-bold">Ma vision</h3>
+                    <p class="text-[.95rem] leading-[1.7] text-(--muted)">J'accorde une grande importance à l'accessibilité, à la performance et à l'esthétique. Je crois en des interfaces simples, utiles et bien pensées, toujours orientées utilisateur. J'aime résoudre de vrais problèmes avec créativité.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CHAPTER 3 — COMPÉTENCES (placeholder)
+         Content: skills lists from ../index.html. Animation TODO.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="chapter-skills" data-chapter="skills" class="border-t border-(--border) py-24">
+        <div class="mx-auto w-full max-w-7xl px-8">
+            <header data-reveal class="mb-14 flex items-baseline gap-4">
+                <span class="font-(family-name:--font-mono) text-[.7rem] text-(--accent)">02</span>
+                <h2 class="font-(family-name:--font-display) text-[clamp(1.75rem,3.5vw,2.75rem)] font-extrabold tracking-[-.02em]">Compétences</h2>
+            </header>
+            <div class="grid gap-12 md:grid-cols-3">
+                <div data-reveal>
+                    <h3 class="mb-5 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.1em] text-(--accent)">Front-End</h3>
+                    <ul class="flex flex-wrap gap-2">
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Langage universel du web, client &amp; serveur">JavaScript</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Bibliothèque UI par Meta, basée sur des composants">React</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Framework CSS utilitaire-first, ultra-flexible">Tailwind CSS</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Framework JavaScript progressif et accessible">Vue.js</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Framework CSS responsive prêt à l'emploi">Bootstrap</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Framework React full-stack, SSR et SSG">Next.js</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Structure et style de toutes les pages web">HTML / CSS</li>
+                    </ul>
+                </div>
+                <div data-reveal>
+                    <h3 class="mb-5 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.1em] text-(--accent)">Back-End</h3>
+                    <ul class="flex flex-wrap gap-2">
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="JavaScript côté serveur, haute performance">Node.js</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Framework web minimaliste pour Node.js">Express</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Architecture HTTP pour échanges client/serveur">API REST</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Base de données relationnelle open-source">MySQL</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Tokens signés pour l'authentification sécurisée">JWT</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Langage back-end historique du web">PHP</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Framework PHP robuste et modulaire">Symfony</li>
+                    </ul>
+                </div>
+                <div data-reveal>
+                    <h3 class="mb-5 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.1em] text-(--accent)">Outils &amp; Méthodes</h3>
+                    <ul class="flex flex-wrap gap-2">
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Versioning et collaboration de code">Git / GitHub</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Référentiel PMI des bonnes pratiques projet">Gestion de projet (PMBOK)</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Conception structurelle des systèmes logiciels">Architecture projet</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Validation des endpoints et contrats d'API">Tests API</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Hébergement et services distants scalables">Cloud (bases)</li>
+                        <li class="border border-(--border) px-3 py-1.5 text-[.8rem]" data-tip="Apps mobile iOS &amp; Android en React">React Native</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CHAPTER 4 — PROJETS  ★ working pinned-section + scrub example
+         Desktop: the section is pinned and #projects-track scrolls
+         horizontally, scrubbed to the scroll position (see v2.js).
+         Mobile / reduced motion: panels stack vertically, no pin.
+         Content: projects array from ../script.js.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="chapter-projects" data-chapter="projects" class="relative overflow-hidden border-t border-(--border) bg-(--bg-alt)">
+        <header class="mx-auto flex w-full max-w-7xl items-baseline gap-4 px-8 pt-24 pb-10 md:absolute md:inset-x-0 md:top-[68px] md:z-10 md:pb-0 md:pt-8">
+            <span class="font-(family-name:--font-mono) text-[.7rem] text-(--accent)">03</span>
+            <h2 class="font-(family-name:--font-display) text-[clamp(1.75rem,3.5vw,2.75rem)] font-extrabold tracking-[-.02em]">Projets</h2>
+            <span class="ml-auto hidden font-(family-name:--font-mono) text-[.68rem] uppercase tracking-[.1em] text-(--muted) md:inline" aria-hidden="true">Scroll ↓ pour défiler →</span>
+        </header>
+
+        <div id="projects-track" class="flex flex-col md:h-svh md:flex-row md:flex-nowrap">
+
+            <!-- 01 — Prestly -->
+            <article data-project-panel id="project-prestly" class="grid shrink-0 gap-10 px-8 pb-20 md:w-screen md:grid-cols-2 md:items-center md:pb-0 md:pt-[140px]">
+                <div class="mx-auto w-full max-w-xl">
+                    <div class="mb-3 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">01 -</div>
+                    <span class="mb-5 inline-block border border-(--accent) px-2.5 py-1 font-(family-name:--font-mono) text-[.65rem] uppercase tracking-[.1em] text-(--accent)">Prestly</span>
+                    <h3 class="mb-4 font-(family-name:--font-display) text-2xl font-bold leading-tight md:text-3xl">Prestly - SaaS de Gestion pour Artisans du Bâtiment</h3>
+                    <p class="mb-6 text-[.95rem] leading-[1.7] text-(--muted)">SaaS de gestion pour artisans du bâtiment indépendants : devis générés par IA en quelques secondes (règles de chiffrage propres à 8 métiers), signature électronique, suivi des paiements et avis clients automatisés, avec une app mobile compagnon. Architecture multi-tenant sécurisée (RLS Postgres, CSP stricte, backups chiffrés AES-256-GCM).</p>
+                    <ul class="mb-8 flex flex-wrap gap-2 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">
+                        <li class="border border-(--border) px-2 py-1">Next.js 16</li>
+                        <li class="border border-(--border) px-2 py-1">Supabase</li>
+                        <li class="border border-(--border) px-2 py-1">Stripe</li>
+                        <li class="border border-(--border) px-2 py-1">IA</li>
+                        <li class="border border-(--border) px-2 py-1">React Native</li>
+                    </ul>
+                    <a href="https://prestly.fr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] text-(--accent) hover:underline">Voir le site <span aria-hidden="true">&#8594;</span></a>
+                </div>
+                <div class="mx-auto w-full max-w-xl border border-(--border) bg-(--card)">
+                    <img src="../Img/prestly.webp" alt="Prestly — 1/10" width="1568" height="699" loading="lazy" decoding="async" class="block h-auto w-full">
+                </div>
+            </article>
+
+            <!-- 02 — Paradise -->
+            <article data-project-panel id="project-paradise" class="grid shrink-0 gap-10 px-8 pb-20 md:w-screen md:grid-cols-2 md:items-center md:pb-0 md:pt-[140px]">
+                <div class="mx-auto w-full max-w-xl">
+                    <div class="mb-3 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">02 -</div>
+                    <span class="mb-5 inline-block border border-(--accent) px-2.5 py-1 font-(family-name:--font-mono) text-[.65rem] uppercase tracking-[.1em] text-(--accent)">Paradise</span>
+                    <h3 class="mb-4 font-(family-name:--font-display) text-2xl font-bold leading-tight md:text-3xl">Paradise - Bar à Dessert (Site Vitrine)</h3>
+                    <p class="mb-6 text-[.95rem] leading-[1.7] text-(--muted)">Site vitrine pour un bar à dessert à Saint-Gratien : carte des produits, présentation du concept, événements et informations pratiques, avec Supabase comme backend.</p>
+                    <ul class="mb-8 flex flex-wrap gap-2 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">
+                        <li class="border border-(--border) px-2 py-1">Next.js</li>
+                        <li class="border border-(--border) px-2 py-1">TypeScript</li>
+                        <li class="border border-(--border) px-2 py-1">Supabase</li>
+                        <li class="border border-(--border) px-2 py-1">React</li>
+                    </ul>
+                    <a href="https://paradise-saintgratien.vercel.app/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-(family-name:--font-mono) text-[.7rem] uppercase tracking-[.06em] text-(--accent) hover:underline">Voir le site <span aria-hidden="true">&#8594;</span></a>
+                </div>
+                <div class="mx-auto w-full max-w-xl border border-(--border) bg-(--card)">
+                    <img src="../Img/paradise.webp" alt="Paradise — 1/5" width="1568" height="698" loading="lazy" decoding="async" class="block h-auto w-full">
+                </div>
+            </article>
+
+            <!-- 03 — Mes Notes -->
+            <article data-project-panel id="project-mesnotes" class="grid shrink-0 gap-10 px-8 pb-20 md:w-screen md:grid-cols-2 md:items-center md:pb-0 md:pt-[140px]">
+                <div class="mx-auto w-full max-w-xl">
+                    <div class="mb-3 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">03 -</div>
+                    <span class="mb-5 inline-block border border-(--accent) px-2.5 py-1 font-(family-name:--font-mono) text-[.65rem] uppercase tracking-[.1em] text-(--accent)">Mes Notes</span>
+                    <h3 class="mb-4 font-(family-name:--font-display) text-2xl font-bold leading-tight md:text-3xl">Mes Notes - Bibliothécaire Personnel</h3>
+                    <p class="mb-6 text-[.95rem] leading-[1.7] text-(--muted)">App de prise de notes Android qui retrouve tes notes par le sens plutôt que par les mots exacts, grâce à un moteur de recherche sémantique 100% embarqué : chaque note est convertie en vecteur via un modèle MiniLM exécuté localement (pont FFI Flutter ↔ Rust ↔ ONNX Runtime), sans jamais dépendre d'une API cloud. Dictée vocale, tags intelligents suggérés par IA, import en masse et corbeille avec restauration.</p>
+                    <ul class="flex flex-wrap gap-2 font-(family-name:--font-mono) text-[.68rem] text-(--muted)">
+                        <li class="border border-(--border) px-2 py-1">Flutter</li>
+                        <li class="border border-(--border) px-2 py-1">Rust</li>
+                        <li class="border border-(--border) px-2 py-1">ONNX Runtime</li>
+                        <li class="border border-(--border) px-2 py-1">SQLite</li>
+                    </ul>
+                </div>
+                <div class="mx-auto grid w-full max-w-xl grid-cols-2 gap-4">
+                    <img src="../Img/mesnotes-liste.webp" alt="Mes Notes — 1/4" width="1080" height="2340" loading="lazy" decoding="async" class="block h-auto w-full border border-(--border) bg-(--card)">
+                    <img src="../Img/mesnotes-recherche.webp" alt="Mes Notes — 2/4" width="1080" height="2340" loading="lazy" decoding="async" class="block h-auto w-full border border-(--border) bg-(--card)">
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CHAPTER 5 — CONTACT (placeholder)
+         Content: contact block from ../index.html. Animation TODO.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="chapter-contact" data-chapter="contact" class="border-t border-(--border) py-32">
+        <div data-reveal class="mx-auto w-full max-w-3xl px-8 text-center">
+            <div class="mb-5 font-(family-name:--font-mono) text-[.68rem] uppercase tracking-[.12em] text-(--accent)">Contact</div>
+            <h2 class="mb-4 font-(family-name:--font-display) text-[clamp(1.75rem,4vw,3rem)] font-extrabold tracking-[-.02em]">Vous avez une idée ou un projet ?</h2>
+            <p class="mb-10 text-(--muted)">Je réponds généralement sous 24 à 48h.</p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="mailto:walid.koujdal@gmail.com" class="inline-flex items-center gap-2 bg-(--accent) px-6 py-3 font-(family-name:--font-mono) text-[.7rem] font-medium uppercase tracking-[.06em] text-(--accent-fg) transition-opacity hover:opacity-85">M'envoyer un email</a>
+                <span class="font-(family-name:--font-mono) text-[.75rem] text-(--muted)">walid.koujdal@gmail.com</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CHAPTER 6 — OUTRO / FOOTER (placeholder)
+         Content: footer from ../index.html. Animation TODO.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="chapter-outro" data-chapter="outro" class="border-t border-(--border) py-10">
+        <footer class="mx-auto flex w-full max-w-7xl flex-col items-center gap-4 px-8 text-center font-(family-name:--font-mono) text-[.7rem] md:flex-row md:justify-between md:text-left">
+            <span class="font-(family-name:--font-display) text-base font-bold">Walid Koujdal</span>
+            <div class="flex flex-wrap justify-center gap-6 uppercase tracking-[.06em]">
+                <a href="mailto:walid.koujdal@gmail.com" class="text-(--muted) transition-colors hover:text-(--fg)">walid.koujdal@gmail.com</a>
+                <a href="https://github.com/w-koujdal" target="_blank" rel="noopener" class="text-(--muted) transition-colors hover:text-(--fg)">GitHub</a>
+                <a href="https://fr.linkedin.com/in/walid-koujdal-2a516b27b" target="_blank" rel="noopener" class="text-(--muted) transition-colors hover:text-(--fg)">LinkedIn</a>
+            </div>
+            <span class="text-(--muted)">&copy; <span id="copyright-year">2025</span> Walid Koujdal</span>
+        </footer>
+    </section>
+
+</main>
+
+<!-- ── Libraries (pinned versions) ─────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="./v2.js"></script>
+</body>
+</html>
