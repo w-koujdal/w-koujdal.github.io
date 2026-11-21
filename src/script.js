@@ -204,12 +204,12 @@ var projects = [
     },
     {
         id: 'mesnotes',
-        label: 'Mes Notes',
+        label: 'Sens',
         category: 'personal',
         url: '#',
         theme: { bg: '#0D1F2A', fg: '#E4F1F4', accent: '#62C6D6' },
         tags: ['Flutter', 'Rust', 'ONNX Runtime', 'SQLite'],
-        sub: { fr: 'Bibliothécaire personnel', en: 'Personal librarian' },
+        sub: { fr: 'Retrouve une note par son sens, même sans les bons mots', en: 'Find a note by its meaning, even without the right words' },
         desc: {
             fr: 'App de prise de notes Android qui retrouve tes notes par le sens plutôt que par les mots exacts, grâce à un moteur de recherche sémantique 100% embarqué : chaque note est convertie en vecteur via un modèle MiniLM exécuté localement (pont FFI Flutter ↔ Rust ↔ ONNX Runtime), sans jamais dépendre d\'une API cloud. Dictée vocale, tags intelligents suggérés par IA, import en masse et corbeille avec restauration.',
             en: 'Android note-taking app that finds your notes by meaning rather than exact keywords, powered by a fully on-device semantic search engine: each note is turned into a vector via a locally-run MiniLM model (Flutter ↔ Rust ↔ ONNX Runtime FFI bridge), with zero cloud dependency. Voice dictation, AI-suggested smart tags, bulk text import and a trash with restore.'
