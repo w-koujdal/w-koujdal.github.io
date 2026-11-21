@@ -92,26 +92,6 @@ var projects = [
         ]
     },
     {
-        id: 'paradise',
-        label: 'Paradise',
-        category: 'pro',
-        url: 'https://paradise-saintgratien.vercel.app/',
-        theme: { bg: '#6E2C0D', fg: '#FFF3E2', accent: '#FFA75E' },
-        tags: ['Next.js', 'TypeScript', 'Supabase', 'React'],
-        sub: { fr: 'Bar à dessert — site vitrine', en: 'Dessert bar — showcase website' },
-        desc: {
-            fr: 'Site vitrine pour un bar à dessert à Saint-Gratien : carte des produits, présentation du concept, événements et informations pratiques, avec Supabase comme backend.',
-            en: 'Showcase website for a dessert bar in Saint-Gratien: product menu, concept presentation, events and practical info, powered by Supabase as backend.'
-        },
-        shots: [
-            { src: 'Img/paradise.webp',          fr: 'Page d\'accueil',  en: 'Home page' },
-            { src: 'Img/paradise-mobile-1.webp', fr: 'Accueil mobile',   en: 'Mobile home' },
-            { src: 'Img/paradise-mobile-2.webp', fr: 'Le concept',       en: 'The concept' },
-            { src: 'Img/paradise-mobile-3.webp', fr: 'La carte',         en: 'The menu' },
-            { src: 'Img/paradise-mobile-4.webp', fr: 'Nous trouver',     en: 'Find us' }
-        ]
-    },
-    {
         id: 'berbercandy',
         label: 'Berber Candy',
         category: 'pro',
@@ -131,22 +111,23 @@ var projects = [
         ]
     },
     {
-        id: 'mesnotes',
-        label: 'Mes Notes',
-        category: 'personal',
-        url: '#',
-        theme: { bg: '#0D1F2A', fg: '#E4F1F4', accent: '#62C6D6' },
-        tags: ['Flutter', 'Rust', 'ONNX Runtime', 'SQLite'],
-        sub: { fr: 'Bibliothécaire personnel', en: 'Personal librarian' },
+        id: 'paradise',
+        label: 'Paradise',
+        category: 'pro',
+        url: 'https://paradise-saintgratien.vercel.app/',
+        theme: { bg: '#6E2C0D', fg: '#FFF3E2', accent: '#FFA75E' },
+        tags: ['Next.js', 'TypeScript', 'Supabase', 'React'],
+        sub: { fr: 'Bar à dessert — site vitrine', en: 'Dessert bar — showcase website' },
         desc: {
-            fr: 'App de prise de notes Android qui retrouve tes notes par le sens plutôt que par les mots exacts, grâce à un moteur de recherche sémantique 100% embarqué : chaque note est convertie en vecteur via un modèle MiniLM exécuté localement (pont FFI Flutter ↔ Rust ↔ ONNX Runtime), sans jamais dépendre d\'une API cloud. Dictée vocale, tags intelligents suggérés par IA, import en masse et corbeille avec restauration.',
-            en: 'Android note-taking app that finds your notes by meaning rather than exact keywords, powered by a fully on-device semantic search engine: each note is turned into a vector via a locally-run MiniLM model (Flutter ↔ Rust ↔ ONNX Runtime FFI bridge), with zero cloud dependency. Voice dictation, AI-suggested smart tags, bulk text import and a trash with restore.'
+            fr: 'Site vitrine pour un bar à dessert à Saint-Gratien : carte des produits, présentation du concept, événements et informations pratiques, avec Supabase comme backend.',
+            en: 'Showcase website for a dessert bar in Saint-Gratien: product menu, concept presentation, events and practical info, powered by Supabase as backend.'
         },
         shots: [
-            { src: 'Img/mesnotes-liste.webp',     fr: 'Mes notes',             en: 'Notes list' },
-            { src: 'Img/mesnotes-recherche.webp', fr: 'Recherche sémantique',  en: 'Semantic search' },
-            { src: 'Img/mesnotes-note.webp',      fr: 'Édition d\'une note',   en: 'Note editor' },
-            { src: 'Img/mesnotes-corbeille.webp', fr: 'Corbeille',             en: 'Trash' }
+            { src: 'Img/paradise.webp',          fr: 'Page d\'accueil',  en: 'Home page' },
+            { src: 'Img/paradise-mobile-1.webp', fr: 'Accueil mobile',   en: 'Mobile home' },
+            { src: 'Img/paradise-mobile-2.webp', fr: 'Le concept',       en: 'The concept' },
+            { src: 'Img/paradise-mobile-3.webp', fr: 'La carte',         en: 'The menu' },
+            { src: 'Img/paradise-mobile-4.webp', fr: 'Nous trouver',     en: 'Find us' }
         ]
     },
     {
@@ -187,6 +168,24 @@ var projects = [
         ]
     },
     {
+        id: 'fait',
+        label: 'Fait ?',
+        category: 'personal',
+        url: '#',
+        theme: { bg: '#0F2A1E', fg: '#E6F6EC', accent: '#4FD18B' },
+        tags: ['Kotlin', 'Jetpack Compose'],
+        sub: { fr: 'Ne plus se demander « est-ce que je l\'ai fait ? »', en: 'Stop wondering "did I do it?"' },
+        desc: {
+            fr: 'App Android pour ne plus se demander « est-ce que je l\'ai fait ? » : médicaments, porte fermée, plaques éteintes… Un appui suffit à le noter, avec une photo preuve gardée hors de la galerie. Les rappels ne sonnent que si ce n\'est pas encore fait, avec un mode réveil qui sonne même en silencieux, et une check-list « Je sors » lue à voix haute. Née de demandes d\'utilisateurs sur Reddit (r/SomebodyMakeThis, r/AppIdeas). Gratuite, sans pub, sans Internet, APK de 2,3 Mo.',
+            en: 'Android app to stop wondering "did I do it?": medication, door locked, stove off… One tap logs it, with a proof photo kept out of the gallery. Reminders only ring if it isn\'t done yet, with an alarm mode that rings even on silent, plus a spoken "Heading out" checklist. Born from user requests on Reddit (r/SomebodyMakeThis, r/AppIdeas). Free, no ads, no Internet, 2.3 MB APK.'
+        },
+        shots: [
+            { src: 'Img/fait-bienvenue.webp', fr: 'Choisir ses tâches',     en: 'Pick your tasks' },
+            { src: 'Img/fait-accueil.webp',   fr: 'Un appui, c\'est noté', en: 'One tap, it\'s logged' },
+            { src: 'Img/fait-je-sors.webp',   fr: 'Check-list « Je sors »', en: '"Heading out" checklist' }
+        ]
+    },
+    {
         id: 'grimoires',
         label: 'Grimoires',
         category: 'personal',
@@ -204,21 +203,22 @@ var projects = [
         ]
     },
     {
-        id: 'fait',
-        label: 'Fait ?',
+        id: 'mesnotes',
+        label: 'Mes Notes',
         category: 'personal',
         url: '#',
-        theme: { bg: '#0F2A1E', fg: '#E6F6EC', accent: '#4FD18B' },
-        tags: ['Kotlin', 'Jetpack Compose'],
-        sub: { fr: 'Ne plus se demander « est-ce que je l\'ai fait ? »', en: 'Stop wondering "did I do it?"' },
+        theme: { bg: '#0D1F2A', fg: '#E4F1F4', accent: '#62C6D6' },
+        tags: ['Flutter', 'Rust', 'ONNX Runtime', 'SQLite'],
+        sub: { fr: 'Bibliothécaire personnel', en: 'Personal librarian' },
         desc: {
-            fr: 'App Android pour ne plus se demander « est-ce que je l\'ai fait ? » : médicaments, porte fermée, plaques éteintes… Un appui suffit à le noter, avec une photo preuve gardée hors de la galerie. Les rappels ne sonnent que si ce n\'est pas encore fait, avec un mode réveil qui sonne même en silencieux, et une check-list « Je sors » lue à voix haute. Née de demandes d\'utilisateurs sur Reddit (r/SomebodyMakeThis, r/AppIdeas). Gratuite, sans pub, sans Internet, APK de 2,3 Mo.',
-            en: 'Android app to stop wondering "did I do it?": medication, door locked, stove off… One tap logs it, with a proof photo kept out of the gallery. Reminders only ring if it isn\'t done yet, with an alarm mode that rings even on silent, plus a spoken "Heading out" checklist. Born from user requests on Reddit (r/SomebodyMakeThis, r/AppIdeas). Free, no ads, no Internet, 2.3 MB APK.'
+            fr: 'App de prise de notes Android qui retrouve tes notes par le sens plutôt que par les mots exacts, grâce à un moteur de recherche sémantique 100% embarqué : chaque note est convertie en vecteur via un modèle MiniLM exécuté localement (pont FFI Flutter ↔ Rust ↔ ONNX Runtime), sans jamais dépendre d\'une API cloud. Dictée vocale, tags intelligents suggérés par IA, import en masse et corbeille avec restauration.',
+            en: 'Android note-taking app that finds your notes by meaning rather than exact keywords, powered by a fully on-device semantic search engine: each note is turned into a vector via a locally-run MiniLM model (Flutter ↔ Rust ↔ ONNX Runtime FFI bridge), with zero cloud dependency. Voice dictation, AI-suggested smart tags, bulk text import and a trash with restore.'
         },
         shots: [
-            { src: 'Img/fait-bienvenue.webp', fr: 'Choisir ses tâches',     en: 'Pick your tasks' },
-            { src: 'Img/fait-accueil.webp',   fr: 'Un appui, c\'est noté', en: 'One tap, it\'s logged' },
-            { src: 'Img/fait-je-sors.webp',   fr: 'Check-list « Je sors »', en: '"Heading out" checklist' }
+            { src: 'Img/mesnotes-liste.webp',     fr: 'Mes notes',             en: 'Notes list' },
+            { src: 'Img/mesnotes-recherche.webp', fr: 'Recherche sémantique',  en: 'Semantic search' },
+            { src: 'Img/mesnotes-note.webp',      fr: 'Édition d\'une note',   en: 'Note editor' },
+            { src: 'Img/mesnotes-corbeille.webp', fr: 'Corbeille',             en: 'Trash' }
         ]
     }
 ];
