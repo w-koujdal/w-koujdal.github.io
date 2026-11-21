@@ -98,16 +98,18 @@ var projects = [
         url: 'https://berber-candy.vercel.app/',
         theme: { bg: '#15181E', fg: '#F3EEE5', accent: '#C3A75A' },
         tags: ['HTML', 'CSS', 'JavaScript', 'SEO', 'Vercel'],
-        sub: { fr: 'Traiteur sur commande — site vitrine', en: 'Made-to-order catering — showcase website' },
+        sub: { fr: 'Traiteur sur commande — la demande Instagram rédigée en 1 minute', en: 'Made-to-order catering — the Instagram request written in 1 minute' },
         desc: {
-            fr: 'Site vitrine pour un traiteur artisanal qui prépare des plateaux salés et sucrés sur commande, réservés par message Instagram. Direction artistique inspirée du zellige, photos servies en AVIF/WebP à plusieurs tailles, référencement complet (données structurées, sitemap, Search Console, IndexNow) et version mobile soignée : contrastes vérifiés, zones tactiles de 44 px, bouton « Réserver » toujours accessible.',
-            en: 'Showcase website for an artisan caterer making sweet and savoury platters to order, booked via Instagram message. Zellige-inspired art direction, photos served as multi-size AVIF/WebP, full SEO setup (structured data, sitemap, Search Console, IndexNow) and a polished mobile version: checked contrast, 44px touch targets, an always-reachable "Book" button.'
+            fr: 'Site pour un traiteur artisanal qui ne prend ses commandes que par message Instagram. Le site est construit autour d\'un formulaire : le client choisit l\'événement, la date, les plats et leurs quantités, et le message s\'écrit en direct. Un clic le copie et ouvre la conversation Instagram : le client n\'a plus qu\'à coller, et la traiteuse reçoit un brief complet au lieu de dix allers-retours. Direction artistique inspirée du zellige, photos en AVIF/WebP, SEO complet (données structurées, Search Console, IndexNow) et accessibilité mobile soignée.',
+            en: 'Website for an artisan caterer who only takes orders by Instagram message. The site is built around a form: the client picks the event, date, dishes and quantities, and the message writes itself live. One click copies it and opens the Instagram chat: the client just pastes, and the caterer gets a complete brief instead of ten back-and-forths. Zellige-inspired art direction, AVIF/WebP photos, full SEO (structured data, Search Console, IndexNow) and careful mobile accessibility.'
         },
         shots: [
-            { src: 'Img/berbercandy.webp',          fr: 'Page d\'accueil',        en: 'Home page' },
-            { src: 'Img/berbercandy-mobile-1.webp', fr: 'Accueil mobile',         en: 'Mobile home' },
-            { src: 'Img/berbercandy-mobile-2.webp', fr: 'Les plateaux',           en: 'The platters' },
-            { src: 'Img/berbercandy-mobile-3.webp', fr: 'Commander en 3 étapes',  en: 'Order in 3 steps' }
+            { src: 'Img/berbercandy.webp',             fr: 'Page d\'accueil',               en: 'Home page' },
+            { src: 'Img/berbercandy-formulaire.webp',  fr: 'Le message s\'écrit en direct',  en: 'The message writes itself live' },
+            { src: 'Img/berbercandy-mobile-1.webp',    fr: 'Accueil mobile',                en: 'Mobile home' },
+            { src: 'Img/berbercandy-mobile-2.webp',    fr: 'Plats et quantités',            en: 'Dishes and quantities' },
+            { src: 'Img/berbercandy-mobile-3.webp',    fr: 'Message prêt à envoyer',        en: 'Message ready to send' },
+            { src: 'Img/berbercandy-mobile-4.webp',    fr: 'Les plateaux',                  en: 'The platters' }
         ]
     },
     {
