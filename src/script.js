@@ -54,8 +54,8 @@ var EN = {
 
 // Libellés utilisés par les chapitres projets
 var UI = {
-    fr: { visit: 'Voir le site', gallery: 'Galerie', demo: 'Voir la démo', pro: 'Pro', personal: 'Personnel', open: 'Ouvrir la galerie de', copied: 'Copié !', copiedSr: 'Adresse email copiée' },
-    en: { visit: 'Visit site', gallery: 'Gallery', demo: 'Watch demo', pro: 'Professional', personal: 'Personal', open: 'Open gallery for', copied: 'Copied!', copiedSr: 'Email address copied' }
+    fr: { visit: 'Voir le site', code: 'Voir le code', gallery: 'Galerie', demo: 'Voir la démo', pro: 'Pro', personal: 'Personnel', open: 'Ouvrir la galerie de', copied: 'Copié !', copiedSr: 'Adresse email copiée' },
+    en: { visit: 'Visit site', code: 'View code', gallery: 'Gallery', demo: 'Watch demo', pro: 'Professional', personal: 'Personal', open: 'Open gallery for', copied: 'Copied!', copiedSr: 'Email address copied' }
 };
 
 /* Projets — un chapitre épinglé est généré pour chaque entrée.
@@ -128,6 +128,75 @@ var projects = [
             { src: 'Img/mesnotes-recherche.webp', fr: 'Recherche sémantique',  en: 'Semantic search' },
             { src: 'Img/mesnotes-note.webp',      fr: 'Édition d\'une note',   en: 'Note editor' },
             { src: 'Img/mesnotes-corbeille.webp', fr: 'Corbeille',             en: 'Trash' }
+        ]
+    },
+    {
+        id: 'trieur',
+        label: 'Trieur',
+        category: 'personal',
+        url: 'https://github.com/w-koujdal/trieur',
+        linkLabel: 'code',
+        theme: { bg: '#161A24', fg: '#F2F4F8', accent: '#F2C14E' },
+        tags: ['Kotlin', 'Jetpack Compose', 'Room FTS4', 'ML Kit'],
+        sub: { fr: 'Retrouver une capture par le texte qu\'elle contient', en: 'Find any screenshot by the text inside it' },
+        desc: {
+            fr: 'App Android open source (MIT) qui retrouve n\'importe quelle capture d\'écran, photo ou PDF grâce au texte qu\'il contient. L\'OCR (ML Kit) tourne entièrement sur le téléphone : rien n\'est envoyé sur Internet. Tri automatique par catégorie (achats, voyages, codes, lieux, conversations…), nettoyage guidé (codes expirés, doublons, vieilles captures) et recherche dans les fichiers d\'un autre appareil du même Wi-Fi, avec des échanges chiffrés (ECDH P-256 + AES-256-GCM). Disponible en français et en anglais.',
+            en: 'Open-source (MIT) Android app that finds any screenshot, photo or PDF by the text inside it. OCR (ML Kit) runs entirely on the phone: nothing is sent to the Internet. Automatic sorting by category (purchases, travel, codes, places, conversations…), guided cleanup (expired codes, duplicates, old screenshots) and search across another device\'s files on the same Wi-Fi, with encrypted exchanges (ECDH P-256 + AES-256-GCM). Available in French and English.'
+        },
+        shots: [
+            { src: 'Img/trieur-tri.webp',        fr: 'Tri automatique',                 en: 'Sorted automatically' },
+            { src: 'Img/trieur-recherche.webp',  fr: 'Recherche dans les images',       en: 'Search inside your images' },
+            { src: 'Img/trieur-detail.webp',     fr: 'Mots surlignés, contacts cliquables', en: 'Words highlighted, contacts tappable' },
+            { src: 'Img/trieur-nettoyage.webp',  fr: 'Nettoyage en un appui',           en: 'One-tap cleanup' }
+        ]
+    },
+    {
+        id: 'trieurpc',
+        label: 'Trieur PC',
+        category: 'personal',
+        url: 'https://github.com/w-koujdal/trieur-pc',
+        linkLabel: 'code',
+        theme: { bg: '#0E1A2B', fg: '#E6EEF8', accent: '#5AA9FF' },
+        tags: ['Kotlin/JVM', 'JavaFX WebView', 'jpackage'],
+        sub: { fr: 'Le compagnon Windows du Trieur', en: 'Trieur\'s Windows companion' },
+        desc: {
+            fr: 'Compagnon Windows open source (MIT) du Trieur : depuis le téléphone, on cherche dans les fichiers du PC, et inversement, sur le même Wi-Fi. Échanges chiffrés, protection contre le DNS rebinding et le CSRF. Fourni en .exe autonome qui ne demande pas de navigateur.',
+            en: 'Open-source (MIT) Windows companion to Trieur: search the PC\'s files from the phone, and vice versa, over the same Wi-Fi. Encrypted exchanges, protection against DNS rebinding and CSRF. Shipped as a standalone .exe that needs no browser.'
+        },
+        shots: [
+            { src: 'Img/trieur-pc-placeholder.webp', fr: 'Captures à venir', en: 'Screenshots coming soon' }
+        ]
+    },
+    {
+        id: 'grimoires',
+        label: 'Grimoires',
+        category: 'personal',
+        url: '#',
+        theme: { bg: '#1E1233', fg: '#F1E8FF', accent: '#C79BFF' },
+        tags: ['Kotlin', 'Jetpack Compose', 'Canvas'],
+        sub: { fr: 'Jeu de réflexion dans une bibliothèque enchantée', en: 'Puzzle game in an enchanted library' },
+        desc: {
+            fr: 'Jeu de réflexion Android : on range les grimoires d\'une bibliothèque enchantée jusqu\'à n\'avoir qu\'une école de magie par étagère, parmi 12 écoles. Chaque étagère complétée libère la créature de son école (phénix, ours de givre, aigle de foudre…) avec une animation et un son. Un chrono démarre à la première lévitation et le meilleur temps est enregistré. Gratuit, sans pub, sans compte, sans aucune permission, APK de 1,5 Mo.',
+            en: 'Android puzzle game: sort the spellbooks of an enchanted library until each shelf holds a single school of magic, out of 12 schools. Every completed shelf frees its school\'s creature (phoenix, frost bear, thunder eagle…) with an animation and a sound. A timer starts at the first levitation and the best time is saved. Free, no ads, no account, no permissions at all, 1.5 MB APK.'
+        },
+        shots: [
+            { src: 'Img/grimoires-placeholder.webp', fr: 'Captures à venir', en: 'Screenshots coming soon' }
+        ]
+    },
+    {
+        id: 'fait',
+        label: 'Fait ?',
+        category: 'personal',
+        url: '#',
+        theme: { bg: '#0F2A1E', fg: '#E6F6EC', accent: '#4FD18B' },
+        tags: ['Kotlin', 'Jetpack Compose'],
+        sub: { fr: 'Ne plus se demander « est-ce que je l\'ai fait ? »', en: 'Stop wondering "did I do it?"' },
+        desc: {
+            fr: 'App Android pour ne plus se demander « est-ce que je l\'ai fait ? » : médicaments, porte fermée, plaques éteintes… Un appui suffit à le noter, avec une photo preuve gardée hors de la galerie. Les rappels ne sonnent que si ce n\'est pas encore fait, avec un mode réveil qui sonne même en silencieux, et une check-list « Je sors » lue à voix haute. Née de demandes d\'utilisateurs sur Reddit (r/SomebodyMakeThis, r/AppIdeas). Gratuite, sans pub, sans Internet, APK de 2,3 Mo.',
+            en: 'Android app to stop wondering "did I do it?": medication, door locked, stove off… One tap logs it, with a proof photo kept out of the gallery. Reminders only ring if it isn\'t done yet, with an alarm mode that rings even on silent, plus a spoken "Heading out" checklist. Born from user requests on Reddit (r/SomebodyMakeThis, r/AppIdeas). Free, no ads, no Internet, 2.3 MB APK.'
+        },
+        shots: [
+            { src: 'Img/fait-placeholder.webp', fr: 'Captures à venir', en: 'Screenshots coming soon' }
         ]
     }
 ];
@@ -226,17 +295,18 @@ function buildProjects() {
 
     host.innerHTML = projects.map(function (p, i) {
         var len = (INTRO + p.shots.length * PER_SHOT).toFixed(2);
-        var hostName = p.url !== '#' ? p.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : p.label.toLowerCase().replace(/\s+/g, '') + '.app';
+        var hostName = p.url !== '#' ? p.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : p.label.toLowerCase().replace(/[^a-z0-9]+/g, '') + '.app';
+        var linkKey = p.linkLabel || 'visit';
         var imgs = p.shots.map(function (s, j) {
             return '<img src="' + s.src + '" alt="" ' + (j === 0 ? 'class="on"' : 'loading="lazy"') + ' decoding="async">';
         }).join('');
         var tags = p.tags.map(function (t) { return '<span class="proj-tag">' + t + '</span>'; }).join('');
         var visit = p.url !== '#'
-            ? '<a class="proj-btn solid" href="' + p.url + '" target="_blank" rel="noopener noreferrer"><b data-ui="visit"></b> <span>&#8599;</span></a>' : '';
+            ? '<a class="proj-btn solid" href="' + p.url + '" target="_blank" rel="noopener noreferrer"><b data-ui="' + linkKey + '"></b> <span>&#8599;</span></a>' : '';
         var video = p.video
             ? '<button type="button" class="proj-btn proj-video-btn" data-video="' + p.video + '">&#9654; <b data-ui="demo"></b></button>' : '';
         var miniLink = p.url !== '#'
-            ? '<a href="' + p.url + '" target="_blank" rel="noopener noreferrer"><b data-ui="visit"></b> &#8599;</a>' : '';
+            ? '<a href="' + p.url + '" target="_blank" rel="noopener noreferrer"><b data-ui="' + linkKey + '"></b> &#8599;</a>' : '';
 
         return '<section class="scene over proj" id="proj-' + p.id + '" data-scene="project" data-pid="' + p.id + '"'
             + ' style="--len:' + len + ';--p-bg:' + p.theme.bg + ';--p-fg:' + p.theme.fg + ';--p-accent:' + p.theme.accent + '">'

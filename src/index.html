@@ -12,6 +12,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://w-koujdal.github.io/">
     <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Walid Koujdal">
     <meta property="og:title" content="Walid Koujdal — Développeur Full Stack">
     <meta property="og:description" content="Développeur Full Stack spécialisé en React, Node.js et Cloud.">
     <meta property="og:image" content="https://w-koujdal.github.io/Img/Walid.png">
@@ -40,6 +41,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="Img/Walid-portrait.webp" type="image/webp">
     <link href="./styles.css" rel="stylesheet">
+
+    <!-- Nom du site affiché par Google au-dessus du titre (à la place de « GitHub ») -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Walid Koujdal",
+        "alternateName": ["Walid Koujdal Portfolio", "Portfolio de Walid Koujdal"],
+        "url": "https://w-koujdal.github.io/"
+    }
+    </script>
 
     <!-- Structured data — Person schema -->
     <script type="application/ld+json">
@@ -70,6 +82,22 @@
                 "name": "Paradise",
                 "url": "https://paradise-saintgratien.vercel.app/",
                 "description": "Site vitrine pour un bar à dessert à Saint-Gratien."
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Trieur",
+                "url": "https://github.com/w-koujdal/trieur",
+                "applicationCategory": "UtilitiesApplication",
+                "operatingSystem": "Android",
+                "description": "Retrouve n'importe quelle capture, photo ou PDF par le texte qu'il contient. OCR 100 % sur le téléphone."
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Trieur PC",
+                "url": "https://github.com/w-koujdal/trieur-pc",
+                "applicationCategory": "UtilitiesApplication",
+                "operatingSystem": "Windows",
+                "description": "Compagnon Windows du Trieur : recherche dans les fichiers du PC depuis le téléphone, et inversement, sur le même Wi-Fi."
             }
         ]
     }
