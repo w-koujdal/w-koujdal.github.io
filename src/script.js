@@ -164,7 +164,7 @@ var projects = [
             en: 'Open-source (MIT) Windows companion to Trieur: search the PC\'s files from the phone, and vice versa, over the same Wi-Fi. Encrypted exchanges, protection against DNS rebinding and CSRF. Shipped as a standalone .exe that needs no browser.'
         },
         shots: [
-            { src: 'Img/trieur-pc-placeholder.webp', fr: 'Captures à venir', en: 'Screenshots coming soon' }
+            { src: 'Img/trieurpc-recherche.webp', fr: 'Recherche dans les fichiers du PC', en: 'Searching the PC\'s files' }
         ]
     },
     {
@@ -180,7 +180,8 @@ var projects = [
             en: 'Android puzzle game: sort the spellbooks of an enchanted library until each shelf holds a single school of magic, out of 12 schools. Every completed shelf frees its school\'s creature (phoenix, frost bear, thunder eagle…) with an animation and a sound. A timer starts at the first levitation and the best time is saved. Free, no ads, no account, no permissions at all, 1.5 MB APK.'
         },
         shots: [
-            { src: 'Img/grimoires-placeholder.webp', fr: 'Captures à venir', en: 'Screenshots coming soon' }
+            { src: 'Img/grimoires-accueil.webp', fr: 'Accueil, bestiaire et niveaux',   en: 'Home, bestiary and levels' },
+            { src: 'Img/grimoires-partie.webp',  fr: 'Défi du jour, grimoire en lévitation', en: 'Daily challenge, levitating spellbook' }
         ]
     },
     {
@@ -196,7 +197,9 @@ var projects = [
             en: 'Android app to stop wondering "did I do it?": medication, door locked, stove off… One tap logs it, with a proof photo kept out of the gallery. Reminders only ring if it isn\'t done yet, with an alarm mode that rings even on silent, plus a spoken "Heading out" checklist. Born from user requests on Reddit (r/SomebodyMakeThis, r/AppIdeas). Free, no ads, no Internet, 2.3 MB APK.'
         },
         shots: [
-            { src: 'Img/fait-placeholder.webp', fr: 'Captures à venir', en: 'Screenshots coming soon' }
+            { src: 'Img/fait-bienvenue.webp', fr: 'Choisir ses tâches',     en: 'Pick your tasks' },
+            { src: 'Img/fait-accueil.webp',   fr: 'Un appui, c\'est noté', en: 'One tap, it\'s logged' },
+            { src: 'Img/fait-je-sors.webp',   fr: 'Check-list « Je sors »', en: '"Heading out" checklist' }
         ]
     }
 ];
