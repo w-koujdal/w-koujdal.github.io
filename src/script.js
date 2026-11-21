@@ -112,6 +112,25 @@ var projects = [
         ]
     },
     {
+        id: 'berbercandy',
+        label: 'Berber Candy',
+        category: 'pro',
+        url: 'https://berber-candy.vercel.app/',
+        theme: { bg: '#15181E', fg: '#F3EEE5', accent: '#C3A75A' },
+        tags: ['HTML', 'CSS', 'JavaScript', 'SEO', 'Vercel'],
+        sub: { fr: 'Traiteur sur commande — site vitrine', en: 'Made-to-order catering — showcase website' },
+        desc: {
+            fr: 'Site vitrine pour un traiteur artisanal qui prépare des plateaux salés et sucrés sur commande, réservés par message Instagram. Direction artistique inspirée du zellige, photos servies en AVIF/WebP à plusieurs tailles, référencement complet (données structurées, sitemap, Search Console, IndexNow) et version mobile soignée : contrastes vérifiés, zones tactiles de 44 px, bouton « Réserver » toujours accessible.',
+            en: 'Showcase website for an artisan caterer making sweet and savoury platters to order, booked via Instagram message. Zellige-inspired art direction, photos served as multi-size AVIF/WebP, full SEO setup (structured data, sitemap, Search Console, IndexNow) and a polished mobile version: checked contrast, 44px touch targets, an always-reachable "Book" button.'
+        },
+        shots: [
+            { src: 'Img/berbercandy.webp',          fr: 'Page d\'accueil',        en: 'Home page' },
+            { src: 'Img/berbercandy-mobile-1.webp', fr: 'Accueil mobile',         en: 'Mobile home' },
+            { src: 'Img/berbercandy-mobile-2.webp', fr: 'Les plateaux',           en: 'The platters' },
+            { src: 'Img/berbercandy-mobile-3.webp', fr: 'Commander en 3 étapes',  en: 'Order in 3 steps' }
+        ]
+    },
+    {
         id: 'mesnotes',
         label: 'Mes Notes',
         category: 'personal',
