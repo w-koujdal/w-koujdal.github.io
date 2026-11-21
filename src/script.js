@@ -22,9 +22,13 @@ var EN = {
     nav_skills: 'Skills',
     nav_projects: 'Projects',
     nav_contact: 'Contact',
-    hero_tag: 'Full Stack Developer',
-    hero_greeting: 'Hi, I\'m <span class="accent">Walid</span><br>and I\'m a Full&nbsp;Stack developer',
-    hero_desc: 'Passionate about web development, I love creating complete, modern, and high-performance applications.',
+    hero_tag: 'Web &amp; mobile developer',
+    hero_greeting: 'Hi, I\'m <span class="accent">Walid</span><br>and I build custom websites and&nbsp;apps',
+    hero_desc: 'Websites for shops and craftspeople, SaaS, Android apps: I handle everything, from design to launch.',
+    proof_projects: 'projects built',
+    proof_clients: 'client websites live',
+    proof_saas: 'SaaS live',
+    proof_oss: 'open-source apps',
     hero_btn_portfolio: 'My Projects',
     hero_btn_cv: 'My Resume',
     hero_hint: 'Scroll',
@@ -74,6 +78,7 @@ var projects = [
         theme: { bg: '#101010', fg: '#F5F2EA', accent: '#F5C400' },
         tags: ['Next.js 16', 'Supabase', 'Stripe', 'IA', 'React Native'],
         sub: { fr: 'SaaS de gestion pour artisans du bâtiment', en: 'Management SaaS for building trade craftsmen' },
+        result: { fr: 'Un devis complet généré en quelques secondes, avec les règles de chiffrage de 8 métiers', en: 'A full quote generated in seconds, with pricing rules for 8 trades' },
         desc: {
             fr: 'SaaS de gestion pour artisans du bâtiment indépendants : devis générés par IA en quelques secondes (règles de chiffrage propres à 8 métiers), signature électronique, suivi des paiements et avis clients automatisés, avec une app mobile compagnon. Architecture multi-tenant sécurisée (RLS Postgres, CSP stricte, backups chiffrés AES-256-GCM).',
             en: 'Management SaaS for independent building trade craftsmen: AI-generated quotes in seconds (pricing rules tailored to 8 trades), e-signature, payment tracking and automated client reviews, plus a companion mobile app. Secure multi-tenant architecture (Postgres RLS, strict CSP, AES-256-GCM encrypted backups).'
@@ -99,6 +104,7 @@ var projects = [
         theme: { bg: '#15181E', fg: '#F3EEE5', accent: '#C3A75A' },
         tags: ['HTML', 'CSS', 'JavaScript', 'SEO', 'Vercel'],
         sub: { fr: 'Traiteur sur commande — la demande Instagram rédigée en 1 minute', en: 'Made-to-order catering — the Instagram request written in 1 minute' },
+        result: { fr: 'La demande de commande Instagram rédigée en 1 minute, prête à envoyer', en: 'The Instagram order request written in 1 minute, ready to send' },
         desc: {
             fr: 'Site pour un traiteur artisanal qui ne prend ses commandes que par message Instagram. Le site est construit autour d\'un formulaire : le client choisit l\'événement, la date, les plats et leurs quantités, et le message s\'écrit en direct. Un clic le copie et ouvre la conversation Instagram : le client n\'a plus qu\'à coller, et la traiteuse reçoit un brief complet au lieu de dix allers-retours. Direction artistique inspirée du zellige, photos en AVIF/WebP, SEO complet (données structurées, Search Console, IndexNow) et accessibilité mobile soignée.',
             en: 'Website for an artisan caterer who only takes orders by Instagram message. The site is built around a form: the client picks the event, date, dishes and quantities, and the message writes itself live. One click copies it and opens the Instagram chat: the client just pastes, and the caterer gets a complete brief instead of ten back-and-forths. Zellige-inspired art direction, AVIF/WebP photos, full SEO (structured data, Search Console, IndexNow) and careful mobile accessibility.'
@@ -120,6 +126,7 @@ var projects = [
         theme: { bg: '#6E2C0D', fg: '#FFF3E2', accent: '#FFA75E' },
         tags: ['Next.js', 'TypeScript', 'Supabase', 'React'],
         sub: { fr: 'Bar à dessert — site vitrine', en: 'Dessert bar — showcase website' },
+        result: { fr: 'Carte, concept, événements et accès réunis sur un site lisible sur mobile', en: 'Menu, concept, events and directions on one mobile-friendly site' },
         desc: {
             fr: 'Site vitrine pour un bar à dessert à Saint-Gratien : carte des produits, présentation du concept, événements et informations pratiques, avec Supabase comme backend.',
             en: 'Showcase website for a dessert bar in Saint-Gratien: product menu, concept presentation, events and practical info, powered by Supabase as backend.'
@@ -141,6 +148,7 @@ var projects = [
         theme: { bg: '#161A24', fg: '#F2F4F8', accent: '#F2C14E' },
         tags: ['Kotlin', 'Jetpack Compose', 'Room FTS4', 'ML Kit'],
         sub: { fr: 'Retrouver une capture par le texte qu\'elle contient', en: 'Find any screenshot by the text inside it' },
+        result: { fr: 'Toute capture retrouvée par son texte, sans rien envoyer sur Internet · open source, v1.2', en: 'Any screenshot found by its text, nothing sent online · open source, v1.2' },
         desc: {
             fr: 'App Android open source (MIT) qui retrouve n\'importe quelle capture d\'écran, photo ou PDF grâce au texte qu\'il contient. L\'OCR (ML Kit) tourne entièrement sur le téléphone : rien n\'est envoyé sur Internet. Tri automatique par catégorie (achats, voyages, codes, lieux, conversations…), nettoyage guidé (codes expirés, doublons, vieilles captures) et recherche dans les fichiers d\'un autre appareil du même Wi-Fi, avec des échanges chiffrés (ECDH P-256 + AES-256-GCM). Disponible en français et en anglais.',
             en: 'Open-source (MIT) Android app that finds any screenshot, photo or PDF by the text inside it. OCR (ML Kit) runs entirely on the phone: nothing is sent to the Internet. Automatic sorting by category (purchases, travel, codes, places, conversations…), guided cleanup (expired codes, duplicates, old screenshots) and search across another device\'s files on the same Wi-Fi, with encrypted exchanges (ECDH P-256 + AES-256-GCM). Available in French and English.'
@@ -161,6 +169,7 @@ var projects = [
         theme: { bg: '#0E1A2B', fg: '#E6EEF8', accent: '#5AA9FF' },
         tags: ['Kotlin/JVM', 'JavaFX WebView', 'jpackage'],
         sub: { fr: 'Le compagnon Windows du Trieur', en: 'Trieur\'s Windows companion' },
+        result: { fr: 'Les fichiers du PC accessibles depuis le téléphone, avec un simple .exe · open source', en: 'The PC\'s files reachable from the phone with a single .exe · open source' },
         desc: {
             fr: 'Compagnon Windows open source (MIT) du Trieur : depuis le téléphone, on cherche dans les fichiers du PC, et inversement, sur le même Wi-Fi. Échanges chiffrés, protection contre le DNS rebinding et le CSRF. Fourni en .exe autonome qui ne demande pas de navigateur.',
             en: 'Open-source (MIT) Windows companion to Trieur: search the PC\'s files from the phone, and vice versa, over the same Wi-Fi. Encrypted exchanges, protection against DNS rebinding and CSRF. Shipped as a standalone .exe that needs no browser.'
@@ -177,6 +186,7 @@ var projects = [
         theme: { bg: '#0F2A1E', fg: '#E6F6EC', accent: '#4FD18B' },
         tags: ['Kotlin', 'Jetpack Compose'],
         sub: { fr: 'Ne plus se demander « est-ce que je l\'ai fait ? »', en: 'Stop wondering "did I do it?"' },
+        result: { fr: 'Une tâche notée en un appui · APK de 2,3 Mo, sans Internet ni pub', en: 'A task logged in one tap · 2.3 MB APK, no Internet, no ads' },
         desc: {
             fr: 'App Android pour ne plus se demander « est-ce que je l\'ai fait ? » : médicaments, porte fermée, plaques éteintes… Un appui suffit à le noter, avec une photo preuve gardée hors de la galerie. Les rappels ne sonnent que si ce n\'est pas encore fait, avec un mode réveil qui sonne même en silencieux, et une check-list « Je sors » lue à voix haute. Née de demandes d\'utilisateurs sur Reddit (r/SomebodyMakeThis, r/AppIdeas). Gratuite, sans pub, sans Internet, APK de 2,3 Mo.',
             en: 'Android app to stop wondering "did I do it?": medication, door locked, stove off… One tap logs it, with a proof photo kept out of the gallery. Reminders only ring if it isn\'t done yet, with an alarm mode that rings even on silent, plus a spoken "Heading out" checklist. Born from user requests on Reddit (r/SomebodyMakeThis, r/AppIdeas). Free, no ads, no Internet, 2.3 MB APK.'
@@ -195,6 +205,7 @@ var projects = [
         theme: { bg: '#1E1233', fg: '#F1E8FF', accent: '#C79BFF' },
         tags: ['Kotlin', 'Jetpack Compose', 'Canvas'],
         sub: { fr: 'Jeu de réflexion dans une bibliothèque enchantée', en: 'Puzzle game in an enchanted library' },
+        result: { fr: '12 écoles de magie à ranger · APK de 1,5 Mo, sans aucune permission', en: '12 schools of magic to sort · 1.5 MB APK, no permissions at all' },
         desc: {
             fr: 'Jeu de réflexion Android : on range les grimoires d\'une bibliothèque enchantée jusqu\'à n\'avoir qu\'une école de magie par étagère, parmi 12 écoles. Chaque étagère complétée libère la créature de son école (phénix, ours de givre, aigle de foudre…) avec une animation et un son. Un chrono démarre à la première lévitation et le meilleur temps est enregistré. Gratuit, sans pub, sans compte, sans aucune permission, APK de 1,5 Mo.',
             en: 'Android puzzle game: sort the spellbooks of an enchanted library until each shelf holds a single school of magic, out of 12 schools. Every completed shelf frees its school\'s creature (phoenix, frost bear, thunder eagle…) with an animation and a sound. A timer starts at the first levitation and the best time is saved. Free, no ads, no account, no permissions at all, 1.5 MB APK.'
@@ -212,6 +223,7 @@ var projects = [
         theme: { bg: '#0D1F2A', fg: '#E4F1F4', accent: '#62C6D6' },
         tags: ['Flutter', 'Rust', 'ONNX Runtime', 'SQLite'],
         sub: { fr: 'Retrouve une note par son sens, même sans les bons mots', en: 'Find a note by its meaning, even without the right words' },
+        result: { fr: 'Recherche par le sens 100 % sur le téléphone, sans aucune API cloud', en: 'Meaning-based search 100% on the phone, no cloud API' },
         desc: {
             fr: 'App de prise de notes Android qui retrouve tes notes par le sens plutôt que par les mots exacts, grâce à un moteur de recherche sémantique 100% embarqué : chaque note est convertie en vecteur via un modèle MiniLM exécuté localement (pont FFI Flutter ↔ Rust ↔ ONNX Runtime), sans jamais dépendre d\'une API cloud. Dictée vocale, tags intelligents suggérés par IA, import en masse et corbeille avec restauration.',
             en: 'Android note-taking app that finds your notes by meaning rather than exact keywords, powered by a fully on-device semantic search engine: each note is turned into a vector via a locally-run MiniLM model (Flutter ↔ Rust ↔ ONNX Runtime FFI bridge), with zero cloud dependency. Voice dictation, AI-suggested smart tags, bulk text import and a trash with restore.'
@@ -341,6 +353,7 @@ function buildProjects() {
             +     '<div class="proj-idx pi-item">' + pad(i + 1) + ' / ' + pad(projects.length) + ' <span class="proj-cat" data-ui="' + p.category + '"></span></div>'
             +     '<h3 class="proj-name pi-item">' + p.label + '</h3>'
             +     '<p class="proj-sub pi-item" data-pf="sub"></p>'
+            +     (p.result ? '<p class="proj-result pi-item" data-pf="result"></p>' : '')
             +     '<p class="proj-desc pi-item" data-pf="desc"></p>'
             +     '<div class="proj-tags pi-item">' + tags + '</div>'
             +     '<div class="proj-links pi-item">' + visit
